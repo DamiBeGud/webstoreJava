@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Additional CSS for styling */
+    .card {
+      border: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+
+
+      /* Custom CSS for slider */
+      .product-slider {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .product-card {
+      display: inline-block;
+      width: 300px;
+      margin-right: 20px; /* Adjust as needed */
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="shop.html">Webshop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="allProducts.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cart.html">Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../auth/login.html">Login / Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+
+      <div class="container mt-5">
+        <h2 class="mb-4">Special deals</h2>
+        <div class="product-slider">
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 1</h5>
+                <p class="card-text">$20.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 2</h5>
+                <p class="card-text">$30.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <!-- Add more product cards here -->
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container mt-5">
+        <h2 class="mb-4">Electronics</h2>
+        <div class="product-slider">
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 1</h5>
+                <p class="card-text">$20.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 2</h5>
+                <p class="card-text">$30.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <!-- Add more product cards here -->
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-5">
+        <h2 class="mb-4">Cloathing</h2>
+        <div class="product-slider">
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 1</h5>
+                <p class="card-text">$20.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 2</h5>
+                <p class="card-text">$30.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <!-- Add more product cards here -->
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="card">
+              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product 3</h5>
+                <p class="card-text">$25.00</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="bg-dark text-light py-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <nav class="nav justify-content-center">
+                <a class="nav-link" href="aboutUs.html">About Us</a>
+                <a class="nav-link" href="contactUs.html">Contact Us</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link" href="termsAndConditions.html">Terms and Conditions</a>
+              </nav>
+            </div>
+            <div class="col-md-6">
+              <form class="form-inline justify-content-center">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col text-center">
+              <p class="mb-0">Amazon Company Inc.</p>
+              <p>1234 Street Name, City, Country</p>
+              <p>Email: info@example.com | Phone: +1234567890</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
