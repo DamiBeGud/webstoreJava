@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="shop.html">Webshop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="allProducts.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cart.html">Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../auth/login.html">Login / Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  <div class="container">
+    <h1 class="mt-5 mb-4">Proceed with Payment</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Invoice details section -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Invoice Details</h5>
+            <div class="form-group">
+              <label for="invoiceNumber">Invoice Number</label>
+              <textarea class="form-control" id="invoiceNumber" rows="3" readonly>Invoice Number: #12345</textarea>
+            </div>
+            <div class="form-group">
+              <label for="invoiceDate">Invoice Date</label>
+              <textarea class="form-control" id="invoiceDate" rows="3" readonly>Invoice Date: 2024-04-20</textarea>
+            </div>
+            <!-- Additional invoice fields can be added here -->
+          </div>
+        </div>
+        <!-- Delivery address section -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Delivery Address</h5>
+            <div class="form-group">
+              <label for="streetAddress">Street Address</label>
+              <textarea class="form-control" id="streetAddress" rows="3" readonly>123 Main St</textarea>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <textarea class="form-control" id="city" rows="3" readonly>Anytown</textarea>
+            </div>
+            <div class="form-group">
+              <label for="zipCode">ZIP Code</label>
+              <textarea class="form-control" id="zipCode" rows="3" readonly>12345</textarea>
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <textarea class="form-control" id="country" rows="3" readonly>USA</textarea>
+            </div>
+            <!-- Additional delivery address fields can be added here -->
+          </div>
+        </div>
+        <!-- Product summary section -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Product Summary</h5>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Product 1
+                <span class="badge badge-primary badge-pill">$10.00</span>
+              </li>
+              <!-- Additional list items for other products can be added here -->
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Total
+                <span class="badge badge-primary badge-pill">$10.00</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- Payment method selection -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Select Payment Method</h5>
+            <div class="form-group">
+              <select class="form-control" id="paymentMethod">
+                <option value="">Select Payment Method</option>
+                <option value="creditCard">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <!-- Additional payment methods can be added here -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- Credit card payment form -->
+        <div class="card" id="creditCardForm" style="display: none;">
+          <div class="card-body">
+            <h5 class="card-title">Credit Card Payment</h5>
+            <form>
+              <!-- Credit card form fields -->
+              <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="expiryDate">Expiry Date</label>
+                  <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="cvv">CVV</label>
+                  <input type="text" class="form-control" id="cvv" placeholder="Enter CVV">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nameOnCard">Name on Card</label>
+                <input type="text" class="form-control" id="nameOnCard" placeholder="Enter name on card">
+              </div>
+              <div class="form-group">
+                <label for="billingAddress">Billing Address</label>
+                <input type="text" class="form-control" id="billingAddress" placeholder="Enter billing address">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Submit Payment</button>
+            </form>
+          </div>
+        </div>
+        <!-- PayPal payment form -->
+        <div class="card" id="paypalForm" style="display: none;">
+          <div class="card-body">
+            <h5 class="card-title">PayPal Payment</h5>
+            <form>
+                <div class="card-body">
+                  <p>Enter your PayPal details and confirm the payment.</p>
+                  <a href="https://www.paypal.com/de/home" type="submit" class="btn btn-primary btn-block">Submit Payment</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-dark text-light py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <nav class="nav justify-content-center">
+            <a class="nav-link" href="aboutUs.html">About Us</a>
+            <a class="nav-link" href="contactUs.html">Contact Us</a>
+            <a class="nav-link" href="faq.html">FAQ</a>
+            <a class="nav-link" href="termsAndConditions.html">Terms and Conditions</a>
+          </nav>
+        </div>
+        <div class="col-md-6">
+          <form class="form-inline justify-content-center">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col text-center">
+          <p class="mb-0">Amazon Company Inc.</p>
+          <p>1234 Street Name, City, Country</p>
+          <p>Email: info@example.com | Phone: +1234567890</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#paymentMethod').change(function() {
+        var selectedMethod = $(this).val();
+        if (selectedMethod === 'creditCard') {
+          $('#creditCardForm').show();
+          $('#paypalForm').hide();
+        } else if (selectedMethod === 'paypal') {
+          $('#creditCardForm').hide();
+          $('#paypalForm').show();
+        } else {
+          $('#creditCardForm').hide();
+          $('#paypalForm').hide();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

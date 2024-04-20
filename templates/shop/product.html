@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .rating {
+      color: #ffc107;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="shop.html">Webshop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="shop.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cart.html">Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../auth/login.html">Login / Register</a>
+          </li>
+          </ul>
+        </div>
+      </nav>
+
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Product Image -->
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/400" class="img-fluid" alt="Product Image">
+      </div>
+      <!-- Product Details -->
+      <div class="col-md-6">
+        <h2 class="mb-3">Product Name</h2>
+        <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor dapibus tellus, vel varius nisi vestibulum sed.</p>
+        <p>Price: $99.99</p>
+        <p>Amount in Stock: 10</p>
+        <p>Star Rating: 
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9734;</span>
+        </p>
+        <!-- Add to Cart Button -->
+        <button type="button" class="btn btn-primary mb-4">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Reviews Section -->
+  <div class="container-fluid bg-light mt-4">
+    <div class="container">
+      <h3 class="mt-4">Customer Reviews</h3>
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Review Title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor dapibus tellus, vel varius nisi vestibulum sed.</p>
+          <p class="card-text">Rating: 
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9734;</span>
+          </p>
+          <p class="card-text">By: John Doe</p>
+        </div>
+      </div>
+      <!-- Add Review Form -->
+      <h4 class="mt-4">Add Your Review</h4>
+      <form>
+        <div class="form-group">
+          <label for="reviewTitle">Title</label>
+          <input type="text" class="form-control" id="reviewTitle" placeholder="Enter review title">
+        </div>
+        <div class="form-group">
+          <label for="reviewContent">Review</label>
+          <textarea class="form-control" id="reviewContent" rows="3" placeholder="Enter your review"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="reviewRating">Rating</label>
+          <select class="form-control" id="reviewRating">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  <br>
+  <footer class="bg-dark text-light py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <nav class="nav justify-content-center">
+            <a class="nav-link" href="aboutUs.html">About Us</a>
+            <a class="nav-link" href="contactUs.html">Contact Us</a>
+            <a class="nav-link" href="faq.html">FAQ</a>
+            <a class="nav-link" href="termsAndConditions.html">Terms and Conditions</a>
+          </nav>
+        </div>
+        <div class="col-md-6">
+          <form class="form-inline justify-content-center">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col text-center">
+          <p class="mb-0">Amazon Company Inc.</p>
+          <p>1234 Street Name, City, Country</p>
+          <p>Email: info@example.com | Phone: +1234567890</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
