@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webshop.shop.dto.ProductDto;
+import com.webshop.shop.exceptions.ProductNotFoundException;
 import com.webshop.shop.models.Product;
 import com.webshop.shop.repository.ProductRepository;
 import com.webshop.shop.service.ProductService;
@@ -58,5 +59,13 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
         return product;
+    }
+
+    @Override
+    public ProductDto getOneProductById(int id) {
+        // Add exception error
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
+        return mapToDto(product);
     }
 }

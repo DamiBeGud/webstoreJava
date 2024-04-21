@@ -1,4 +1,4 @@
-package com.webshop.shop.controllers.api.v1;
+package com.webshop.shop.controllers.api.product.v1;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;

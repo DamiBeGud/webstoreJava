@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/defaultLayout">
+
+<body>
+
+<div layout:fragment="content">
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Product Image -->
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/400" class="img-fluid" alt="Product Image">
+      </div>
+      <!-- Product Details -->
+      <div class="col-md-6">
+        <h2 class="mb-3" th:text="${product.name}">Product Name</h2>
+        <p th:text="${product.description}">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor dapibus tellus, vel varius nisi vestibulum sed.</p>
+        <p>Price: $ <span th:text="${product.price}">99.99</span></p>
+        <p>Amount in Stock: 10</p>
+        <p>Star Rating: 
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9733;</span>
+          <span class="rating">&#9734;</span>
+        </p>
+        <!-- Add to Cart Button -->
+        <button type="button" class="btn btn-primary mb-4">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Reviews Section -->
+  <div class="container-fluid bg-light mt-4">
+    <div class="container">
+      <h3 class="mt-4">Customer Reviews</h3>
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Review Title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor dapibus tellus, vel varius nisi vestibulum sed.</p>
+          <p class="card-text">Rating: 
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9733;</span>
+            <span class="rating">&#9734;</span>
+          </p>
+          <p class="card-text">By: John Doe</p>
+        </div>
+      </div>
+      <!-- Add Review Form -->
+      <h4 class="mt-4">Add Your Review</h4>
+      <form>
+        <div class="form-group">
+          <label for="reviewTitle">Title</label>
+          <input type="text" class="form-control" id="reviewTitle" placeholder="Enter review title">
+        </div>
+        <div class="form-group">
+          <label for="reviewContent">Review</label>
+          <textarea class="form-control" id="reviewContent" rows="3" placeholder="Enter your review"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="reviewRating">Rating</label>
+          <select class="form-control" id="reviewRating">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>
+</body>
+</html>
