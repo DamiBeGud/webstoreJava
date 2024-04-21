@@ -1,69 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amazon-like Web Shop</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    /* Additional CSS styles */
-    .sidebar {
-      background-color: #f8f9fa;
-      padding: 20px;
-    }
-    .accordion-link {
-      cursor: pointer;
-    }
-    .accordion-link:hover {
-      text-decoration: none;
-    }
-    .accordion-link.active {
-      font-weight: bold;
-    }
-    .product-card {
-      border: 1px solid #dee2e6;
-      border-radius: 5px;
-      margin-bottom: 20px;
-    }
-    .product-card img {
-      max-width: 100%;
-      height: auto;
-    }
-    .product-card .card-body {
-      padding: 20px;
-    }
-    /* Custom CSS to remove bullet points from unordered lists */
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-  </style>
-</head>
+<html lang="en" layout:decorate="layouts/defaultLayout">
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="shop.html">Webshop</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="allProducts.html">Shop</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cart.html">Cart</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../auth/login.html">Login / Register</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <div layout:fragment="content">
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar with categories and filters -->
@@ -145,85 +83,18 @@
       <!-- Main content area to display products -->
       <div class="col-md-9 p-4">
           <div class="row">
-
-
-
-
-            
-          <div class="col-md-4">
+          <div class="col-md-4" th:each=" product : ${products}">
             <div class="product-card">
               <div class="card">
                 <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
                 <div class="card-body">
-                  <h5 class="card-title">Product 1</h5>
-                  <p class="card-text">$25.00</p>
+                  <h5 class="card-title" th:text="${product.name}">Product 1</h5>
+                  <p class="card-text" >$<span th:text="${product.price}"></span></p>
                   <a href="#" class="btn btn-primary">Add to Cart</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="product-card">
-              <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                  <h5 class="card-title">Product 2</h5>
-                  <p class="card-text">$30.00</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-card">
-              <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                  <h5 class="card-title">Product 3</h5>
-                  <p class="card-text">$35.00</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Additional product cards can be added here -->
-          <div class="col-md-4">
-            <div class="product-card">
-              <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                  <h5 class="card-title">Product 3</h5>
-                  <p class="card-text">$35.00</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-card">
-              <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                  <h5 class="card-title">Product 3</h5>
-                  <p class="card-text">$35.00</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-card">
-              <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                  <h5 class="card-title">Product 3</h5>
-                  <p class="card-text">$35.00</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
 
 
 
@@ -233,42 +104,6 @@
       </div>
     </div>
   </div>
-  <footer class="bg-dark text-light py-4 fixed-bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <nav class="nav justify-content-center">
-            <a class="nav-link" href="aboutUs.html">About Us</a>
-            <a class="nav-link" href="contactUs.html">Contact Us</a>
-            <a class="nav-link" href="faq.html">FAQ</a>
-            <a class="nav-link" href="termsAndConditions.html">Terms and Conditions</a>
-          </nav>
-        </div>
-        <div class="col-md-6">
-          <form class="form-inline justify-content-center">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col text-center">
-          <p class="mb-0">Amazon Company Inc.</p>
-          <p>1234 Street Name, City, Country</p>
-          <p>Email: info@example.com | Phone: +1234567890</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-    // Activate accordion links
-    $('.accordion-link').click(function() {
-      $(this).toggleClass('active');
-    });
-  </script>
+</div>
 </body>
 </html>
