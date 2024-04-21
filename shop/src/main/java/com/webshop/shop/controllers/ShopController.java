@@ -13,15 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.webshop.shop.dto.ProductDto;
 import com.webshop.shop.service.ProductService;
+import com.webshop.shop.service.ReviewService;
 
 @Controller
 public class ShopController {
 
     private ProductService productService;
+    private ReviewService reviewService;
 
     @Autowired
-    public ShopController(ProductService productService) {
+    public ShopController(ProductService productService, ReviewService reviewService) {
         this.productService = productService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping("/shop")
@@ -38,6 +41,7 @@ public class ShopController {
     public ModelAndView getProduct(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("product", productService.getOneProductById(id));
+        modelAndView.addObject("reviews", reviewService.findReviewsByProductId(id));
         modelAndView.setViewName("product");
         return modelAndView;
     }

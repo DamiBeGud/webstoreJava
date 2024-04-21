@@ -1,5 +1,8 @@
 package com.webshop.shop.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.webshop.shop.dto.ReviewDto;
@@ -37,4 +40,20 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
 
+    @Override
+    public List<ReviewDto> findReviewsByProductId(int id) {
+        List<Review> reviews = reviewRepository.findReviewsByProductId(id);
+
+        return reviews.stream().map(r -> mapToDto(r)).collect(Collectors.toList());
+    }
+
+    private ReviewDto mapToDto(Review review) {
+        ReviewDto reviewDto = new ReviewDto();
+        // reviewDto.setId(review.getId());
+        // reviewDto.setProductId(0);
+        reviewDto.setTitle(review.getTitle());
+        reviewDto.setReview(review.getReview());
+        reviewDto.setRating(review.getRating());
+        return reviewDto;
+    }
 }
