@@ -32,7 +32,7 @@ public class ShopController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("products", productService.getAllProducts());
-        modelAndView.setViewName("allProducts");
+        modelAndView.setViewName("shop/allProducts");
 
         return modelAndView;
     }
@@ -42,7 +42,7 @@ public class ShopController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("product", productService.getOneProductById(id));
         modelAndView.addObject("reviews", reviewService.findReviewsByProductId(id));
-        modelAndView.setViewName("product");
+        modelAndView.setViewName("shop/product");
         return modelAndView;
     }
 

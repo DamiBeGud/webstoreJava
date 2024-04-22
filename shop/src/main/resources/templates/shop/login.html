@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+xmlns:th="http://thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,10 +14,12 @@
       <div class="col-md-6 mx-auto">
         <div class="card">
           <h5 class="card-header">Login</h5>
+          <br>
+          <div th:if="${param.error}" class="alert alert-danger">Your email or password are invalid</div>
           <div class="card-body">
-            <form id="loginForm" class="needs-validation" novalidate>
+            <form id="loginForm" class="needs-validation" novalidate th:action="@{/login}" method="post" role="form">
               <div class="form-group">
-                <label for="email">Email address</label>
+                <label for="username">Email address</label>
                 <input type="email" class="form-control" id="username" name="username" placeholder="Enter email" required>
                 <div class="invalid-feedback">Please enter a valid email address.</div>
               </div>
@@ -25,8 +28,8 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                 <div class="invalid-feedback">Please enter your password.</div>
               </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-			  <a href="registerUser.html" class="btn btn-block btn-link" type="button">Register</a>
+              <button type="submit" class="btn btn-primary" value="Log in">Login</button>
+			        <a href="/register/user" class="btn btn-block btn-link" type="button">Register</a>
             </form>
           </div>
         </div>
@@ -53,28 +56,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script> -->
