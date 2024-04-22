@@ -21,12 +21,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(RegisterDto registerDto) {
+    public Integer saveUser(RegisterDto registerDto) {
         UserEntity user = new UserEntity();
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         user.setRole("ADMIN");
+        user.setName(registerDto.getName());
+        user.setNumber(registerDto.getNumber());
+        user.setStreet(registerDto.getStreet());
+        user.setZip(registerDto.getZip());
+        user.setCountry(registerDto.getCountry());
         userRepository.save(user);
+
+        return user.getId();
+
     }
 
     @Override

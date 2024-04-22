@@ -23,19 +23,19 @@ public class AuthController {
 
     @GetMapping("/login")
     public String getLoginPage() {
-        return "shop/login";
+        return "login";
     }
 
     @GetMapping("/register/user")
     public String getRegisterUserPage() {
-        return "shop/registerUser";
+        return "registerUser";
     }
 
     @GetMapping("/register/company")
     public String getRegisterCompanyPage(Model model) {
         RegisterDto user = new RegisterDto();
         model.addAttribute("user", user);
-        return "shop/registerCompany";
+        return "registerCompany";
     }
 
     @PostMapping("/register/company/save")
@@ -49,9 +49,9 @@ public class AuthController {
         }
         if (result.hasErrors()) {
             model.addAttribute("user", user);
-            return "shop/registerCompany";
+            return "registerCompany";
         }
-        userService.saveUser(user);
-        return "redirect:/dashboard";
+        int userId = userService.saveUser(user);
+        return "redirect:/dashboard/" + userId;
     }
 }

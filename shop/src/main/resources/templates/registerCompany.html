@@ -15,11 +15,11 @@
             <h5 class="card-header">Register Company</h5>
             <div class="card-body">
         <form id="companyRegistrationForm" class="needs-validation" novalidate th:action="@{/register/company/save}" th:object="${user}" method="post">
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="company_name">Company Name</label>
-            <input type="text" class="form-control" id="company_name" placeholder="Enter company name" required>
+            <input type="text" class="form-control" id="company_name" placeholder="Enter company name" th:field="*{name}" required>
             <div class="invalid-feedback">Please enter the company name.</div>
-          </div> -->
+          </div>
           <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" th:field="*{email}" required>
@@ -31,27 +31,27 @@
             <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" required>
             <div class="invalid-feedback">Please enter a password.</div>
           </div>
-          <!-- <h4>Company Address</h4>
+          <h4>Company Address</h4>
           <div class="form-group">
             <label for="company_street">Street</label>
-            <input type="text" class="form-control" id="company_street" placeholder="Enter street" required>
+            <input type="text" class="form-control" id="company_street" placeholder="Enter street" th:field="*{street}" required>
             <div class="invalid-feedback">Please enter the street.</div>
           </div>
           <div class="form-group">
             <label for="company_house_number">House Number</label>
-            <input type="text" class="form-control" id="company_house_number" placeholder="Enter house number" required>
+            <input type="text" class="form-control" id="company_house_number" placeholder="Enter house number" th:field="*{number}" required>
             <div class="invalid-feedback">Please enter the house number.</div>
           </div>
           <div class="form-group">
             <label for="company_zip">ZIP Code</label>
-            <input type="text" class="form-control" id="company_zip" placeholder="Enter ZIP code" required>
+            <input type="text" class="form-control" id="company_zip" placeholder="Enter ZIP code" th:field="*{zip}" required>
             <div class="invalid-feedback">Please enter the ZIP code.</div>
           </div>
           <div class="form-group">
             <label for="company_country">Country</label>
-            <input type="text" class="form-control" id="company_country" placeholder="Enter country" required>
+            <input type="text" class="form-control" id="company_country" placeholder="Enter country" th:field="*{country}" required>
             <div class="invalid-feedback">Please enter the country.</div>
-          </div> -->
+          </div>
           <button type="submit" class="btn btn-primary btn-block">Register</button>
           <a href="/login" class="btn btn-block btn-link" type="button">Log in</a>
           <a href="/register/user" class="btn btn-block btn-link" type="button">Register as an User</a>

@@ -1,5 +1,7 @@
 package com.webshop.shop.security;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,14 +20,19 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.webshop.shop.models.UserEntity;
+import com.webshop.shop.repository.UserRepository;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     private CustomUserDetailsService userDetailsService;
+    private UserRepository userRepository;
 
     @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(CustomUserDetailsService userDetailsService, UserRepository userRepository) {
         this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     @Bean
@@ -40,10 +47,11 @@ public class SecurityConfig {
                         "/css/**",
                         "/js/**")
                 .permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/dashboard")
+                        .defaultSuccessUrl("/dashboard", true)
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error=true")
                         .permitAll())
@@ -52,7 +60,16 @@ public class SecurityConfig {
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll());
 
-        return http.build();
+        return http
+                .formLogin()
+                .successHandler((request, response, authentication) -> {
+                    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                    String currentUser = auth.getName();
+                    UserEntity id = userRepository.findByEmail(currentUser);
+                    response.sendRedirect("/dashboard/" + id.getId());
+                })
+                .and()
+                .build();
     }
 
     @Bean

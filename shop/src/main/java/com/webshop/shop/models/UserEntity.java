@@ -21,4 +21,11 @@ public class UserEntity {
     private String email;
     private String password;
     private String role;
+
+    private String name;
+    private String street;
+    private int number;
+    private int zip;
+    private String Country;
+
 }
