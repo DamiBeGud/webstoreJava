@@ -9,5 +9,7 @@ public interface ProductService {
 
     List<ProductDto> getAllProducts();
 
+    List<ProductDto> getAllProductsWithUserId(int id);
+
     ProductDto getOneProductById(int id);
 }

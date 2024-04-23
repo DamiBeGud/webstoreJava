@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="'/dashboard/' + ${user.id}">Webshop Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="'/dashboard/' + ${user.id} + '/product/add'">Add Product</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="orders.html">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="'/dashboard/' + ${user.id} + '/products'">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+  <div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="regular-tab" data-toggle="tab" href="#regular" role="tab" aria-controls="regular" aria-selected="true">Regular Form</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="csv-tab" data-toggle="tab" href="#csv" role="tab" aria-controls="csv" aria-selected="false">CSV Upload</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <!-- Regular Form Tab -->
+      <div class="tab-pane fade show active" id="regular" role="tabpanel" aria-labelledby="regular-tab">
+        <h2 class="mt-3">Add Product (Regular Form)</h2>
+        <form class="submitRegularForm" th:id="${user.id}">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+              </div>
+              <div class="form-group">
+                <label for="amountAvailable">Amount Available</label>
+                <input type="number" class="form-control" id="amountAvailable" placeholder="Enter amount available">
+              </div>
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" placeholder="Enter price">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="image">Product Image</label>
+                <input type="file" class="form-control-file" id="image">
+              </div>
+              <button type="button" class="btn btn-primary" id="submitRegularForm">Submit</button>
+
+        </form>
+      </div>
+      <!-- CSV Upload Tab -->
+      <div class="tab-pane fade" id="csv" role="tabpanel" aria-labelledby="csv-tab">
+        <h2 class="mt-3">Add Products (CSV Upload)</h2>
+        <form>
+          <!-- CSV upload form fields -->
+          <div class="form-group">
+            <label for="csvFile">Upload CSV File</label>
+            <input type="file" class="form-control-file" id="csvFile" accept=".csv">
+          </div>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <!-- Send regular form -->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('submitRegularForm').addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent the default form submission
+          
+          // Get input values
+          let userId= document.querySelector('.submitRegularForm').id;
+          let productName = document.getElementById('productName').value;
+          // let amountAvailable = document.getElementById('amountAvailable').value;
+          let price = document.getElementById('price').value;
+          let description = document.getElementById('description').value;
+          // let image = document.getElementById('image').files[0]; // Get the first file
+          
+          // Create a JavaScript object with form data
+          let formData = {
+              name: productName,
+              // amountAvailable: amountAvailable,
+              description: description,
+              price: price,
+              userId:userId,
+              // image: image
+          };
+          
+          // Convert the object to JSON
+          let jsonData = JSON.stringify(formData);
+          
+          // Send POST request with JSON data
+          fetch('http://localhost:8080/api/v1/product/create', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: jsonData
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then(data => {
+              console.log('Success:', data);
+              // Optionally, do something with the response data
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              // Optionally, handle errors
+          });
+          });
+          });
+        </script>
+</body>
+</html>

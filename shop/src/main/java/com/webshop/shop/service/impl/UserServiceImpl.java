@@ -1,10 +1,12 @@
 package com.webshop.shop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.webshop.shop.dto.RegisterDto;
+import com.webshop.shop.dto.UserDto;
 import com.webshop.shop.models.UserEntity;
 import com.webshop.shop.repository.UserRepository;
 import com.webshop.shop.service.UserService;
@@ -40,6 +42,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public UserDto getUserById(int id) {
+        UserEntity userEntity = userRepository.getById(id);
+
+        UserDto userDto = new UserDto();
+
+        userDto.setId(userEntity.getId());
+        userDto.setEmail(userEntity.getEmail());
+        userDto.setName(userEntity.getName());
+        userDto.setCountry(userEntity.getCountry());
+        userDto.setStreet(userEntity.getStreet());
+        userDto.setNumber(userEntity.getNumber());
+        userDto.setZip(userEntity.getZip());
+        userDto.setRole(userEntity.getRole());
+        return userDto;
     }
 
 }

@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
+        product.setUserId(productDto.getUserId());
 
         Product newProduct = productRepository.save(product);
 
@@ -35,12 +36,27 @@ public class ProductServiceImpl implements ProductService {
         productResponse.setName(newProduct.getName());
         productResponse.setDescription(newProduct.getDescription());
         productResponse.setPrice(newProduct.getPrice());
+        productResponse.setUserId(newProduct.getUserId());
         return productResponse;
     }
 
     @Override
     public List<ProductDto> getAllProducts() {
         List<Product> product = productRepository.findAll();
+        return product.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDto getOneProductById(int id) {
+        // Add exception error
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
+        return mapToDto(product);
+    }
+
+    @Override
+    public List<ProductDto> getAllProductsWithUserId(int id) {
+        List<Product> product = productRepository.findAllByUserId(id);
         return product.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
     }
 
@@ -61,11 +77,4 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-    @Override
-    public ProductDto getOneProductById(int id) {
-        // Add exception error
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
-        return mapToDto(product);
-    }
 }
