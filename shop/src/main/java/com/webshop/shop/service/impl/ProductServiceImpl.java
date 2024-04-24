@@ -27,7 +27,11 @@ public class ProductServiceImpl implements ProductService {
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
         product.setUserId(productDto.getUserId());
+        product.setCategory(productDto.getCategory());
+        product.setSubCategory(productDto.getSubCategory());
+        product.setImage(productDto.getImage());
 
         Product newProduct = productRepository.save(product);
 
@@ -37,6 +41,10 @@ public class ProductServiceImpl implements ProductService {
         productResponse.setDescription(newProduct.getDescription());
         productResponse.setPrice(newProduct.getPrice());
         productResponse.setUserId(newProduct.getUserId());
+        productResponse.setStock(newProduct.getStock());
+        productResponse.setCategory(newProduct.getCategory());
+        productResponse.setSubCategory(newProduct.getSubCategory());
+
         return productResponse;
     }
 
@@ -56,8 +64,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getAllProductsWithUserId(int id) {
-        List<Product> product = productRepository.findAllByUserId(id);
-        return product.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
+        List<Product> products = productRepository.findAllByUserId(id);
+        if (products.isEmpty()) {
+            throw new ProductNotFoundException("No products found with the provided name");
+        }
+        return products.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDto> getAllProductsWithNameWithUserId(String name, int id) {
+        List<Product> products = productRepository.findAllByNameContainingIgnoreCaseAndUserId(name, id);
+        if (products.isEmpty()) {
+            throw new ProductNotFoundException("No products found with the provided name");
+        }
+        return products.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
     }
 
     private ProductDto mapToDto(Product product) {
@@ -66,6 +86,8 @@ public class ProductServiceImpl implements ProductService {
         productDto.setName(product.getName());
         productDto.setDescription(product.getDescription());
         productDto.setPrice(product.getPrice());
+        productDto.setUserId(product.getUserId());
+        productDto.setStock(product.getStock());
         return productDto;
     }
 

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webshop.shop.dto.ProductDto;
+import com.webshop.shop.dto.SearchRequestDto;
 import com.webshop.shop.models.Product;
 import com.webshop.shop.service.ProductService;
 
@@ -39,6 +40,13 @@ public class ProductControllerREST {
     public ResponseEntity<List<ProductDto>> getProducts() {
 
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+    }
+
+    @PostMapping("company/search")
+    public ResponseEntity<List<ProductDto>> getProductsCompanySearch(@RequestBody SearchRequestDto searchRequestDto) {
+        System.out.println(searchRequestDto);
+        return new ResponseEntity<>(productService.getAllProductsWithNameWithUserId(searchRequestDto.getSearchString(),
+                searchRequestDto.getUserId()), HttpStatus.OK);
     }
 
 }

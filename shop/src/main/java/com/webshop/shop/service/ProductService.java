@@ -12,4 +12,6 @@ public interface ProductService {
     List<ProductDto> getAllProductsWithUserId(int id);
 
     ProductDto getOneProductById(int id);
+
+    List<ProductDto> getAllProductsWithNameWithUserId(String name, int id);
 }

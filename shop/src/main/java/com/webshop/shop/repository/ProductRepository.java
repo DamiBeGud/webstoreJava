@@ -8,4 +8,6 @@ import com.webshop.shop.models.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findAllByUserId(int id);
+
+    List<Product> findAllByNameContainingIgnoreCaseAndUserId(String name, Integer userId);
 }

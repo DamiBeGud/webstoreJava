@@ -8,7 +8,7 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" th:href="'/dashboard/' + ${user.id}">Webshop Dashboard</a>
+    <a class="navbar-brand" th:href="'/dashboard/' + ${user.id}" th:text="${user.name}">Webshop Dashboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,29 +43,41 @@
       <div class="tab-pane fade show active" id="regular" role="tabpanel" aria-labelledby="regular-tab">
         <h2 class="mt-3">Add Product (Regular Form)</h2>
         <form class="submitRegularForm" th:id="${user.id}">
-            <div class="form-group">
-                <label for="productName">Product Name</label>
-                <input type="text" class="form-control" id="productName" placeholder="Enter product name">
-              </div>
-              <div class="form-group">
-                <label for="amountAvailable">Amount Available</label>
-                <input type="number" class="form-control" id="amountAvailable" placeholder="Enter amount available">
-              </div>
-              <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" class="form-control" id="price" placeholder="Enter price">
-              </div>
-              <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="image">Product Image</label>
-                <input type="file" class="form-control-file" id="image">
-              </div>
-              <button type="button" class="btn btn-primary" id="submitRegularForm">Submit</button>
+          <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+          </div>
+          <div class="form-group">
+              <label for="amountAvailable">Stock</label>
+              <input type="number" class="form-control" id="amountAvailable" placeholder="Enter amount available">
+          </div>
+          <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" class="form-control" id="price" placeholder="Enter price">
+          </div>
+          <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+          </div>
+          <div class="form-group">
+              <label for="category">Category</label>
+              <select class="form-control" id="category" onchange="getSubcategories(this)">
+                  <!-- Populate options dynamically from database -->
+                  <option value="">Select category</option>
+                  <!-- Add options dynamically using server-side code -->
+                  <!-- For example, using Thymeleaf in Spring Boot -->
+                  <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+              </select>
+          </div>
+          <div class="form-group" id="subcategory-container">
 
-        </form>
+          </div>
+          <div class="form-group">
+              <label for="image">Product Image</label>
+              <input type="file" class="form-control-file" id="image">
+          </div>
+          <button type="button" class="btn btn-primary" id="submitRegularForm">Submit</button>
+      </form>
       </div>
       <!-- CSV Upload Tab -->
       <div class="tab-pane fade" id="csv" role="tabpanel" aria-labelledby="csv-tab">
@@ -81,14 +93,14 @@
       </div>
     </div>
   </div>
-
+  
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+  <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
         <!-- Send regular form -->
         <script>
+          let firestoreImageUrl;
           document.addEventListener('DOMContentLoaded', function() {
           document.getElementById('submitRegularForm').addEventListener('click', function(event) {
           event.preventDefault(); // Prevent the default form submission
@@ -96,21 +108,26 @@
           // Get input values
           let userId= document.querySelector('.submitRegularForm').id;
           let productName = document.getElementById('productName').value;
-          // let amountAvailable = document.getElementById('amountAvailable').value;
+          let amountAvailable = document.getElementById('amountAvailable').value;
           let price = document.getElementById('price').value;
           let description = document.getElementById('description').value;
+          let category = document.getElementById('category').value;
+          let subcategory = document.getElementById('subcategory').value;
           // let image = document.getElementById('image').files[0]; // Get the first file
           
           // Create a JavaScript object with form data
           let formData = {
               name: productName,
-              // amountAvailable: amountAvailable,
+              stock: parseInt(amountAvailable),
               description: description,
               price: price,
               userId:userId,
-              // image: image
+              category:parseInt(category),
+              subCategory:parseInt(subcategory),
+              image: firestoreImageUrl
           };
           
+          console.log(formData)
           // Convert the object to JSON
           let jsonData = JSON.stringify(formData);
           
@@ -124,12 +141,15 @@
           })
           .then(response => {
               if (!response.ok) {
+                  showAlert("Error","danger");
                   throw new Error('Network response was not ok');
               }
               return response.json();
           })
           .then(data => {
               console.log('Success:', data);
+              showAlert("Product added","success");
+              clearNormalForm();
               // Optionally, do something with the response data
           })
           .catch(error => {
@@ -137,7 +157,160 @@
               // Optionally, handle errors
           });
           });
-          });
+          });  
+          
+          function getSubcategories(selectElement) {
+            let categoryId = selectElement.value;
+            let url = 'http://localhost:8080/api/v1/subcategory/' + categoryId;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  console.log("data" + data[0].id)
+                    // Create the select element with options
+                    let subcategorySelect = document.createElement('select');
+                    subcategorySelect.setAttribute('class', 'form-control');
+                    subcategorySelect.setAttribute('id', 'subcategory');
+                    // Create initial option telling to select a subcategory
+                    let initialOption = document.createElement('option');
+                    initialOption.value = '';
+                    initialOption.text = 'Select subcategory';
+                    subcategorySelect.appendChild(initialOption);
+                    // Add the label for subcategory
+                    let label = document.createElement('label');
+                    label.setAttribute('for', 'subcategory');
+                    label.textContent = 'Subcategory';
+                    
+                    // Append the label to the subcategorySelect
+                    subcategorySelect.appendChild(label);
+                    
+                    // Add new options
+                    data.forEach(subcategory => {
+                        let option = document.createElement('option');
+                        option.value = subcategory.id;
+                        option.text = subcategory.name;
+                        subcategorySelect.appendChild(option);
+                    });
+                    
+                    // Get the subcategory container
+                    let subcategoryContainer = document.getElementById('subcategory-container');
+                    
+                    // Clear previous content
+                    subcategoryContainer.innerHTML = '';
+                    
+                    // Append the select element with options to the subcategory container
+                    subcategoryContainer.appendChild(subcategorySelect);
+                })
+                .catch(error => {
+                    console.error('Error fetching subcategories:', error);
+                });
+                }
+
+
+                function showAlert(message, alertType) {
+              // Create alert element
+              let alertDiv = $('<div>', {
+                class: `alert alert-${alertType} alert-dismissible fade show position-fixed bottom-0 end-0 m-3`,
+                role: 'alert',
+                css: {
+                  minWidth: '300px',
+                  borderRadius: '10px'
+                }
+              });
+
+              // Add message to alert
+              let messageSpan = $('<span>', {
+                text: message,
+                css: { fontSize: '1.2em' }
+              });
+              alertDiv.append(messageSpan);
+
+              // Create close button
+              let closeButton = $('<button>', {
+                class: 'btn-close',
+                type: 'button',
+                'data-bs-dismiss': 'alert',
+                'aria-label': 'Close',
+                click: function() {
+                  alertDiv.alert('close');
+                },
+                css: {
+                  position: 'absolute',
+                  top: '5px',
+                  right: '5px',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  fontSize: '1.5em'
+                }
+              }).html('<span aria-hidden="true">&times;</span>');
+
+              // Add close button to alert
+              alertDiv.append(closeButton);
+
+              // Append alert to the body
+              $('body').append(alertDiv);
+                }
+
+                function clearNormalForm() {
+                // Clear input fields
+                $('#productName').val('');
+                $('#amountAvailable').val('');
+                $('#price').val('');
+                $('#description').val('');
+                $('#category').val('');
+                $('#subcategory-container').html('');
+                $('#image').val('');
+              }
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBPkLsRoInYShgtalWq4ox6AJ1wqes-akg",
+    authDomain: "onlinestore-39a00.firebaseapp.com",
+    projectId: "onlinestore-39a00",
+    storageBucket: "onlinestore-39a00.appspot.com",
+    messagingSenderId: "938349227295",
+    appId: "1:938349227295:web:4476693c260d7cf837942a"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  let file;
+  let imageName;
+
+// Select the file input element
+let input = document.getElementById('image');
+
+// Add event listener for 'change' event to get the selected file
+input.addEventListener('change', getFile);
+
+function getFile(e) {
+    // Get the selected file
+    file = e.target.files[0];
+    imageName = file.name;
+    uploadImage()
+}
+
+function uploadImage() {
+    if (!file) {
+        console.error('No file selected');
+        return;
+    }
+
+    let storageRef = firebase.storage().ref("/images/" + imageName);
+    let uploadTask = storageRef.put(file);
+
+    uploadTask.on("state_changed", (snapshot) => {
+        console.log(snapshot);
+    }, (error) => {
+        console.error("Error is: " + error);
+    }, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then(url => {
+            // Assuming you have an input field with id 'imageURL' to store the image URL
+            firestoreImageUrl = url;
+            console.log("url: " + firestoreImageUrl);
+        });
+    });
+}
+
         </script>
 </body>
 </html>

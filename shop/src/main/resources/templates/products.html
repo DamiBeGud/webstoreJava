@@ -32,10 +32,10 @@
 
   <div class="container mt-5">
     <h2 class="mb-3">All Products</h2>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Search products">
+    <div class="input-group mb-3 inputid" th:id="${user.id}">
+      <input type="text" class="form-control" placeholder="Search products" id="searchInput">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">Search</button>
+        <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
       </div>
     </div>
     <table class="table">
@@ -43,10 +43,11 @@
         <tr>
           <th>#</th>
           <th>Product Name</th>
-          <th>Amount Available</th>
+          <th>Stock</th>
           <th>Price</th>
           <th>Action</th>
           <th>Edit Amount</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -57,6 +58,7 @@
           <td>$<span th:text="${product.price}">20</span></td>
           <td><button class="btn btn-primary" data-toggle="collapse" data-target="#editProductCollapse">Edit</button></td>
           <td><button class="btn btn-secondary" data-toggle="collapse" data-target="#editAmountCollapse">Edit Amount</button></td>
+          <td><button class="btn btn-danger">Delete</button></td>
         </tr>
         <!-- Add more product rows here -->
       </tbody>
@@ -126,6 +128,74 @@
       </div>
       
 
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Add click event listener to searchButton
+    document.getElementById("searchButton").addEventListener("click", function() {
+        // Get id value from element with class inputid
+        let id = document.querySelector(".inputid").id;
+        
+        // Get input value from element with id searchInput
+        let searchInputValue = document.getElementById("searchInput").value;
+        
+        // Create JSON object with id and searchInputValue
+        let data = {
+            userId: parseInt(id),
+            searchString: searchInputValue
+        };
+
+        // Make HTTP request
+        fetch("http://localhost:8080/api/v1/product/company/search", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+              $('tbody').remove();
+              $('table').after('<p class="alert alert-danger" id="notFound">No products with that name were found.</p>');
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle successful response
+            console.log("Response:", data);
+            updateTable(data)
+        })
+        .catch(error => {
+            // Handle error
+            console.error("Error:", error);
+        });
+    });
+});
+
+  function updateTable(products) {
+      // Remove existing tbody
+      $('tbody').remove();
+      $('#notFound').remove();
+      if (products.length > 0) {
+          // Rebuild table with new data
+          let tbody = $('<tbody>');
+          $.each(products, function(index, product) {
+              let tr = $('<tr>');
+              tr.append('<td>' + product.id + '</td>');
+              tr.append('<td>' + product.name + '</td>');
+              tr.append('<td>10</td>');
+              tr.append('<td>$<span>' + product.price + '</span></td>');
+              tr.append('<td><button class="btn btn-primary" data-toggle="collapse" data-target="#editProductCollapse">Edit</button></td>');
+              tr.append('<td><button class="btn btn-secondary" data-toggle="collapse" data-target="#editAmountCollapse">Edit Amount</button></td>');
+              tr.append('<td><button class="btn btn-danger">Delete</button></td>');
+              tbody.append(tr);
+          });
+          $('table').append(tbody);
+          console.log("rebuilt with new data")
+      }
+  }
+  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

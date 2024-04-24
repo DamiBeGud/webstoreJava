@@ -12,16 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Product {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String description;
-    private Double price;
-    private int stock;
-    private int userId;
-    private String image;
-    private int category;
-    private int subCategory;
+    private String Name;
+
 }

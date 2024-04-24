@@ -7,6 +7,10 @@ public class ProductDto {
     private int id;
     private String name;
     private String description;
-    private int price;
+    private Double price;
     private int userId;
+    private int stock;
+    private String image;
+    private int category;
+    private int subCategory;
 }

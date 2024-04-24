@@ -12,4 +12,5 @@ public class UserDto {
     private int zip;
     private String Country;
     private String role;
+    private String image;
 }
