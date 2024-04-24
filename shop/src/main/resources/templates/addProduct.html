@@ -274,28 +274,33 @@
   firebase.initializeApp(firebaseConfig);
 
   let file;
-  let imageName;
+  let fileName;
 
 // Select the file input element
 let input = document.getElementById('image');
-
+let inputCSV = document.getElementById('csvFile')
 // Add event listener for 'change' event to get the selected file
-input.addEventListener('change', getFile);
+input.addEventListener('change', getFile("/images/"));
+inputCSV.addEventListener('change',getFile("/csv/"));
 
-function getFile(e) {
+
+function getFile(path) {
+  return function(e){
+    console.log("triggered return function")
     // Get the selected file
     file = e.target.files[0];
-    imageName = file.name;
-    uploadImage()
+    fileName = file.name;
+    uploadImage(path)
+  }
 }
 
-function uploadImage() {
+function uploadImage(path) {
     if (!file) {
         console.error('No file selected');
         return;
     }
 
-    let storageRef = firebase.storage().ref("/images/" + imageName);
+    let storageRef = firebase.storage().ref(path + fileName);
     let uploadTask = storageRef.put(file);
 
     uploadTask.on("state_changed", (snapshot) => {
