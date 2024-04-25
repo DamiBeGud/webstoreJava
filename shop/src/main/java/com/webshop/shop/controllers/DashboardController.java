@@ -34,6 +34,8 @@ public class DashboardController {
     public String getDashboardsProductsPage(@PathVariable int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("products", productService.getAllProductsWithUserId(id));
+        model.addAttribute("categoryList", categorysService.getAllCategorys());
+        model.addAttribute("subCategoryList", categorysService.getAllSubCategorys());
         return "products";
     }
 

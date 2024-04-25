@@ -39,6 +39,13 @@ public class CategorysServiceImpl implements CategorysService {
         return subCategories.stream().map(sc -> mapToDtoSub(sc)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<SubCategoryDto> getAllSubCategorys() {
+        List<SubCategory> subCategories = subCategoryRepository.findAll();
+
+        return subCategories.stream().map(sc -> mapToDtoSub(sc)).collect(Collectors.toList());
+    }
+
     private SubCategoryDto mapToDtoSub(SubCategory subCategory) {
         SubCategoryDto subCategoryDto = new SubCategoryDto();
         subCategoryDto.setId(subCategory.getId());
@@ -53,4 +60,5 @@ public class CategorysServiceImpl implements CategorysService {
         categoryDto.setName(category.getName());
         return categoryDto;
     }
+
 }

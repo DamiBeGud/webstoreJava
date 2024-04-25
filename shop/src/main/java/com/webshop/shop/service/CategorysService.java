@@ -9,5 +9,7 @@ public interface CategorysService {
 
     List<CategoryDto> getAllCategorys();
 
+    List<SubCategoryDto> getAllSubCategorys();
+
     List<SubCategoryDto> getAllSubCategoriesWithCategoryId(int id);
 }

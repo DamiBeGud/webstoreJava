@@ -43,10 +43,12 @@
         <tr>
           <th>#</th>
           <th>Product Name</th>
-          <th>Stock</th>
           <th>Price</th>
-          <th>Action</th>
-          <th>Edit Amount</th>
+          <th>Stock</th>
+          <th>Category</th>
+          <th>Sub category</th>
+          <th>Edit Product</th>
+          <th>Add Stock</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -54,10 +56,21 @@
         <tr th:each="product : ${products}">
           <td th:text="${product.id}">1</td>
           <td th:text="${product.name}">Product 1</td>
-          <td>10</td>
           <td>$<span th:text="${product.price}">20</span></td>
+          <td th:text="${product.stock}">10</td>
+
+
+          <th:block th:each="category : ${categoryList}" th:if="${category.id == product.category}">
+            <td th:text="${category.name}">Electronics</td>
+          </th:block>
+          <th:block th:each="subCategory : ${subCategoryList}" th:if="${subCategory.id == product.subCategory}">
+            <td th:text="${subCategory.name}">Laptop</td>
+          </th:block>
+
+
+
           <td><button class="btn btn-primary" data-toggle="collapse" data-target="#editProductCollapse">Edit</button></td>
-          <td><button class="btn btn-secondary" data-toggle="collapse" data-target="#editAmountCollapse">Edit Amount</button></td>
+          <td><button class="btn btn-secondary" data-toggle="collapse" data-target="#editAmountCollapse">Add</button></td>
           <td><button class="btn btn-danger">Delete</button></td>
         </tr>
         <!-- Add more product rows here -->
@@ -72,7 +85,7 @@
         <div class="bg-light fixed-top" style="right: 0; top: 56px; bottom: 0; width: 400px;">
             <div class="p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4 class="mb-0">Edit Amount</h4>
+                  <h4 class="mb-0">Add Stock</h4>
                   <button type="button" class="close" data-toggle="collapse" data-target="#editAmountCollapse" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -81,7 +94,7 @@
           <div class="p-4">
             <form>
               <div class="form-group">
-                <label for="editAmount">New Amount</label>
+                <label for="editAmount">Add Stock</label>
                 <input type="number" class="form-control" id="editAmount" placeholder="Enter new amount">
               </div>
             </form>
