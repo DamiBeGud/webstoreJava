@@ -2,6 +2,7 @@ package com.webshop.shop.service;
 
 import java.util.List;
 
+import com.webshop.shop.dto.CsvFileUploadDto;
 import com.webshop.shop.dto.ProductDto;
 
 public interface ProductService {
@@ -14,4 +15,6 @@ public interface ProductService {
     ProductDto getOneProductById(int id);
 
     List<ProductDto> getAllProductsWithNameWithUserId(String name, int id);
+
+    List<ProductDto> createProductCsv(CsvFileUploadDto csvFileUploadDto);
 }

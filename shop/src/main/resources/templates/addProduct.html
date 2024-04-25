@@ -62,10 +62,7 @@
           <div class="form-group">
               <label for="category">Category</label>
               <select class="form-control" id="category" onchange="getSubcategories(this)">
-                  <!-- Populate options dynamically from database -->
                   <option value="">Select category</option>
-                  <!-- Add options dynamically using server-side code -->
-                  <!-- For example, using Thymeleaf in Spring Boot -->
                   <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
               </select>
           </div>
@@ -82,13 +79,13 @@
       <!-- CSV Upload Tab -->
       <div class="tab-pane fade" id="csv" role="tabpanel" aria-labelledby="csv-tab">
         <h2 class="mt-3">Add Products (CSV Upload)</h2>
-        <form>
+        <form class="submitCsvForm" th:id="${user.id}">
           <!-- CSV upload form fields -->
           <div class="form-group">
             <label for="csvFile">Upload CSV File</label>
             <input type="file" class="form-control-file" id="csvFile" accept=".csv">
           </div>
-          <button type="submit" class="btn btn-primary">Upload</button>
+          <button type="button" class="btn btn-primary" id="submitCsvForm">Add Product(s)</button>
         </form>
       </div>
     </div>
@@ -101,9 +98,55 @@
         <!-- Send regular form -->
         <script>
           let firestoreImageUrl;
+
+          document.addEventListener('DOMContentLoaded',function(){
+            document.getElementById('submitCsvForm').addEventListener('click',function(event){
+              event.preventDefault();
+              let userId= document.querySelector('.submitCsvForm').id;
+
+              let formData={
+                userId:parseInt(userId),
+                csvUrl:firestoreImageUrl
+              }
+              let jsonData = JSON.stringify(formData);
+                fetch('http://localhost:8080/api/v1/product/create/csv', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    showAlert("Error","danger");
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                showAlert("Product added","success");
+                clearNormalForm();
+                // Optionally, do something with the response data
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Optionally, handle errors
+            });
+
+              })
+            })
+
+
+
+
+
+
+
+
           document.addEventListener('DOMContentLoaded', function() {
           document.getElementById('submitRegularForm').addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent the default form submission
+          event.preventDefault(); 
           
           // Get input values
           let userId= document.querySelector('.submitRegularForm').id;
@@ -314,7 +357,7 @@ function uploadImage(path) {
             console.log("url: " + firestoreImageUrl);
         });
     });
-}
+    }
 
         </script>
 </body>
