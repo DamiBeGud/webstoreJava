@@ -117,6 +117,16 @@ public class ProductServiceImpl implements ProductService {
         return newProductsList.stream().map(npl -> mapToDto(npl)).collect(Collectors.toList());
     }
 
+    @Override
+    public ProductDto updateStock(int id, int stock) {
+        System.out.println(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + "was not found"));
+        product.setStock(product.getStock() + stock);
+        Product updateProduct = productRepository.save(product);
+        return mapToDto(updateProduct);
+    }
+
     private ProductDto mapToDto(Product product) {
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());

@@ -57,7 +57,7 @@
           <td th:text="${product.id}">1</td>
           <td th:text="${product.name}">Product 1</td>
           <td>$<span th:text="${product.price}">20</span></td>
-          <td th:text="${product.stock}">10</td>
+          <td th:text="${product.stock}" th:id="'stock-' + ${product.id}">10</td>
 
 
           <th:block th:each="category : ${categoryList}" th:if="${category.id == product.category}">
@@ -70,7 +70,7 @@
 
 
           <td><button class="btn btn-primary" data-toggle="collapse" data-target="#editProductCollapse">Edit</button></td>
-          <td><button class="btn btn-secondary" data-toggle="collapse" data-target="#editAmountCollapse">Add</button></td>
+          <td><button class="btn btn-secondary" data-toggle="collapse" data-target="#editAmountCollapse" th:id="${product.id}" onclick="getIdFromButton(this)">Add</button></td>
           <td><button class="btn btn-danger">Delete</button></td>
         </tr>
         <!-- Add more product rows here -->
@@ -92,7 +92,7 @@
                 </div>
             </div>
           <div class="p-4">
-            <form>
+            <form class="addStock">
               <div class="form-group">
                 <label for="editAmount">Add Stock</label>
                 <input type="number" class="form-control" id="editAmount" placeholder="Enter new amount">
@@ -100,8 +100,8 @@
             </form>
           </div>
           <div class="bg-light py-3 px-4 fixed-bottom">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-secondary ml-2" data-toggle="collapse" data-target="#editAmountCollapse">Close</button>
+            <button type="submit" class="btn btn-primary" id="addStockButton">Add</button>
+            <button type="button" class="btn btn-secondary ml-2" data-toggle="collapse" data-target="#editAmountCollapse" id="closeAddStockSidebar">Close</button>
           </div>
         </div>
       </div>
@@ -141,8 +141,72 @@
       </div>
       
 
-
+      <script src="http://localhost:8080/static/js/bundle.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
+    let productId;
+      function getIdFromButton(button) {
+              productId = $(button).attr('id');    
+              console.log(productId)    
+          }
+          $(document).ready(function() {
+              $('#addStockButton').click(function() {
+                console.log("id" + productId)
+                  // Get the amount from the input field
+                  let stock = $('#editAmount').val();
+
+      // Construct the request body
+      const requestBody = JSON.stringify({
+          id: parseInt(productId),
+          stock: parseInt(stock)
+      });
+
+      // Define the fetch options
+      const options = {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: requestBody
+      };
+
+      // Make the fetch request
+      fetch('http://localhost:8080/api/v1/product/update/stock', options)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then(data => {
+              // Handle success response
+              $("#closeAddStockSidebar").trigger("click");
+              console.log('Success:', data);
+              let stockElement = document.getElementById("stock-" + data.id)
+              stockElement.innerHTML = ""
+              stockElement.innerHTML = data.stock
+          })
+          .catch(error => {
+              // Handle error
+              console.error('Error:', error);
+          });
+
+                  });
+                });
+                
+          
+
+
+
+
+
+
+
+
+                
+
     document.addEventListener("DOMContentLoaded", function() {
     // Add click event listener to searchButton
     document.getElementById("searchButton").addEventListener("click", function() {
@@ -209,8 +273,5 @@
       }
   }
   </script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

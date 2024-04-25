@@ -64,4 +64,10 @@ public class ProductControllerREST {
         return new ResponseEntity<>(productService.createProductCsv(csvFileUploadDto), HttpStatus.CREATED);
     }
 
+    @PostMapping("update/stock")
+    public ResponseEntity<ProductDto> updateStock(@RequestBody ProductDto productDto) {
+        return new ResponseEntity<>(productService.updateStock(productDto.getId(), productDto.getStock()),
+                HttpStatus.OK);
+    }
+
 }

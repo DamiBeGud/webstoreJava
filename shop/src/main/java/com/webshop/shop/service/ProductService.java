@@ -14,6 +14,8 @@ public interface ProductService {
 
     ProductDto getOneProductById(int id);
 
+    ProductDto updateStock(int id, int stock);
+
     List<ProductDto> getAllProductsWithNameWithUserId(String name, int id);
 
     List<ProductDto> createProductCsv(CsvFileUploadDto csvFileUploadDto);
