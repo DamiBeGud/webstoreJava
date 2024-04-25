@@ -1,1 +1,5 @@
-console.log("Hello From Webpack")
+import { products } from "./src/pages/dashboard/products";
+
+products();
+
+
