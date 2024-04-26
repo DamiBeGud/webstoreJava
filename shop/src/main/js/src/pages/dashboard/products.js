@@ -50,7 +50,7 @@ export function products () {
 
 
   let updateProductBtn = document.getElementById('updateProduct')
-  if(updateProduct !=null){
+  if(updateProductBtn !=null){
     updateProductBtn.addEventListener('click',updateProduct)
   }  
   
@@ -103,9 +103,9 @@ export function products () {
 
   document.addEventListener('DOMContentLoaded', function() {
 
-    let addStockButton = document.getElementById('addStockButton')
-    if(addStockButton != null){
-    addStockButton.addEventListener('click', function() {
+    let addStock = document.getElementById('addStockButton')
+    if(addStock != null){
+    addStock.addEventListener('click', function() {
         console.log("id" + productId);
 
         // Get the amount from the input field
