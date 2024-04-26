@@ -15,18 +15,22 @@ import org.springframework.stereotype.Service;
 
 import com.webshop.shop.dto.CsvFileUploadDto;
 import com.webshop.shop.dto.ProductDto;
+import com.webshop.shop.dto.ReviewDto;
 import com.webshop.shop.exceptions.ProductNotFoundException;
 import com.webshop.shop.models.Product;
 import com.webshop.shop.repository.ProductRepository;
 import com.webshop.shop.service.ProductService;
+import com.webshop.shop.service.ReviewService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
+    private ReviewService reviewService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ReviewService reviewService) {
         this.productRepository = productRepository;
+        this.reviewService = reviewService;
     }
 
     @Override
@@ -52,6 +56,7 @@ public class ProductServiceImpl implements ProductService {
         productResponse.setStock(newProduct.getStock());
         productResponse.setCategory(newProduct.getCategory());
         productResponse.setSubCategory(newProduct.getSubCategory());
+        productResponse.setImage(newProduct.getImage());
 
         return productResponse;
     }
@@ -63,11 +68,43 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> getAllProductsShop() {
+        List<Product> product = productRepository.findAll();
+        List<ProductDto> productDtos = product.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
+        List<ProductDto> response = productDtos.stream().map(products -> {
+            products.setRating(rating(products.getId()));
+            return products;
+        }).collect(Collectors.toList());
+        // TODO Auto-generated method stub
+        return response;
+    }
+
+    @Override
     public ProductDto getOneProductById(int id) {
         // Add exception error
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
-        return mapToDto(product);
+
+        ProductDto productDto = mapToDto(product);
+      
+        productDto.setRating(rating(productDto.getId()));
+        return productDto;
+    }
+
+    private Integer rating(int id){
+        int rating;
+        List<ReviewDto> reviews = reviewService.findReviewsByProductId(id);
+        if(reviews.size() == 0){
+            rating = 0;
+            return rating;
+        }else{
+            int reviewTotal = 0;
+            for(ReviewDto review : reviews){
+                reviewTotal= reviewTotal + review.getRating();
+            }
+            rating = reviewTotal/reviews.size();
+            return rating;
+        }
     }
 
     @Override
@@ -139,6 +176,7 @@ public class ProductServiceImpl implements ProductService {
         productDto.setSubCategory(product.getSubCategory());
         productDto.setDiscount(product.getDiscount());
         productDto.setDiscountPrice(product.getDiscountPrice());
+        productDto.setImage(product.getImage());
         return productDto;
     }
 

@@ -8,6 +8,7 @@ public class RegisterDto {
     private String password;
     private String name;
     private String street;
+    private String city;
     private int number;
     private int zip;
     private String Country;

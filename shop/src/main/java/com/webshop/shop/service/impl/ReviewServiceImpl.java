@@ -26,15 +26,18 @@ public class ReviewServiceImpl implements ReviewService {
         review.setTitle(reviewDto.getTitle());
         review.setReview(reviewDto.getReview());
         review.setRating(reviewDto.getRating());
+        review.setName(reviewDto.getName());
 
         Review newReview = reviewRepository.save(review);
 
         ReviewDto reviewResponse = new ReviewDto();
         reviewResponse.setId(newReview.getId());
-        reviewResponse.setProductId(0);
+        reviewResponse.setProductId(newReview.getProductId());
         reviewResponse.setTitle(newReview.getTitle());
         reviewResponse.setReview(newReview.getReview());
         reviewResponse.setRating(newReview.getRating());
+        reviewResponse.setName(newReview.getName());
+
 
         return reviewResponse;
 
@@ -51,6 +54,7 @@ public class ReviewServiceImpl implements ReviewService {
         ReviewDto reviewDto = new ReviewDto();
         // reviewDto.setId(review.getId());
         // reviewDto.setProductId(0);
+        reviewDto.setName(review.getName());
         reviewDto.setTitle(review.getTitle());
         reviewDto.setReview(review.getReview());
         reviewDto.setRating(review.getRating());

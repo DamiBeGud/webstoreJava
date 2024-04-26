@@ -1,6 +1,7 @@
 package com.webshop.shop.security;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,23 +36,29 @@ public class SecurityConfig {
         this.userRepository = userRepository;
     }
 
+
+
+
+
+
+    @SuppressWarnings("deprecation")
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .requestMatchers(
-                        "/login",
-                        "/register/**",
-                        "/shop",
-                        "/css/**",
-                        "/js/**")
-                .permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .csrf(csrf -> csrf.disable())
+                .authorizeRequests(requests -> requests
+                        .requestMatchers(
+                                "/login",
+                                "/register/**",
+                                "/shop",
+                                "/css/**",
+                                "/js/**",
+                                "/product/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/dashboard", true)
+                        // .defaultSuccessUrl("/dashboard", true)
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error=true")
                         .permitAll())
@@ -61,14 +68,21 @@ public class SecurityConfig {
                                 .permitAll());
 
         return http
-                .formLogin()
-                .successHandler((request, response, authentication) -> {
-                    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-                    String currentUser = auth.getName();
-                    UserEntity id = userRepository.findByEmail(currentUser);
-                    response.sendRedirect("/dashboard/" + id.getId());
-                })
-                .and()
+                .formLogin(login -> login
+                        .successHandler((request, response, authentication) -> {
+                            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                            String currentUser = auth.getName();
+                            UserEntity user = userRepository.findByEmail(currentUser);
+                            // Check the role of the authenticated user
+                            if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+                                // If the user has the role ADMIN, redirect to /dashboard
+                                UserEntity id = user;
+                                response.sendRedirect("/dashboard/" + id.getId());
+                            } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("USER"))) {
+                                // If the user has the role USER, redirect to /shop
+                                response.sendRedirect("/shop");
+                            }
+                        }))
                 .build();
     }
 

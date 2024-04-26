@@ -27,9 +27,15 @@ public class AuthController {
     }
 
     @GetMapping("/register/user")
-    public String getRegisterUserPage() {
+    public String getRegisterUserPage(Model model) {
+        RegisterDto user = new RegisterDto();
+        model.addAttribute("user", user);
         return "registerUser";
     }
+
+
+
+
 
     @GetMapping("/register/company")
     public String getRegisterCompanyPage(Model model) {
@@ -51,7 +57,24 @@ public class AuthController {
             model.addAttribute("user", user);
             return "registerCompany";
         }
-        int userId = userService.saveUser(user);
+        int userId = userService.saveUser(user, "ADMIN");
+        return "redirect:/dashboard/" + userId;
+    }
+
+    @PostMapping("/register/user/save")
+    public String registerUser(@ModelAttribute("user") RegisterDto user, Model model, BindingResult result) {
+
+        UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
+        if (existingUserEmail != null && existingUserEmail.getEmail() != null
+                && !existingUserEmail.getEmail().isEmpty()) {
+            result.rejectValue("email", "duplicate.email", "There is already a user with this email");
+
+        }
+        if (result.hasErrors()) {
+            model.addAttribute("user", user);
+            return "registerCompany";
+        }
+        int userId = userService.saveUser(user, "USER");
         return "redirect:/dashboard/" + userId;
     }
 }

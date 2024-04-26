@@ -49,8 +49,11 @@ export function products () {
 
 
 
-  document.getElementById('updateProduct').addEventListener('click',updateProduct)
-
+  let updateProductBtn = document.getElementById('updateProduct')
+  if(updateProduct !=null){
+    updateProductBtn.addEventListener('click',updateProduct)
+  }  
+  
 
   function addStockButton(event) {
     productId = event.target.id;
@@ -81,21 +84,28 @@ export function products () {
   function addEventListeners(){
       const buttonsAddStock = document.querySelectorAll('.addStock');
       console.log(buttonsAddStock)
-      buttonsAddStock.forEach(function(button) {
-        button.addEventListener('click', addStockButton);
-      });
+      if(buttonsAddStock != null){
+        buttonsAddStock.forEach(function(button) {
+          button.addEventListener('click', addStockButton);
+        });
+      }
 
       const buttonsEditProduct = document.querySelectorAll('.editProduct');
       console.log(buttonsEditProduct);
-      buttonsEditProduct.forEach(function(button) {
-        button.addEventListener('click', editProductButton)
-      })
+      if(buttonsEditProduct != null){
+        buttonsEditProduct.forEach(function(button) {
+          button.addEventListener('click', editProductButton)
+        })
+      }
    
   }
   addEventListeners()
 
   document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('addStockButton').addEventListener('click', function() {
+
+    let addStockButton = document.getElementById('addStockButton')
+    if(addStockButton != null){
+    addStockButton.addEventListener('click', function() {
         console.log("id" + productId);
 
         // Get the amount from the input field
@@ -137,6 +147,7 @@ export function products () {
                 console.error('Error:', error);
             });
     });
+  }
 });
 
 
@@ -144,21 +155,19 @@ export function products () {
   // Search
   document.addEventListener('DOMContentLoaded', function () {
     // Add click event listener to searchButton
-    document
-      .getElementById('searchButton')
-      .addEventListener('click', function () {
+    let searchBtn = document.getElementById('searchButton')
+
+    if(searchBtn != null){
+      searchBtn.addEventListener('click', function () {
         // Get id value from element with class inputid
         let id = document.querySelector('.inputid').getAttribute('id')
-
         // Get input value from element with id searchInput
         let searchInputValue = document.getElementById('searchInput').value
-
         // Create JSON object with id and searchInputValue
         let data = {
           userId: parseInt(id),
           searchString: searchInputValue
         }
-
         // Make HTTP request
         fetch('http://localhost:8080/api/v1/product/company/search', {
           method: 'POST',
@@ -191,6 +200,8 @@ export function products () {
             console.error('Error:', error)
           })
       })
+    }
+
   })
 
   function updateTable (data) {

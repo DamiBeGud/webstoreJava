@@ -15,4 +15,5 @@ public class ProductDto {
     private int subCategory;
     private Boolean discount;
     private double discountPrice;
+    private int rating;
 }

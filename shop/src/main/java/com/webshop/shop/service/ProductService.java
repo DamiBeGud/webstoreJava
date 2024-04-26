@@ -9,6 +9,8 @@ public interface ProductService {
     ProductDto createProduct(ProductDto productDto);
 
     List<ProductDto> getAllProducts();
+    
+    List<ProductDto> getAllProductsShop();
 
     List<ProductDto> getAllProductsWithUserId(int id);
 

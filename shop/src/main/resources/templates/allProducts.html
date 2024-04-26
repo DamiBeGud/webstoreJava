@@ -87,22 +87,49 @@
               <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
                   <div class="product-card">
                       <div class="card">
-                          <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+                          <img th:src="@{${product.image}}" class="card-img-top" alt="Product Image">
                           <div class="card-body">
                               <h5 class="card-title" th:text="${product.name}">Product 1</h5>
+                              <p class="card-text rating-class" th:id="${product.rating}">Rating: 
+                                <!-- <span class="rating">&#9733;</span>
+                                <span class="rating">&#9733;</span>
+                                <span class="rating">&#9733;</span>
+                                <span class="rating">&#9733;</span>
+                                <span class="rating">&#9734;</span> -->
+                              </p>
                               <p class="card-text">$<span th:text="${product.price}"></span></p>
+                              <p class="card-text" th:text="${product.description}"></p>
+                              <br>
                               <a href="#" class="btn btn-primary">Add to Cart</a>
                           </div>
                       </div>
                   </div>
               </a>
           </div>
-          
-
-
-
-
-
+                              <script>
+                                document.addEventListener('DOMContentLoaded',()=>{
+                                  const ratings = document.querySelectorAll('.rating-class');
+                                  ratings.forEach((rating)=>{
+                                    const ratingNumber = parseInt(rating.getAttribute('id'));
+                                    if(ratingNumber != 0){
+                                      for(i=0; i < 5; i++){
+                                        const span = document.createElement('span')
+                                        span.classList = "rating"
+                                        if(i <= ratingNumber){
+                                          span.innerHTML = "&#9733;"
+                                        }else{
+                                          span.innerHTML = "&#9734;"
+                                        }
+                                        rating.appendChild(span)
+                                      }
+                                    }else{
+                                      const span = document.createElement('span')
+                                      span.innerHTML="No reviews"
+                                      rating.appendChild(span)
+                                    }
+                                  })
+                                })
+                              </script>
         </div>
       </div>
     </div>

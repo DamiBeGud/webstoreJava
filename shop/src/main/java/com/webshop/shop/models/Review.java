@@ -20,4 +20,5 @@ public class Review {
     private String title;
     private String review;
     private int rating;
+    private String name;
 }
