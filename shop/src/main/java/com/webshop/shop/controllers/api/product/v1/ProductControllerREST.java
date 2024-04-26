@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.webshop.shop.dto.CsvFileUploadDto;
 import com.webshop.shop.dto.ProductDto;
-import com.webshop.shop.dto.SearchRequestDto;
+import com.webshop.shop.dto.request.SearchRequestDto;
 import com.webshop.shop.dto.response.SearchDashboardSearchResponse;
 import com.webshop.shop.models.Product;
 import com.webshop.shop.service.CategorysService;

@@ -1,4 +1,4 @@
-package com.webshop.shop.dto;
+package com.webshop.shop.dto.request;
 
 import lombok.Data;
 

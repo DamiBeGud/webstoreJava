@@ -27,10 +27,6 @@
   <div class="container-fluid bg-light mt-4">
     <div class="container">
       <h3 class="mt-4">Customer Reviews</h3>
-
-
-
-
       <div class="card mt-3" th:each="review : ${reviews}">
         <div class="card-body">
           <h5 class="card-title" th:text="${review.title}">Review Title</h5>
@@ -45,31 +41,6 @@
           <p class="card-text">By: <span th:text="${review.name}">John Doe</span></p>
         </div>
       </div>
-      <script>
-        document.addEventListener('DOMContentLoaded',()=>{
-          const ratings = document.querySelectorAll('.rating-class');
-          ratings.forEach((rating)=>{
-            const ratingNumber = parseInt(rating.getAttribute('id'));
-            if(ratingNumber != 0){
-              for(i=0; i < 5; i++){
-                const span = document.createElement('span')
-                span.classList = "rating"
-                if(i <= ratingNumber){
-                  span.innerHTML = "&#9733;"
-                }else{
-                  span.innerHTML = "&#9734;"
-                }
-                rating.appendChild(span)
-              }
-            }else{
-              const span = document.createElement('span')
-              span.innerHTML="No reviews"
-              rating.appendChild(span)
-            }
-          })
-        })
-      </script>
-
       <!-- Add Review Form -->
       <form class="reviewForm" th:id="${product.id}" sec:authorize="isAuthenticated()">
         <h4 class="mt-4">Add Your Review</h4>
@@ -97,56 +68,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit Review</button>
       </form>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('.reviewForm');
-  
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-  
-            const productId =parseInt(form.getAttribute('id'));
-            const title = document.getElementById('reviewTitle').value;
-            const review = document.getElementById('reviewContent').value;
-            const rating = parseInt(document.getElementById('reviewRating').value);
-            const name = document.getElementById('name').value
-  
-            const apiUrl = 'http://localhost:8080/api/v1/review/create';
-  
-            // Make the API call
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    productId: productId,
-                    title: title,
-                    review: review,
-                    rating: rating,
-                    name:name,
-                }),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Handle success response from the API
-                console.log('Review submitted successfully:', data);
-                // You can add further actions here if needed, like showing a success message to the user
-            })
-            .catch(error => {
-                // Handle errors
-                console.error('There was a problem with the review submission:', error);
-                // You can add further actions here if needed, like showing an error message to the user
-            });
-        });
-    });
-  </script>
-   <script src="http://localhost:8080/static/js/bundle.js"></script>
-
     </div>
   </div>
   <br>
