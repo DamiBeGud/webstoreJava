@@ -84,27 +84,23 @@
       <div class="col-md-9 p-4">
           <div class="row">
             <div class="col-md-4" th:each="product : ${products}">
-              <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
-                  <div class="product-card">
-                      <div class="card">
+              <div class="product-card">
+                <div class="card">
+                        <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
                           <img th:src="@{${product.image}}" class="card-img-top" alt="Product Image">
+                        </a>  
                           <div class="card-body">
+                            <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
                               <h5 class="card-title" th:text="${product.name}">Product 1</h5>
-                              <p class="card-text rating-class" th:id="${product.rating}">Rating: 
-                                <!-- <span class="rating">&#9733;</span>
-                                <span class="rating">&#9733;</span>
-                                <span class="rating">&#9733;</span>
-                                <span class="rating">&#9733;</span>
-                                <span class="rating">&#9734;</span> -->
-                              </p>
+                              <p class="card-text rating-class" th:id="${product.rating}">Rating:</p>
                               <p class="card-text">$<span th:text="${product.price}"></span></p>
                               <p class="card-text" th:text="${product.description}"></p>
                               <br>
-                              <a href="#" class="btn btn-primary">Add to Cart</a>
+                            </a> 
+                              <button th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
                           </div>
                       </div>
                   </div>
-              </a>
           </div>
         </div>
       </div>

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webshop.shop.dto.ProductDto;
+import com.webshop.shop.models.Cart;
 import com.webshop.shop.models.UserEntity;
 import com.webshop.shop.repository.UserRepository;
 import com.webshop.shop.security.SecurityUtil;
+import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.ProductService;
 import com.webshop.shop.service.ReviewService;
 import com.webshop.shop.service.UserService;
@@ -25,15 +27,20 @@ public class ShopController {
     private ProductService productService;
     private ReviewService reviewService;
     private UserService userService;
+    private CartService cartService;
 
 
     @Autowired
-    public ShopController(ProductService productService, ReviewService reviewService, UserService userService) {
+    public ShopController(
+        ProductService productService,
+        ReviewService reviewService,
+        UserService userService,
+        CartService cartService) {
         this.productService = productService;
-        this.reviewService = reviewService;
-        this.userService = userService;
-
-    }
+            this.reviewService = reviewService;
+            this.userService = userService;
+            this.cartService = cartService;
+        }
 
     @GetMapping("/shop")
     public ModelAndView getProducts() {
@@ -42,6 +49,9 @@ public class ShopController {
         String email = SecurityUtil.getSessionUser();
         if(email != null){
             modelAndView.addObject("user", userService.getUser());
+            Cart cart = cartService.getCart();
+            System.out.println("Cart: " + cart);
+            modelAndView.addObject("cart", cart);
         }
         modelAndView.setViewName("allProducts");
 

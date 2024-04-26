@@ -44,12 +44,37 @@ export function product(){
                 // You can add further actions here if needed, like showing an error message to the user
             });
         });
-    }
-
-
+    }    
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const buttonsaddProductToCart = document.querySelectorAll(".addProductToCart");
+    
+    if(buttonsaddProductToCart != null){
+
+    buttonsaddProductToCart.forEach(button => {
+
+        button.addEventListener("click", function() {
+            const url = button.id;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => {
+                console.log("Response:", response);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    });
+
+}
+});
 
 
 
