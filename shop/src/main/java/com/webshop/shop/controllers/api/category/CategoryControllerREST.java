@@ -1,5 +1,6 @@
 package com.webshop.shop.controllers.api.category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.webshop.shop.dto.CategoryDto;
 import com.webshop.shop.dto.SubCategoryDto;
 import com.webshop.shop.models.SubCategory;
 import com.webshop.shop.service.CategorysService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -29,4 +33,6 @@ public class CategoryControllerREST {
     public ResponseEntity getSubCategory(@PathVariable int id) {
         return new ResponseEntity<>(categorysService.getAllSubCategoriesWithCategoryId(id), HttpStatus.OK);
     }
+
+    
 }

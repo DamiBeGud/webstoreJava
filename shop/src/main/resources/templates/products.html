@@ -55,21 +55,24 @@
       <tbody>
         <tr th:each="product : ${products}">
           <td th:text="${product.id}">1</td>
-          <td th:text="${product.name}">Product 1</td>
-          <td>$<span th:text="${product.price}">20</span></td>
+          <td th:text="${product.name}" th:id="'name-' + ${product.id}">Product 1</td>
+          <td>
+            <div th:unless="${product.discount}">
+              $<span th:text="${product.price}" th:id="'price-' + ${product.id}">20</span>
+            </div>
+            <div th:if="${product.discount}">
+              $<span th:text="${product.discountPrice}" th:id="'price-' + ${product.id}">20</span>
+            </div>
+        </td>
+        
           <td th:text="${product.stock}" th:id="'stock-' + ${product.id}">10</td>
-
-
           <th:block th:each="category : ${categoryList}" th:if="${category.id == product.category}">
             <td th:text="${category.name}">Electronics</td>
           </th:block>
           <th:block th:each="subCategory : ${subCategoryList}" th:if="${subCategory.id == product.subCategory}">
             <td th:text="${subCategory.name}">Laptop</td>
           </th:block>
-
-
-
-          <td><button class="btn btn-primary" data-toggle="collapse" data-target="#editProductCollapse">Edit</button></td>
+          <td><button class="btn btn-primary editProduct" data-toggle="collapse" data-target="#editProductCollapse" th:id="${product.id}">Edit</button></td>
           <td><button class="btn btn-secondary addStock" data-toggle="collapse" data-target="#editAmountCollapse" th:id="${product.id}">Add</button></td>
           <td><button class="btn btn-danger">Delete</button></td>
         </tr>
@@ -77,7 +80,6 @@
       </tbody>
     </table>
   </div>
-
 
 
     <!-- Sidebar for editing amount -->
@@ -122,10 +124,10 @@
                   <label for="productName">Product Name</label>
                   <input type="text" class="form-control" id="productName" placeholder="Enter product name">
                 </div>
+
                 <div class="form-group">
                   <label for="productPrice">Product Price</label>
-                  <input type="number" class="form-control" id="productPrice" placeholder="Enter product price">
-                </div>
+                  <input type="number" class="form-control" id="productPrice" placeholder="Enter product price"></div>
                 <div class="form-group">
                   <label for="productDescription">Product Description</label>
                   <textarea class="form-control" id="productDescription" rows="3" placeholder="Enter product description"></textarea>
@@ -133,8 +135,8 @@
               </form>
             </div>
             <div class="bg-light py-3 px-4 fixed-bottom">
-              <button type="submit" class="btn btn-primary">Save</button>
-              <button type="button" class="btn btn-secondary ml-2" data-toggle="collapse" data-target="#editProductCollapse">Close</button>
+              <button type="submit" class="btn btn-primary" id="updateProduct">Save</button>
+              <button type="button" class="btn btn-secondary ml-2" data-toggle="collapse" data-target="#editProductCollapse" id="closeEditSidebarButton">Close</button>
             </div>
           </div>
         </div>

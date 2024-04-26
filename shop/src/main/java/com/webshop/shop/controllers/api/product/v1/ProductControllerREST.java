@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.webshop.shop.dto.CsvFileUploadDto;
 import com.webshop.shop.dto.ProductDto;
+import com.webshop.shop.dto.SearchDashboardSearchResponse;
 import com.webshop.shop.dto.SearchRequestDto;
 import com.webshop.shop.models.Product;
+import com.webshop.shop.service.CategorysService;
 import com.webshop.shop.service.ProductService;
 
 import java.io.BufferedReader;
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,10 +33,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ProductControllerREST {
 
     private ProductService productService;
+    private CategorysService categorysService;
 
     @Autowired
-    public ProductControllerREST(ProductService productService) {
+    public ProductControllerREST(ProductService productService, CategorysService categorysService) {
         this.productService = productService;
+        this.categorysService = categorysService;
     }
 
     @PostMapping("create")
@@ -49,11 +54,22 @@ public class ProductControllerREST {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> getProductById(@PathVariable int id){
+        return new ResponseEntity<>(productService.getOneProductById(id), HttpStatus.OK);
+    }
+
     @PostMapping("company/search")
-    public ResponseEntity<List<ProductDto>> getProductsCompanySearch(@RequestBody SearchRequestDto searchRequestDto) {
+    public ResponseEntity<SearchDashboardSearchResponse> getProductsCompanySearch(@RequestBody SearchRequestDto searchRequestDto) {
         System.out.println(searchRequestDto);
-        return new ResponseEntity<>(productService.getAllProductsWithNameWithUserId(searchRequestDto.getSearchString(),
-                searchRequestDto.getUserId()), HttpStatus.OK);
+        SearchDashboardSearchResponse searchDashboardSearchResponse = new SearchDashboardSearchResponse();
+        searchDashboardSearchResponse.setProducts(productService.getAllProductsWithNameWithUserId(searchRequestDto.getSearchString(),
+        searchRequestDto.getUserId()));
+        searchDashboardSearchResponse.setCategories(categorysService.getAllCategorys());
+        searchDashboardSearchResponse.setSubCategories(categorysService.getAllSubCategorys());
+
+        // return null;
+        return new ResponseEntity<>(searchDashboardSearchResponse, HttpStatus.OK);
     }
 
     @PostMapping("create/csv")
@@ -67,6 +83,12 @@ public class ProductControllerREST {
     @PostMapping("update/stock")
     public ResponseEntity<ProductDto> updateStock(@RequestBody ProductDto productDto) {
         return new ResponseEntity<>(productService.updateStock(productDto.getId(), productDto.getStock()),
+                HttpStatus.OK);
+    }
+
+    @PostMapping("update")
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {       
+        return new ResponseEntity<>(productService.updateProduct(productDto),
                 HttpStatus.OK);
     }
 

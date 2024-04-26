@@ -137,6 +137,8 @@ public class ProductServiceImpl implements ProductService {
         productDto.setStock(product.getStock());
         productDto.setCategory(product.getCategory());
         productDto.setSubCategory(product.getSubCategory());
+        productDto.setDiscount(product.getDiscount());
+        productDto.setDiscountPrice(product.getDiscountPrice());
         return productDto;
     }
 
@@ -179,6 +181,30 @@ public class ProductServiceImpl implements ProductService {
             // Handle the case where the line does not match the expected format
             throw new IllegalArgumentException("Invalid CSV format: " + line);
         }
+    }
+
+    @Override
+    public ProductDto updateProduct(ProductDto productDto) {
+
+        Product product = productRepository.findById(productDto.getId()).orElseThrow(
+            ()-> new ProductNotFoundException("Product with id " + productDto.getId() + "was not found"));
+        product.setName(productDto.getName());
+        product.setDescription(productDto.getDescription());
+
+        double newPrice = productDto.getPrice();
+        double oldPrice = product.getPrice();
+
+        if(newPrice < oldPrice){
+            product.setDiscountPrice(newPrice);
+            product.setDiscount(true);
+        }else{
+            product.setPrice(productDto.getPrice());
+            product.setDiscount(false);
+        }
+
+        Product updateProduct = productRepository.save(product);
+
+        return mapToDto(updateProduct);
     }
 
 }

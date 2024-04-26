@@ -13,4 +13,6 @@ public class ProductDto {
     private String image;
     private int category;
     private int subCategory;
+    private Boolean discount;
+    private double discountPrice;
 }

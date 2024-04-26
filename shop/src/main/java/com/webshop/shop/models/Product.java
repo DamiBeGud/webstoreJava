@@ -24,4 +24,6 @@ public class Product {
     private String image;
     private int category;
     private int subCategory;
+    private Boolean discount = false;
+    private double discountPrice;
 }
