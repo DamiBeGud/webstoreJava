@@ -2,6 +2,7 @@ package com.webshop.shop.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,15 +63,16 @@ public class CartServiceImpl implements CartService{
         int id = user.getId();
 
         List<Cart> carts = cartRepository.findByUserId(id);
+
         Cart cart = new Cart();
 
         if(carts.size() > 0){
-           Cart foundCart = carts.stream().filter(c -> c.getActive() == true).findFirst().orElseThrow();
-           if(foundCart !=null){
-            cart.setId(foundCart.getId());
-            cart.setUserId(foundCart.getUserId());
-            cart.setCart(foundCart.getCart());
-            cart.setActive(foundCart.getActive());
+           Optional<Cart> foundCart = carts.stream().filter(c -> c.getActive() == true).findFirst();
+           if(foundCart.isPresent()){
+            cart.setId(foundCart.get().getId());
+            cart.setUserId(foundCart.get().getUserId());
+            cart.setCart(foundCart.get().getCart());
+            cart.setActive(foundCart.get().getActive());
            }else{
             Cart newCart = createCart(id);
             cart.setId(newCart.getId());
