@@ -176,4 +176,27 @@ public class CartServiceImpl implements CartService{
         return numberOfProductsInCart;
     }
 
+    @Override
+    public CartProductDto updateQty(int cartProductId, int qty) {
+        CartProduct cartProduct = cartProductRepository.findById(cartProductId).orElseThrow();
+        CartProductDto cartProductDto = new CartProductDto();
+        cartProduct.setQty(qty);
+        cartProductRepository.save(cartProduct);
+
+        double updatedPrice = 0;
+        
+        ProductDto product = productService.getOneProductById(cartProduct.getProductId());
+        if(product.getDiscount() == true){
+            updatedPrice = product.getDiscountPrice() * qty;
+        }else{
+            updatedPrice = product.getPrice() * qty;
+        }
+
+        cartProductDto.setQty(qty);
+        cartProductDto.setId(cartProductId);
+        cartProductDto.setPrice(updatedPrice);
+
+        return cartProductDto;
+    }
+
 }

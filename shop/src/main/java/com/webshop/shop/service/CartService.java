@@ -16,4 +16,6 @@ public interface CartService {
     CartDto getShopingCart();
 
     int getNumberOfProductsInCart();
+
+    CartProductDto updateQty(int cartProductId, int qty);
 }

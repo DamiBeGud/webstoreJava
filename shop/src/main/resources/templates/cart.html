@@ -21,7 +21,7 @@
                         <label for="exampleFormControlSelect1" class="col-form-label">Quantity</label>
                     </div>
                     <div class="col-auto">
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1" style="width: 50px;">
+                        <select class="form-control form-control-sm qty-select" th:id="'http://localhost:8080/api/v1/cart/update/qty/' + ${product.id}" style="width: 50px;">
                             <option value="1" th:selected="${product.qty == 1}">1</option>
                             <option value="2" th:selected="${product.qty == 2}">2</option>
                             <option value="3" th:selected="${product.qty == 3}">3</option>
@@ -35,7 +35,7 @@
                         </select>
                     </div>
                 </div>                
-                  <p class="card-text">Price: $ <span th:text="${product.price}">10.00</span></p>
+                  <p class="card-text">Price: $ <span th:text="${product.price}" th:id="'productCardPrice-' + ${product.id}">10.00</span></p>
                   <button class="btn btn-danger removeProductFromCart" th:id="'http://localhost:8080/api/v1/cart/' + ${shopingCart.id} + '/remove/' + ${product.id}">Remove</button>
                 </div>
               </div>
@@ -52,11 +52,11 @@
             <ul class="list-group">
               <li class="list-group-item d-flex justify-content-between align-items-center" th:each="product : ${shopingCart.cart}" th:id="'cartSummery-' + ${product.id}">
                 <span th:text="${product.name}">Product 1</span>
-                <span class="badge badge-primary badge-pill">$ <span th:text="${product.price}">10.00</span></span>
+                <span class="badge badge-primary badge-pill">$ <span th:text="${product.price}" th:id="'summaryPrice-' + ${product.id}">10.00</span></span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 Total
-                <span class="badge badge-primary badge-pill">$ <span th:text="${shopingCart.total}">30.00</span></span>
+                <span class="badge badge-primary badge-pill">$ <span th:text="${shopingCart.total}" id="totalSummary">30.00</span></span>
               </li>
             </ul>
             <div class="mt-3">

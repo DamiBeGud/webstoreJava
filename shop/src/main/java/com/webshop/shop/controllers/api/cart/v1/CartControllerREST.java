@@ -33,11 +33,17 @@ public class CartControllerREST {
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    @PostMapping("/cart/{cartId}/remove/{productId}")
-    public ResponseEntity postMethodName(@PathVariable int cartId, @PathVariable int productId) {
+    @PostMapping("cart/{cartId}/remove/{productId}")
+    public ResponseEntity removeProductFromCart(@PathVariable int cartId, @PathVariable int productId) {
        int response = cartService.removeProductFromCart(cartId, productId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PostMapping("cart/update/qty/{cartProductId}/value/{qty}")
+    public ResponseEntity updateQty(@PathVariable int cartProductId, @PathVariable int qty) {
+        return new ResponseEntity<>(cartService.updateQty(cartProductId,qty), HttpStatus.OK);
+    }
+    
     
     
 }

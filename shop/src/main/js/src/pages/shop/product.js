@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Data:", data); // Log the received data
+                console.log("Data:", data);
                 const productsInCart = document.getElementById('cartItemCount');
                 let productsInCartNumber = parseInt(productsInCart.innerHTML);
                 productsInCartNumber -= 1;
@@ -109,13 +109,53 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById('cartSummery-' + data).remove();
             })
             .catch(error => {
-                console.error("Error:", error); // Log any errors that occur during the fetch
+                console.error("Error:", error); 
             });
         });
     });
 
 }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const selectElementsQty = document.querySelectorAll('.qty-select');
+    if(selectElementsQty != null){
+    selectElementsQty.forEach(selectElement => {
+        selectElement.addEventListener('change', function() {
+            const selectedValue = this.value;
+
+            const url = this.id;
+            fetch(url + '/value/' + selectedValue, {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+            })
+            .then(response => response.json())
+            .then(data=>{
+                console.log('qty data' + data.id + data.qty + data.price)
+                const cardPrice = document.getElementById('productCardPrice-' + data.id);
+                const summeryPrice = document.getElementById('summaryPrice-' + data.id);
+                const totalSummery = document.getElementById('totalSummary');
+                let summeryPriceNum = parseFloat(summeryPrice.innerHTML);
+                let totlaSummeryNum = parseFloat(totalSummery.innerHTML);
+                cardPrice.innerHTML= "";
+                cardPrice.innerHTML= data.price;
+                summeryPrice.innerHTML= "";
+                summeryPrice.innerHTML= data.price;
+                totlaSummeryNum = totlaSummeryNum + data.price - summeryPriceNum;
+                totalSummery.innerHTML = "";
+                totalSummery.innerHTML = totlaSummeryNum
+            })
+            .catch(error => {
+                console.error('Request failed', error);
+            });
+        });
+    });
+    }
+});
+
 
 
 
