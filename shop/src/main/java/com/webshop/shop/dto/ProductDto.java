@@ -16,4 +16,5 @@ public class ProductDto {
     private Boolean discount;
     private double discountPrice;
     private int rating;
+    private int cartProductId;
 }

@@ -70,12 +70,6 @@ public class ShopController {
         modelAndView.setViewName("product");
         return modelAndView;
     }
-
-    @GetMapping("/cart")
-    public String getMethodName() {
-
-        return "cart";
-    }
     
 
 }
