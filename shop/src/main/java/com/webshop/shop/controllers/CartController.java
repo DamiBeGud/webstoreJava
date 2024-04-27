@@ -32,7 +32,6 @@ public class CartController {
         model.addAttribute("user", userService.getUser());
         System.out.println("Cart Checkout" + cartService.getShopingCart());
         model.addAttribute("shopingCart", cartService.getShopingCart()); 
-        
         return "checkout";
     }
 

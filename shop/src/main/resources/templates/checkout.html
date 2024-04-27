@@ -60,7 +60,7 @@
             <div class="card-body">
               <h5 class="card-title">Credit Card Payment</h5>
               
-              <form class="needs-validation" novalidate>
+              <form class="needs-validation" novalidate th:action="@{/cart/checkout/order}" method="post">
                 <div class="form-group">
                   <label for="cardNumber">Card Number</label>
                   <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number" required>

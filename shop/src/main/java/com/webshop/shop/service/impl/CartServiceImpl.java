@@ -206,4 +206,10 @@ public class CartServiceImpl implements CartService{
         cartRepository.save(cart);
     }
 
+    @Override
+    public Cart getCartForOrderService(int userId, Boolean active) {
+        Cart cart = cartRepository.findFirstByUserIdAndActive(userId, active);
+        return cart;
+    }
+
 }

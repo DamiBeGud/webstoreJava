@@ -20,4 +20,6 @@ public interface CartService {
     CartProductDto updateQty(int cartProductId, int qty);
 
     void deactivateCart(int cartId);
+
+    Cart getCartForOrderService(int userId, Boolean active);
 }
