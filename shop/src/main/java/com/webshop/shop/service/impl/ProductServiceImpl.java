@@ -86,23 +86,23 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
 
         ProductDto productDto = mapToDto(product);
-      
+
         productDto.setRating(rating(productDto.getId()));
         return productDto;
     }
 
-    private Integer rating(int id){
+    private Integer rating(int id) {
         int rating;
         List<ReviewDto> reviews = reviewService.findReviewsByProductId(id);
-        if(reviews.size() == 0){
+        if (reviews.size() == 0) {
             rating = 0;
             return rating;
-        }else{
+        } else {
             int reviewTotal = 0;
-            for(ReviewDto review : reviews){
-                reviewTotal= reviewTotal + review.getRating();
+            for (ReviewDto review : reviews) {
+                reviewTotal = reviewTotal + review.getRating();
             }
-            rating = reviewTotal/reviews.size();
+            rating = reviewTotal / reviews.size();
             return rating;
         }
     }
@@ -225,17 +225,17 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto updateProduct(ProductDto productDto) {
 
         Product product = productRepository.findById(productDto.getId()).orElseThrow(
-            ()-> new ProductNotFoundException("Product with id " + productDto.getId() + "was not found"));
+                () -> new ProductNotFoundException("Product with id " + productDto.getId() + "was not found"));
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
 
         double newPrice = productDto.getPrice();
         double oldPrice = product.getPrice();
 
-        if(newPrice < oldPrice){
+        if (newPrice < oldPrice) {
             product.setDiscountPrice(newPrice);
             product.setDiscount(true);
-        }else{
+        } else {
             product.setPrice(productDto.getPrice());
             product.setDiscount(false);
         }
@@ -243,6 +243,12 @@ public class ProductServiceImpl implements ProductService {
         Product updateProduct = productRepository.save(product);
 
         return mapToDto(updateProduct);
+    }
+
+    @Override
+    public Product getOneProductByIdForOrderService(int id) {
+
+        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product was not found"));
     }
 
 }
