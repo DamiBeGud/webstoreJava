@@ -18,4 +18,6 @@ public interface CartService {
     int getNumberOfProductsInCart();
 
     CartProductDto updateQty(int cartProductId, int qty);
+
+    void deactivateCart(int cartId);
 }

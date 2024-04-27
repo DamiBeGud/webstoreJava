@@ -199,4 +199,11 @@ public class CartServiceImpl implements CartService{
         return cartProductDto;
     }
 
+    @Override
+    public void deactivateCart(int cartId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        cart.setActive(false);
+        cartRepository.save(cart);
+    }
+
 }
