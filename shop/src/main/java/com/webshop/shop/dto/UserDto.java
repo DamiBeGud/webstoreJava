@@ -10,6 +10,7 @@ public class UserDto {
     private String street;
     private int number;
     private int zip;
+    private String city;
     private String Country;
     private String role;
     private String image;

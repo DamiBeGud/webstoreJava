@@ -158,6 +158,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    let paymentMethod = document.getElementById("paymentMethod");
+    if(paymentMethod != null){
+    paymentMethod.addEventListener("change", () => {
+      let selectedMethod = paymentMethod.value;
+      let creditCardForm = document.getElementById("creditCardForm");
+      let paypalForm = document.getElementById("paypalForm");
+      if (selectedMethod === 'creditCard') {
+        creditCardForm.style.display = 'block';
+        paypalForm.style.display = 'none';
+      } else if (selectedMethod === 'paypal') {
+        creditCardForm.style.display = 'none';
+        paypalForm.style.display = 'block';
+      } else {
+        creditCardForm.style.display = 'none';
+        paypalForm.style.display = 'none';
+      }
+    });
+    }
+  });
+
+
+
+
 
 
 

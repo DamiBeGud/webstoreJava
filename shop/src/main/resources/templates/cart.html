@@ -60,9 +60,9 @@
               </li>
             </ul>
             <div class="mt-3">
-              <button class="btn btn-primary btn-block">Proceed to Payment</button>
-              <a class="btn btn-primary btn-block" href="proceedWithPayment.html">Proceed to Payment link testing</a>
-              <a href="#" class="btn btn-secondary btn-block mt-2">Back to Shop</a>
+              <a class="btn btn-primary btn-block" th:href="@{/cart/checkout}">Proceed to Payment</a>
+    
+              <a th:href="@{/shop}" class="btn btn-secondary btn-block mt-2">Back to Shop</a>
             </div>
           </div>
         </div>

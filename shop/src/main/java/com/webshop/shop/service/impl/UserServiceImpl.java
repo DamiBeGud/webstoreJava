@@ -49,17 +49,7 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserById(int id) {
         UserEntity userEntity = userRepository.getById(id);
 
-        UserDto userDto = new UserDto();
-
-        userDto.setId(userEntity.getId());
-        userDto.setEmail(userEntity.getEmail());
-        userDto.setName(userEntity.getName());
-        userDto.setCountry(userEntity.getCountry());
-        userDto.setStreet(userEntity.getStreet());
-        userDto.setNumber(userEntity.getNumber());
-        userDto.setZip(userEntity.getZip());
-        userDto.setRole(userEntity.getRole());
-        return userDto;
+        return mapToDtoUser(userEntity);
     }
 
     @Override
@@ -68,11 +58,20 @@ public class UserServiceImpl implements UserService {
         String email = SecurityUtil.getSessionUser();
         UserEntity user = userRepository.findByEmail(email);
         System.out.println(user);
+        return mapToDtoUser(user);
+    }
 
+    private UserDto mapToDtoUser(UserEntity userEntity){
         UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setRole(user.getRole());
+        userDto.setId(userEntity.getId());
+        userDto.setEmail(userEntity.getEmail());
+        userDto.setName(userEntity.getName());
+        userDto.setCountry(userEntity.getCountry());
+        userDto.setCity(userEntity.getCity());
+        userDto.setStreet(userEntity.getStreet());
+        userDto.setNumber(userEntity.getNumber());
+        userDto.setZip(userEntity.getZip());
+        userDto.setRole(userEntity.getRole());
         return userDto;
     }
 
