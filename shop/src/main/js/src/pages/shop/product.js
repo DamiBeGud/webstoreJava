@@ -66,6 +66,10 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => {
                 console.log("Response:", response);
+                const productsInCart = document.getElementById('cartItemCount');
+                let productsInCartNumber = parseInt(productsInCart.innerHTML);
+                productsInCartNumber += 1;
+                productsInCart.innerHTML = productsInCartNumber;
             })
             .catch(error => {
                 console.error("Error:", error);
@@ -78,6 +82,40 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const removeProductFromCart = document.querySelectorAll(".removeProductFromCart");
+    
+    if(removeProductFromCart != null){
+
+        removeProductFromCart.forEach(button => {
+
+        button.addEventListener("click", function() {
+            const url = button.id;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data:", data); // Log the received data
+                const productsInCart = document.getElementById('cartItemCount');
+                let productsInCartNumber = parseInt(productsInCart.innerHTML);
+                productsInCartNumber -= 1;
+                productsInCart.innerHTML = productsInCartNumber;
+                document.getElementById('productCard-' + data).remove();
+                document.getElementById('cartSummery-' + data).remove();
+            })
+            .catch(error => {
+                console.error("Error:", error); // Log any errors that occur during the fetch
+            });
+        });
+    });
+
+}
+});
 
 
 

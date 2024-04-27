@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,32 +44,32 @@ public class ShopController {
         }
 
     @GetMapping("/shop")
-    public ModelAndView getProducts() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("products", productService.getAllProductsShop());
+    public String getProducts(Model model) {
+
+        model.addAttribute("products", productService.getAllProductsShop());
         String email = SecurityUtil.getSessionUser();
         if(email != null){
-            modelAndView.addObject("user", userService.getUser());
+            model.addAttribute("user", userService.getUser());
             Cart cart = cartService.getCart();
-            System.out.println("Cart: " + cart);
-            modelAndView.addObject("cart", cart);
-        }
-        modelAndView.setViewName("allProducts");
+            model.addAttribute("cart", cart);
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
 
-        return modelAndView;
+        }
+
+        return "allProducts";
     }
 
     @GetMapping("/product/{id}")
-    public ModelAndView getProduct(@PathVariable int id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("product", productService.getOneProductById(id));
-        modelAndView.addObject("reviews", reviewService.findReviewsByProductId(id));
+    public String getProduct(@PathVariable int id, Model model) {
+        model.addAttribute("product", productService.getOneProductById(id));
+        model.addAttribute("reviews", reviewService.findReviewsByProductId(id));
         String email = SecurityUtil.getSessionUser();
         if(email != null){
-            modelAndView.addObject("user", userService.getUser());
+            model.addAttribute("user", userService.getUser());
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
         }
-        modelAndView.setViewName("product");
-        return modelAndView;
+
+        return "product";
     }
     
 

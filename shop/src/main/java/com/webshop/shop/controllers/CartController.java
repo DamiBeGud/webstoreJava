@@ -21,6 +21,7 @@ public class CartController {
     @GetMapping("/cart")
     public String getMethodName(Model model) {
         model.addAttribute("shopingCart", cartService.getShopingCart());  
+        model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
         return "cart";
     }
 }

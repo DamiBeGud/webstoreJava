@@ -2,7 +2,6 @@ package com.webshop.shop.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,7 +122,7 @@ public class CartServiceImpl implements CartService{
         }).collect(Collectors.toList());
         double total = 0;
         for(CartProductDto cartProductDto :cartProductDtos){
-            double price = cartProductDto.getPrice() * cartProductDto.getQty();
+            double price = cartProductDto.getPrice();
             total = total + price;
         }
 
@@ -155,4 +154,26 @@ public class CartServiceImpl implements CartService{
         }
         return cartProductDto;
     }
+
+    @Override
+    public int removeProductFromCart(int cartId,int cartProductId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        System.out.println("Cart remove:" + cart);
+        List<CartProduct> cartProducts = cart.getCart();
+    
+        cartProducts.removeIf(cp -> cp.getId() == cartProductId);
+        cart.setCart(cartProducts);
+        cartRepository.save(cart);
+        cartProductRepository.deleteById(cartProductId);
+
+        return cartProductId;
+    }
+
+    @Override
+    public int getNumberOfProductsInCart() {
+        Cart cart = getCart();
+        int numberOfProductsInCart = cart.getCart().size();
+        return numberOfProductsInCart;
+    }
+
 }

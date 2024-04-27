@@ -14,4 +14,5 @@ public class CartDto {
     // private List<CartProduct> cart = new ArrayList<>();
     private List<CartProductDto> cart = new ArrayList<>();
     private double total;
+    private int numberOfProducts;
 }

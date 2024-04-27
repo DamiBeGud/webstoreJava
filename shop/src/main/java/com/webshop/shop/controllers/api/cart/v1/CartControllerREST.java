@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webshop.shop.service.CartService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -30,5 +32,12 @@ public class CartControllerREST {
         cartService.addProductToCart(userId, cartId, productId);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
+
+    @PostMapping("/cart/{cartId}/remove/{productId}")
+    public ResponseEntity postMethodName(@PathVariable int cartId, @PathVariable int productId) {
+       int response = cartService.removeProductFromCart(cartId, productId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
     
 }
