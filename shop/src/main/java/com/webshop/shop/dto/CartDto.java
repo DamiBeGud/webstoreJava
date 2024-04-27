@@ -11,6 +11,7 @@ public class CartDto {
     private int id;
     private int userId;
     private Boolean active = true;
-    private List<CartProduct> cart = new ArrayList<>();
+    // private List<CartProduct> cart = new ArrayList<>();
+    private List<CartProductDto> cart = new ArrayList<>();
     private double total;
 }

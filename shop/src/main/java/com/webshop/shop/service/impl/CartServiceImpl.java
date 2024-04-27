@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webshop.shop.dto.CartDto;
+import com.webshop.shop.dto.CartProductDto;
 import com.webshop.shop.dto.ProductDto;
-import com.webshop.shop.dto.response.CartPageResponse;
 import com.webshop.shop.exceptions.ProductNotFoundException;
 import com.webshop.shop.models.Cart;
 import com.webshop.shop.models.CartProduct;
@@ -107,27 +107,30 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public CartPageResponse getShopingCart() {
-        CartPageResponse cartPageResponse =  new CartPageResponse();
+    public CartDto getShopingCart() {
         Cart cart = getCart();
         CartDto cartDto = mapToDtoCart(cart);
+
         List<CartProduct> cartProducts = cart.getCart();
-        List<ProductDto> products = cartProducts.stream().map(cp -> {
+
+        List<CartProductDto> cartProductDtos = cartProducts.stream().map(cp -> {
             ProductDto productDto = productService.getOneProductById(cp.getProductId());
-            productDto.setCartProductId(cp.getId());
-            return productDto;
-        }).collect(Collectors.toList()); 
+            CartProductDto cartProductDto = productDtoToCartProductDto(productDto);
+            cartProductDto.setId(cp.getId());
+            cartProductDto.setQty(cp.getQty());
+            cartProductDto.setPrice(cartProductDto.getPrice() * cartProductDto.getQty());
+            return cartProductDto;
+        }).collect(Collectors.toList());
         double total = 0;
-        for(ProductDto product : products){
-            total = total + product.getPrice();
+        for(CartProductDto cartProductDto :cartProductDtos){
+            double price = cartProductDto.getPrice() * cartProductDto.getQty();
+            total = total + price;
         }
+
+        cartDto.setCart(cartProductDtos);
         cartDto.setTotal(total);
-        cartPageResponse.setCartProducts(cartProducts);
-        cartPageResponse.setProductsDto(products);
-        cartPageResponse.setCart(cartDto);
-        System.out.println("Shoping cart" + cart);
-        System.out.println("Products list" + products);
-        return cartPageResponse;
+        System.out.println("CartDto sent to FE" + cartDto);
+        return cartDto;
     }
 
 
@@ -135,8 +138,21 @@ public class CartServiceImpl implements CartService{
         CartDto cartDto = new CartDto();
         cartDto.setId(cart.getId());
         cartDto.setActive(cart.getActive());
-        cartDto.setCart(cart.getCart());
+        // cartDto.setCart(cart.getCart());
         cartDto.setUserId(cart.getUserId());
         return cartDto;
+    }
+    private CartProductDto productDtoToCartProductDto(ProductDto productDto){
+        CartProductDto cartProductDto = new CartProductDto();
+        cartProductDto.setProductId(productDto.getId());
+        cartProductDto.setName(productDto.getName());
+        cartProductDto.setCompanyId(productDto.getUserId());
+        cartProductDto.setImage(productDto.getImage());
+        if(productDto.getDiscount()){
+            cartProductDto.setPrice(productDto.getDiscountPrice());
+        }else{
+            cartProductDto.setPrice(productDto.getPrice());
+        }
+        return cartProductDto;
     }
 }

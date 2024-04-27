@@ -1,6 +1,6 @@
 package com.webshop.shop.service;
 
-import com.webshop.shop.dto.response.CartPageResponse;
+import com.webshop.shop.dto.CartDto;
 import com.webshop.shop.models.Cart;
 
 public interface CartService {
@@ -10,5 +10,5 @@ public interface CartService {
 
     void addProductToCart(int userId, int cartId, int productId);
 
-    CartPageResponse getShopingCart();
+    CartDto getShopingCart();
 }
