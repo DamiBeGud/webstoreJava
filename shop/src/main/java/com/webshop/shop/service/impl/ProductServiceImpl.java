@@ -75,13 +75,11 @@ public class ProductServiceImpl implements ProductService {
             products.setRating(rating(products.getId()));
             return products;
         }).collect(Collectors.toList());
-        // TODO Auto-generated method stub
         return response;
     }
 
     @Override
     public ProductDto getOneProductById(int id) {
-        // Add exception error
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
 
@@ -156,7 +154,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto updateStock(int id, int stock) {
-        System.out.println(id);
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + "was not found"));
         product.setStock(product.getStock() + stock);
@@ -249,6 +246,15 @@ public class ProductServiceImpl implements ProductService {
     public Product getOneProductByIdForOrderService(int id) {
 
         return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product was not found"));
+    }
+
+    @Override
+    public void updateStockOrder(int id, int stock) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + "was not found"));
+        product.setStock(product.getStock() - stock);
+        productRepository.save(product);
+
     }
 
 }

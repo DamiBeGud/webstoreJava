@@ -19,6 +19,8 @@ public interface ProductService {
 
     ProductDto updateStock(int id, int stock);
 
+    void updateStockOrder(int id, int stock);
+
     ProductDto updateProduct(ProductDto productDto);
 
     List<ProductDto> getAllProductsWithNameWithUserId(String name, int id);

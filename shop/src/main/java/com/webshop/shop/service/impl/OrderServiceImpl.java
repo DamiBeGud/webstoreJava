@@ -24,6 +24,7 @@ import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.OrderService;
 import com.webshop.shop.service.ProductService;
 import com.webshop.shop.service.UserService;
+import com.webshop.shop.util.TupleInteger;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -64,11 +65,16 @@ public class OrderServiceImpl implements OrderService {
         return newOrder.getId();
     }
 
+    // Has to be updated to dto same as users order
     @Override
     public void createCompanyOrder(Cart cart) {
         List<Integer> companyIds = cart.getCart().stream().map(product -> {
             return product.getCompanyId();
         }).distinct().collect(Collectors.toList());
+        List<TupleInteger> prodIdQty = cart.getCart().stream().map(c -> {
+            return new TupleInteger(c.getProductId(), c.getQty());
+        }).collect(Collectors.toList());
+
         for (int company : companyIds) {
             OrderCompany newOrder = new OrderCompany();
             List<Product> products = cart.getCart().stream()
@@ -77,10 +83,18 @@ public class OrderServiceImpl implements OrderService {
                         return productService.getOneProductByIdForOrderService(product.getProductId());
                     })
                     .collect(Collectors.toList());
+
             newOrder.setOrderedProducts(products);
             newOrder.setCompanyId(company);
             newOrder.setUserId(cart.getUserId());
             orderCompanyRepository.save(newOrder);
+            for (TupleInteger tuple : prodIdQty) {
+                // Product product =
+                // productService.getOneProductByIdForOrderService(tuple.getFirst());
+                // product.setStock(product.getStock() - tuple.getSecond());
+                // product
+                productService.updateStockOrder(tuple.getFirst(), tuple.getSecond());
+            }
         }
     }
 
