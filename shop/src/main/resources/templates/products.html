@@ -1,36 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<html lang="en" layout:decorate="layouts/defaultLayout">
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" th:href="'/dashboard/' + ${user.id}">Webshop Dashboard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="'/dashboard/' + ${user.id} + '/product/add'">Add Product</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="orders.html">Orders</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="'/dashboard/' + ${user.id} + '/products'">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Log out</a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
-  <div class="container mt-5">
+  <div class="container mt-5" layout:fragment="content">
     <h2 class="mb-3">All Products</h2>
     <div class="input-group mb-3 inputid" th:id="${user.id}">
       <input type="text" class="form-control" placeholder="Search products" id="searchInput">
@@ -143,12 +115,12 @@
       </div>
       
 
-      <script src="http://localhost:8080/static/js/bundle.js"></script>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <!-- <script src="http://localhost:8080/static/js/bundle.js"></script> -->
+      <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
    
-  </script>
+  </script> -->
 </body>
 </html>

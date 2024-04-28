@@ -93,13 +93,14 @@
 
 <body>
 
-  <div th:replace="layouts/commonHeader :: header"></div>
+  <div th:replace="layouts/commonHeader :: header" sec:authorize="hasRole('USER')"></div>
+  <div th:replace="layouts/dashboardHeader :: header" sec:authorize="!hasRole('USER')"></div>
 
   <section layout:fragment="content">
     <p>Replace this with a page that has layout:fragment="content"</p>
   </section>
 
-  <div th:replace="layouts/commonFooter :: footer"></div>
+  <div th:replace="layouts/commonFooter :: footer" sec:authorize="hasRole('USER')"></div>
 
 
 
@@ -116,6 +117,71 @@
       $(this).toggleClass('active');
     });
   </script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+ // Check if the element with ID 'salesByCategoryChart' exists
+ var salesByCategoryElement = document.getElementById('salesByCategoryChart');
+ if (salesByCategoryElement) {
+     // The element exists, proceed with chart initialization
+     var salesByCategoryCtx = salesByCategoryElement.getContext('2d');
+     var salesByCategoryChart = new Chart(salesByCategoryCtx, {
+         type: 'bar',
+         data: {
+             labels: ['Electronics', 'Clothing', 'Books', 'Home & Kitchen', 'Sports'],
+             datasets: [{
+                 label: 'Sales',
+                 data: [1500, 1200, 1800, 900, 1300],
+                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                 borderColor: 'rgba(54, 162, 235, 1)',
+                 borderWidth: 1
+             }]
+         },
+         options: {
+             scales: {
+                 yAxes: [{
+                     ticks: {
+                         beginAtZero: true
+                     }
+                 }]
+             }
+         }
+     });
+ } else {
+     console.error("Element with ID 'salesByCategoryChart' not found.");
+ }
+ 
+ // Check if the element with ID 'salesTrendChart' exists
+ var salesTrendElement = document.getElementById('salesTrendChart');
+ if (salesTrendElement) {
+     // The element exists, proceed with chart initialization
+     var salesTrendCtx = salesTrendElement.getContext('2d');
+     var salesTrendChart = new Chart(salesTrendCtx, {
+         type: 'line',
+         data: {
+             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+             datasets: [{
+                 label: 'Sales',
+                 data: [1000, 1200, 1500, 1800, 2000, 2200, 2500],
+                 borderColor: 'rgba(255, 99, 132, 1)',
+                 borderWidth: 2,
+                 fill: false
+             }]
+         },
+         options: {
+             scales: {
+                 yAxes: [{
+                     ticks: {
+                         beginAtZero: true
+                     }
+                 }]
+             }
+         }
+     });
+ } else {
+     console.error("Element with ID 'salesTrendChart' not found.");
+ }
+ 
+   </script>
 </body>
 
 </html>
