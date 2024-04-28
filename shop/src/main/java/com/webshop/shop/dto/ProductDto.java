@@ -16,6 +16,7 @@ public class ProductDto {
     private Boolean discount;
     private double discountPrice;
     private int rating;
+    private int qty;
 
     // Remove later
     private int cartProductId;

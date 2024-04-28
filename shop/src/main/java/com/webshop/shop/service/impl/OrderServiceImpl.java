@@ -108,8 +108,10 @@ public class OrderServiceImpl implements OrderService {
         for (OrderUser order : orders) {
             OrderUserDto orderDto = new OrderUserDto();
             Cart cart = order.getCart();
-            List<Product> products = cart.getCart().stream().map(c -> {
-                Product product = productService.getOneProductByIdForOrderService(c.getProductId());
+            List<ProductDto> products = cart.getCart().stream().map(c -> {
+                Product produ = productService.getOneProductByIdForOrderService(c.getProductId());
+                ProductDto product = mapToDtoProduct(produ);
+                product.setQty(c.getQty());
                 return product;
             }).collect(Collectors.toList());
             orderDto.setId(order.getId());
@@ -121,6 +123,22 @@ public class OrderServiceImpl implements OrderService {
             ordersDto.add(orderDto);
         }
         return ordersDto;
+    }
+
+    private ProductDto mapToDtoProduct(Product product) {
+        ProductDto productDto = new ProductDto();
+        productDto.setId(product.getId());
+        productDto.setName(product.getName());
+        productDto.setDescription(product.getDescription());
+        productDto.setPrice(product.getPrice());
+        productDto.setUserId(product.getUserId());
+        productDto.setStock(product.getStock());
+        productDto.setCategory(product.getCategory());
+        productDto.setSubCategory(product.getSubCategory());
+        productDto.setDiscount(product.getDiscount());
+        productDto.setDiscountPrice(product.getDiscountPrice());
+        productDto.setImage(product.getImage());
+        return productDto;
     }
 
 }

@@ -14,7 +14,7 @@ public class OrderUserDto {
     private int userId;
     private LocalDate date;
     private Cart cart;
-    private List<Product> orderedProducts;
+    private List<ProductDto> orderedProducts;
     private double total;
 
 }
