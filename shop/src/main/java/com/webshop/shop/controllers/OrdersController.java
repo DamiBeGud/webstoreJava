@@ -35,4 +35,10 @@ public class OrdersController {
         return "redirect:/order/success/" + orderId;
     }
 
+    @GetMapping("/orders")
+    public String getOrdersPage(Model model) {
+        model.addAttribute("orders", orderService.getUserOrders());
+        return "ordersUserPage";
+    }
+
 }

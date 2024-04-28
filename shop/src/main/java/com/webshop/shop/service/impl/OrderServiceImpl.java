@@ -2,6 +2,7 @@ package com.webshop.shop.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.webshop.shop.models.CartProduct;
 import com.webshop.shop.models.OrderCompany;
 import com.webshop.shop.models.OrderUser;
 import com.webshop.shop.models.Product;
+import com.webshop.shop.models.UserEntity;
 import com.webshop.shop.repository.CartRepository;
 import com.webshop.shop.repository.OrderCompanyRepository;
 import com.webshop.shop.repository.OrderUserRepository;
@@ -95,6 +97,30 @@ public class OrderServiceImpl implements OrderService {
     public OrderUserDto getUserOrder(int orderId) {
         OrderUser order = orderUserRepository.findById(orderId).orElseThrow();
         return mapToDtoOrderUser(order);
+    }
+
+    @Override
+    public List<OrderUserDto> getUserOrders() {
+        UserDto user = userService.getUser();
+
+        List<OrderUser> orders = orderUserRepository.findAllByUserId(user.getId());
+        List<OrderUserDto> ordersDto = new ArrayList<>();
+        for (OrderUser order : orders) {
+            OrderUserDto orderDto = new OrderUserDto();
+            Cart cart = order.getCart();
+            List<Product> products = cart.getCart().stream().map(c -> {
+                Product product = productService.getOneProductByIdForOrderService(c.getProductId());
+                return product;
+            }).collect(Collectors.toList());
+            orderDto.setId(order.getId());
+            orderDto.setCart(cart);
+            orderDto.setDate(order.getDate());
+            orderDto.setOrderedProducts(products);
+            orderDto.setTotal(0);
+            orderDto.setUserId(order.getUserId());
+            ordersDto.add(orderDto);
+        }
+        return ordersDto;
     }
 
 }
