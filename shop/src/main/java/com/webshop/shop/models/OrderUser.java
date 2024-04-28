@@ -1,6 +1,5 @@
 package com.webshop.shop.models;
 
-
 import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;

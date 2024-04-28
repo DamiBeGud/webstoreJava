@@ -11,6 +11,7 @@ import com.webshop.shop.dto.OrderUserDto;
 import com.webshop.shop.dto.ProductDto;
 import com.webshop.shop.dto.UserDto;
 import com.webshop.shop.models.Cart;
+import com.webshop.shop.models.CartProduct;
 import com.webshop.shop.models.OrderCompany;
 import com.webshop.shop.models.OrderUser;
 import com.webshop.shop.models.Product;
@@ -88,6 +89,12 @@ public class OrderServiceImpl implements OrderService {
         orderUserDto.setDate(orderUser.getDate());
         orderUserDto.setCart(orderUser.getCart());
         return orderUserDto;
+    }
+
+    @Override
+    public OrderUserDto getUserOrder(int orderId) {
+        OrderUser order = orderUserRepository.findById(orderId).orElseThrow();
+        return mapToDtoOrderUser(order);
     }
 
 }

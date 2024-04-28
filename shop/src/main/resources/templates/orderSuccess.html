@@ -1,19 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-    </style>
-</head>
+<html lang="en" layout:decorate="layouts/defaultLayout">
 <body>
-    <div class="container">
+    <div class="container" layout:fragment="content">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="alert alert-success" role="alert">
@@ -26,16 +14,14 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Order Summary</h5>
-                        <!-- Replace the dummy data with actual order details -->
-                        <p class="card-text">Order ID: 123456</p>
-                        <p class="card-text">Date: April 27, 2024</p>
-                        <p class="card-text">Total Amount: $100.00</p>
-                        <!-- You can add more details here like items ordered, shipping address, etc. -->
+                        <p class="card-text">Order ID: <span th:text="${order.id}">123456</span></p>
+                        <p class="card-text">Date: <span th:text="${order.date}">April 21, 2024</span></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
 
     <!-- Bootstrap JS (Optional, only if you need JS functionality) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
