@@ -1,3 +1,5 @@
+import { toast } from "../../util/toast";
+
 export function product(){
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.querySelector('.reviewForm');
@@ -36,11 +38,13 @@ export function product(){
             .then(data => {
                 // Handle success response from the API
                 console.log('Review submitted successfully:', data);
+                toast("success","Review Submited")
                 // You can add further actions here if needed, like showing a success message to the user
             })
             .catch(error => {
                 // Handle errors
                 console.error('There was a problem with the review submission:', error);
+                toast("alert","Error")
                 // You can add further actions here if needed, like showing an error message to the user
             });
         });
@@ -70,9 +74,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 let productsInCartNumber = parseInt(productsInCart.innerHTML);
                 productsInCartNumber += 1;
                 productsInCart.innerHTML = productsInCartNumber;
+                toast("success", "Product added to Cart")
+
             })
             .catch(error => {
                 console.error("Error:", error);
+                toast("alert", "Error")
             });
         });
     });
@@ -107,9 +114,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 productsInCart.innerHTML = productsInCartNumber;
                 document.getElementById('productCard-' + data).remove();
                 document.getElementById('cartSummery-' + data).remove();
+                toast("success","Product removed from cart")
             })
             .catch(error => {
-                console.error("Error:", error); 
+                console.error("Error:", error);
+                toast("alert","Error") 
             });
         });
     });

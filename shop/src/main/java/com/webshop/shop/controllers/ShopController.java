@@ -30,30 +30,28 @@ public class ShopController {
     private UserService userService;
     private CartService cartService;
 
-
     @Autowired
     public ShopController(
-        ProductService productService,
-        ReviewService reviewService,
-        UserService userService,
-        CartService cartService) {
+            ProductService productService,
+            ReviewService reviewService,
+            UserService userService,
+            CartService cartService) {
         this.productService = productService;
-            this.reviewService = reviewService;
-            this.userService = userService;
-            this.cartService = cartService;
-        }
+        this.reviewService = reviewService;
+        this.userService = userService;
+        this.cartService = cartService;
+    }
 
     @GetMapping("/shop")
     public String getProducts(Model model) {
 
         model.addAttribute("products", productService.getAllProductsShop());
         String email = SecurityUtil.getSessionUser();
-        if(email != null){
+        if (email != null) {
             model.addAttribute("user", userService.getUser());
             Cart cart = cartService.getCart();
             model.addAttribute("cart", cart);
             model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
-
         }
 
         return "allProducts";
@@ -64,13 +62,12 @@ public class ShopController {
         model.addAttribute("product", productService.getOneProductById(id));
         model.addAttribute("reviews", reviewService.findReviewsByProductId(id));
         String email = SecurityUtil.getSessionUser();
-        if(email != null){
+        if (email != null) {
             model.addAttribute("user", userService.getUser());
             model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
         }
 
         return "product";
     }
-    
 
 }

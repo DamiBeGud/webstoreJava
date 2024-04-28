@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,87 +13,109 @@
       background-color: #f8f9fa;
       padding: 20px;
     }
+
     .accordion-link {
       cursor: pointer;
     }
+
     .accordion-link:hover {
       text-decoration: none;
     }
+
     .accordion-link.active {
       font-weight: bold;
     }
+
     .product-card {
       border: 1px solid #dee2e6;
       border-radius: 5px;
       margin-bottom: 20px;
     }
+
     .product-card img {
       max-width: 100%;
       height: auto;
     }
+
     .product-card .card-body {
       padding: 20px;
     }
+
     /* Custom CSS to remove bullet points from unordered lists */
     ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
     }
+
     .rating {
       color: #ffc107;
     }
+
     .product-card-link {
-    text-decoration: none; /* Disable underline */
-    color: inherit; /* Use the normal color */
-}
-    .product-card-link:hover {
-        text-decoration: none; /* Disable underline */
-        color: inherit; /* Use the normal color */
+      text-decoration: none;
+      /* Disable underline */
+      color: inherit;
+      /* Use the normal color */
     }
-        /* Additional CSS styles */
-        .product-card {
+
+    .product-card-link:hover {
+      text-decoration: none;
+      /* Disable underline */
+      color: inherit;
+      /* Use the normal color */
+    }
+
+    /* Additional CSS styles */
+    .product-card {
       border: 1px solid #dee2e6;
       border-radius: 5px;
       margin-bottom: 20px;
     }
+
     .product-card img {
       max-width: 100%;
       height: auto;
     }
+
     .product-card .card-body {
       padding: 20px;
     }
+
     .container {
-            margin-top: 50px;
-        }
+      margin-top: 50px;
+    }
+
+
+
   </style>
 </head>
+
 <body>
 
-<div th:replace="layouts/commonHeader :: header"></div>
+  <div th:replace="layouts/commonHeader :: header"></div>
 
-<section layout:fragment="content">
+  <section layout:fragment="content">
     <p>Replace this with a page that has layout:fragment="content"</p>
-</section>
+  </section>
 
-<div th:replace="layouts/commonFooter :: footer"></div>
-
-
+  <div th:replace="layouts/commonFooter :: footer"></div>
 
 
 
- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
- <script src="http://localhost:8080/static/js/bundle.js"></script>
 
- <script>
-  // Activate accordion links
-     $('.accordion-link').click(function() {
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="http://localhost:8080/static/js/bundle.js"></script>
+
+  <script>
+    // Activate accordion links
+    $('.accordion-link').click(function () {
       $(this).toggleClass('active');
     });
-</script>
+  </script>
 </body>
+
 </html>
-  

@@ -36,11 +36,6 @@ public class SecurityConfig {
         this.userRepository = userRepository;
     }
 
-
-
-
-
-
     @SuppressWarnings("deprecation")
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -48,12 +43,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(requests -> requests
                         .requestMatchers(
+                                "/shop",
                                 "/login",
                                 "/register/**",
-                                "/shop",
                                 "/css/**",
                                 "/js/**",
-                                "/product/**")
+                                "/product/**",
+                                "/static/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
