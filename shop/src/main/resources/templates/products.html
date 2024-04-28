@@ -2,7 +2,8 @@
 <html lang="en" layout:decorate="layouts/defaultLayout">
 <body>
 
-  <div class="container mt-5" layout:fragment="content">
+  <div layout:fragment="content">
+  <div class="container mt-5" >
     <h2 class="mb-3">All Products</h2>
     <div class="input-group mb-3 inputid" th:id="${user.id}">
       <input type="text" class="form-control" placeholder="Search products" id="searchInput">
@@ -113,14 +114,6 @@
           </div>
         </div>
       </div>
-      
-
-      <!-- <script src="http://localhost:8080/static/js/bundle.js"></script> -->
-      <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-   
-  </script> -->
+    </div>
 </body>
 </html>
