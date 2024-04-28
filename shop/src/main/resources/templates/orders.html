@@ -1,50 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webshop Dashboard</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="shopDashboard.html">Webshop Dashboard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="addProduct.html">Add Product</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="orders.html">Orders</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="products.html">Productss</a>
-          </li>
-      </ul>
-    </div>
-  </nav>
+<html lang="en" layout:decorate="layouts/defaultLayout">
 
-    <!-- Orders Section -->
-    <section id="orders" class="p-5">
+<body>
+
+    <section id="orders" class="p-5" layout:fragment="content">
         <div class="container-fluid">
-          <h2 class="mb-4">All Products</h2>
-          <div class="input-group mb-4">
-            <input type="text" class="form-control" placeholder="Search products">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">Search</button>
-            </div>
-          </div>
+          <h2 class="mb-4">All Orders</h2>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>Order ID</th>
                   <th>Customer Name</th>
-                  <th>Product</th>
-                  <th>Quantity</th>
                   <th>Shipping Address</th>
                   <th>Date of Order</th>
                   <th>Date Shipped</th>
@@ -54,16 +21,16 @@
               </thead>
               <tbody>
                 <!-- Orders data will be populated here dynamically -->
-                <tr>
-                  <td>1</td>
-                  <td>John Doe</td>
-                  <td>Product Name</td>
-                  <td>2</td>
-                  <td>123 Main St, City, Country</td>
-                  <td>2022-04-25</td>
+                <tr th:each="order : ${orders}">
+                  <td><a th:href="'http://localhost:8080/dashboard/' + ${user.id} + '/order/' + ${order.id}"> # <span th:text="${order.id}">id</span></a></td>
+                  <td th:text="${order.customer.name}">John Doe</td>
+                  <td th:text="${order.customer.number} + ' ' + ${order.customer.street} + ', ' + ${order.customer.city} + ', ' + ${order.customer.country}">123 Main St, City, Country</td>
+                  <td th:text="${order.date}">2022-04-25</td>
                   <td></td>
                   <td>
-                    <span class="badge badge-primary">Pending</span>
+                    <span th:class="${order.status} ? 'badge badge-success' : 'badge badge-primary'">
+                      <span th:text="${order.status} ? 'Shipped' : 'Pending'">Pending</span>
+                    </span>
                   </td>
                   <td>
                     <button class="btn btn-success btn-sm">Ship</button>
@@ -76,11 +43,5 @@
       </section>
       
       
-      
-
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

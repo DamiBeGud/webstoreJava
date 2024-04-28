@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.webshop.shop.security.SecurityUtil;
 import com.webshop.shop.service.CategorysService;
+import com.webshop.shop.service.OrderService;
 import com.webshop.shop.service.ProductService;
 import com.webshop.shop.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,13 +18,15 @@ public class DashboardController {
     private UserService userService;
     private ProductService productService;
     private CategorysService categorysService;
+    private OrderService orderService;
 
     @Autowired
     public DashboardController(UserService userService, ProductService productService,
-            CategorysService categorysService) {
+            CategorysService categorysService, OrderService orderService) {
         this.userService = userService;
         this.productService = productService;
         this.categorysService = categorysService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/dashboard/{id}")
@@ -60,12 +63,13 @@ public class DashboardController {
         return "addProduct";
     }
 
-    @GetMapping("dashboard/{id}/orders")
+    @GetMapping("/dashboard/{id}/orders")
     public String getOrdersPageDashboard(@PathVariable int id, Model model) {
         String email = SecurityUtil.getSessionUser();
         if (email != null) {
             model.addAttribute("user", userService.getUser());
         }
+        model.addAttribute("orders", orderService.getCompanyOrders());
         return "orders";
     }
 

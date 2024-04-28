@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webshop.shop.dto.OrderCompanyDto;
 import com.webshop.shop.dto.OrderUserDto;
 import com.webshop.shop.dto.ProductDto;
 import com.webshop.shop.dto.UserDto;
@@ -89,10 +90,6 @@ public class OrderServiceImpl implements OrderService {
             newOrder.setUserId(cart.getUserId());
             orderCompanyRepository.save(newOrder);
             for (TupleInteger tuple : prodIdQty) {
-                // Product product =
-                // productService.getOneProductByIdForOrderService(tuple.getFirst());
-                // product.setStock(product.getStock() - tuple.getSecond());
-                // product
                 productService.updateStockOrder(tuple.getFirst(), tuple.getSecond());
             }
         }
@@ -153,6 +150,33 @@ public class OrderServiceImpl implements OrderService {
         productDto.setDiscountPrice(product.getDiscountPrice());
         productDto.setImage(product.getImage());
         return productDto;
+    }
+
+    @Override
+    public List<OrderCompanyDto> getCompanyOrders() {
+        UserDto user = userService.getUser();
+        List<OrderCompanyDto> orders = orderCompanyRepository.findAllByCompanyId(user.getId()).stream()
+                .map(order -> {
+                    OrderCompanyDto orderDto = mapToDtoCompanyOrder(order);
+                    orderDto.setCustomer(userService.getUserById(orderDto.getUserId()));
+                    return orderDto;
+                }).collect(Collectors.toList());
+
+        return orders;
+    }
+
+    private OrderCompanyDto mapToDtoCompanyOrder(OrderCompany orderCompany) {
+        OrderCompanyDto orderCompanyDto = new OrderCompanyDto();
+        orderCompanyDto.setId(orderCompany.getId());
+        orderCompanyDto.setUserId(orderCompany.getUserId());
+        orderCompanyDto.setCompanyId(orderCompany.getCompanyId());
+        orderCompanyDto.setDate(orderCompany.getDate());
+        orderCompanyDto.setDateShipped(orderCompany.getDateShipped());
+        orderCompanyDto.setStatus(orderCompany.getStatus());
+        orderCompanyDto.setOrderedProducts(orderCompany.getOrderedProducts());
+
+        return orderCompanyDto;
+
     }
 
 }

@@ -1,4 +1,5 @@
 package com.webshop.shop.models;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,9 @@ public class OrderCompany {
     private int userId;
     private int companyId;
     private LocalDate date = LocalDate.now();
+    private LocalDate dateShipped;
+    private Boolean status;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name="order_company_product",joinColumns = @JoinColumn(name="order_id",referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name="product_id", referencedColumnName = "id"))
-    private List<Product> orderedProducts = new ArrayList<>(); 
+    @JoinTable(name = "order_company_product", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    private List<Product> orderedProducts = new ArrayList<>();
 }
