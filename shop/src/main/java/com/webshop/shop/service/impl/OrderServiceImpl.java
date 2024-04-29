@@ -17,15 +17,19 @@ import com.webshop.shop.models.CartProduct;
 import com.webshop.shop.models.OrderCompany;
 import com.webshop.shop.models.OrderUser;
 import com.webshop.shop.models.Product;
+import com.webshop.shop.models.ProductOrderModel;
 import com.webshop.shop.models.UserEntity;
 import com.webshop.shop.repository.CartRepository;
 import com.webshop.shop.repository.OrderCompanyRepository;
 import com.webshop.shop.repository.OrderUserRepository;
+import com.webshop.shop.repository.ProductOrderModelRepository;
 import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.OrderService;
 import com.webshop.shop.service.ProductService;
 import com.webshop.shop.service.UserService;
 import com.webshop.shop.util.TupleInteger;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -35,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
     private UserService userService;
     private CartRepository cartRepository;
     private ProductService productService;
+    private ProductOrderModelRepository productOrderModelRepository;
 
     @Autowired
     public OrderServiceImpl(
@@ -43,13 +48,15 @@ public class OrderServiceImpl implements OrderService {
             CartService cartService,
             UserService userService,
             CartRepository cartRepository,
-            ProductService productService) {
+            ProductService productService,
+            ProductOrderModelRepository productOrderModelRepository) {
         this.orderUserRepository = orderUserRepository;
         this.orderCompanyRepository = orderCompanyRepository;
         this.cartService = cartService;
         this.userService = userService;
         this.cartRepository = cartRepository;
         this.productService = productService;
+        this.productOrderModelRepository = productOrderModelRepository;
     }
 
     @Override
@@ -78,21 +85,49 @@ public class OrderServiceImpl implements OrderService {
 
         for (int company : companyIds) {
             OrderCompany newOrder = new OrderCompany();
-            List<Product> products = cart.getCart().stream()
+            List<ProductOrderModel> products = cart.getCart().stream()
                     .filter(product -> product.getCompanyId() == company)
                     .map(product -> {
-                        return productService.getOneProductByIdForOrderService(product.getProductId());
+                        Product prodFetch = productService.getOneProductByIdForOrderService(product.getProductId());
+                        Product prod = prodFetch;
+                        ProductOrderModel orderProd = productToOrderProduct(prod);
+                        orderProd.setQty(product.getQty());
+                        productOrderModelRepository.save(orderProd);
+                        return orderProd;
                     })
                     .collect(Collectors.toList());
+            double total = 0;
+            for (ProductOrderModel product : products) {
+                total = total + product.getPrice();
+            }
 
             newOrder.setOrderedProducts(products);
             newOrder.setCompanyId(company);
             newOrder.setUserId(cart.getUserId());
+            newOrder.setTotal(total);
             orderCompanyRepository.save(newOrder);
             for (TupleInteger tuple : prodIdQty) {
                 productService.updateStockOrder(tuple.getFirst(), tuple.getSecond());
             }
         }
+    }
+
+    private ProductOrderModel productToOrderProduct(Product product) {
+        ProductOrderModel productOrderModel = new ProductOrderModel();
+        productOrderModel.setProductid(product.getId());
+        productOrderModel.setName(product.getName());
+        productOrderModel.setDescription(product.getDescription());
+        if (product.getDiscount() == true) {
+            productOrderModel.setPrice(product.getDiscountPrice());
+        } else {
+            productOrderModel.setPrice(product.getPrice());
+        }
+        productOrderModel.setUserId(product.getUserId());
+        productOrderModel.setStock(product.getStock());
+        productOrderModel.setCategory(product.getCategory());
+        productOrderModel.setSubCategory(product.getSubCategory());
+        productOrderModel.setImage(product.getImage());
+        return productOrderModel;
     }
 
     private OrderUserDto mapToDtoOrderUser(OrderUser orderUser) {
@@ -174,9 +209,18 @@ public class OrderServiceImpl implements OrderService {
         orderCompanyDto.setDateShipped(orderCompany.getDateShipped());
         orderCompanyDto.setStatus(orderCompany.getStatus());
         orderCompanyDto.setOrderedProducts(orderCompany.getOrderedProducts());
+        orderCompanyDto.setTotal(orderCompany.getTotal());
 
         return orderCompanyDto;
 
+    }
+
+    @Override
+    public OrderCompanyDto getCompanyOrder(int id) {
+        System.out.println("ORDER SERVICE ID" + id);
+        OrderCompany order = orderCompanyRepository.findById(id).orElseThrow();
+        System.out.println("ORDER SERVICE DEBUG" + order);
+        return mapToDtoCompanyOrder(order);
     }
 
 }

@@ -16,4 +16,6 @@ public interface OrderService {
     List<OrderUserDto> getUserOrders();
 
     List<OrderCompanyDto> getCompanyOrders();
+
+    OrderCompanyDto getCompanyOrder(int id);
 }

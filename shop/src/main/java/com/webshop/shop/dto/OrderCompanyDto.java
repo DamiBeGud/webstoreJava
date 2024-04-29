@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.catalina.User;
 
 import com.webshop.shop.models.Product;
+import com.webshop.shop.models.ProductOrderModel;
 
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public class OrderCompanyDto {
     private LocalDate date;
     private LocalDate dateShipped;
     private Boolean status;
-    private List<Product> orderedProducts;
+    private List<ProductOrderModel> orderedProducts;
     private UserDto customer;
+    private double total;
 }

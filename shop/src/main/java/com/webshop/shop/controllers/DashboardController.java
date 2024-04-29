@@ -73,4 +73,14 @@ public class DashboardController {
         return "orders";
     }
 
+    @GetMapping("/dashboard/{id}/order/{orderId}")
+    public String getSingleOrderDahsboardPage(@PathVariable int id, @PathVariable int orderId, Model model) {
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+        }
+        model.addAttribute("order", orderService.getCompanyOrder(orderId));
+        return "singleDashboardOrder";
+    }
+
 }

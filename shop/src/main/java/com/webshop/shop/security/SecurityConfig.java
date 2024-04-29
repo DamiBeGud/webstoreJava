@@ -70,11 +70,11 @@ public class SecurityConfig {
                             String currentUser = auth.getName();
                             UserEntity user = userRepository.findByEmail(currentUser);
                             // Check the role of the authenticated user
-                            if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+                            if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                                 // If the user has the role ADMIN, redirect to /dashboard
                                 UserEntity id = user;
                                 response.sendRedirect("/dashboard/" + id.getId());
-                            } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("USER"))) {
+                            } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
                                 // If the user has the role USER, redirect to /shop
                                 response.sendRedirect("/shop");
                             }

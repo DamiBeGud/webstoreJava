@@ -30,7 +30,9 @@ public class OrderCompany {
     private LocalDate date = LocalDate.now();
     private LocalDate dateShipped;
     private Boolean status;
+    private double total;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "order_company_product", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
-    private List<Product> orderedProducts = new ArrayList<>();
+    private List<ProductOrderModel> orderedProducts = new ArrayList<>();
+
 }

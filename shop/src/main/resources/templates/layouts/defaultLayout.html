@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org">
+<html lang="en" 
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        >
 
 <head>
   <meta charset="UTF-8">
@@ -93,14 +96,14 @@
 
 <body>
 
-  <div th:replace="layouts/commonHeader :: header" sec:authorize="hasRole('USER')"></div>
-  <div th:replace="layouts/dashboardHeader :: header" sec:authorize="!hasRole('USER')"></div>
+  <div th:replace="layouts/commonHeader :: header" sec:authorize="hasRole('ROLE_USER')"></div>
+  <div th:replace="layouts/dashboardHeader :: header" sec:authorize="hasRole('ROLE_ADMIN')"></div>
 
   <section layout:fragment="content">
     <p>Replace this with a page that has layout:fragment="content"</p>
   </section>
 
-  <div th:replace="layouts/commonFooter :: footer" sec:authorize="hasRole('USER')"></div>
+  <div th:replace="layouts/commonFooter :: footer" sec:authorize="hasRole('ROLE_USER')"></div>
 
 
 
