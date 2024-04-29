@@ -93,7 +93,12 @@
                             <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
                               <h5 class="card-title" th:text="${product.name}">Product 1</h5>
                               <p class="card-text rating-class" th:id="${product.rating}">Rating:</p>
-                              <p class="card-text">$<span th:text="${product.price}"></span></p>
+                              <p class="card-text" th:if="${!product.discount}">$<span th:text="${product.price}"></span></p>
+
+                              <p class="card-text" th:if="${product.discount}">$
+                              <span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
+                              <span th:text="${product.discountPrice}"></span>
+                              </p>
                               <p class="card-text" th:text="${product.description}"></p>
                               <br>
                             </a> 

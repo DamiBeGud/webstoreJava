@@ -42,6 +42,11 @@ public class ShopController {
         this.cartService = cartService;
     }
 
+    @GetMapping("/")
+    public String getShopPage(Model model) {
+        return "shop";
+    }
+
     @GetMapping("/shop")
     public String getProducts(Model model) {
 
