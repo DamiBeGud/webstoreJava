@@ -10,4 +10,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findAllByUserId(int id);
 
     List<Product> findAllByNameContainingIgnoreCaseAndUserId(String name, Integer userId);
+
+    List<Product> findAllByDiscountIsTrue();
+
+    List<Product> findAllByCategory(int categoryId);
+
+    List<Product> findAllBySubCategory(int subcategoryId);
 }

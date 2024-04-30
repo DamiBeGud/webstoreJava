@@ -1,0 +1,1433 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\Users\\damim\\Desktop\\JavaUni\\webstore",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2024-04-30 00:55:13",
+            "filesum": 215,
+            "codesum": 14741,
+            "commentsum": 298,
+            "blanksum": 915,
+            "statistics": {
+                ".csv": {
+                    "code": 2,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".cmd": {
+                    "code": 113,
+                    "comment": 1,
+                    "blank": 26
+                },
+                ".html": {
+                    "code": 5504,
+                    "comment": 223,
+                    "blank": 286
+                },
+                ".sql": {
+                    "code": 21,
+                    "comment": 4,
+                    "blank": 3
+                },
+                "": {
+                    "code": 113,
+                    "comment": 2,
+                    "blank": 16
+                },
+                ".js": {
+                    "code": 486,
+                    "comment": 21,
+                    "blank": 107
+                },
+                ".md": {
+                    "code": 17,
+                    "comment": 12,
+                    "blank": 5
+                },
+                ".java": {
+                    "code": 2078,
+                    "comment": 27,
+                    "blank": 462
+                },
+                ".properties": {
+                    "code": 18,
+                    "comment": 4,
+                    "blank": 2
+                },
+                ".json": {
+                    "code": 6305,
+                    "comment": 0,
+                    "blank": 2
+                },
+                ".xml": {
+                    "code": 84,
+                    "comment": 3,
+                    "blank": 6
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 3,
+                    "code": 21,
+                    "comment": 4,
+                    "filename": "cath.sql"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 1,
+                    "filename": "example.csv"
+                },
+                {
+                    "blank": 5,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "shop\\.gitignore"
+                },
+                {
+                    "filename": "shop\\.mvn\\wrapper\\maven-wrapper.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 2,
+                    "filename": "shop\\.mvn\\wrapper\\maven-wrapper.properties"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 12,
+                    "filename": "shop\\HELP.md"
+                },
+                {
+                    "blank": 11,
+                    "code": 83,
+                    "comment": 2,
+                    "filename": "shop\\mvnw"
+                },
+                {
+                    "blank": 26,
+                    "code": 113,
+                    "comment": 1,
+                    "filename": "shop\\mvnw.cmd"
+                },
+                {
+                    "blank": 6,
+                    "code": 84,
+                    "comment": 3,
+                    "filename": "shop\\pom.xml"
+                },
+                {
+                    "blank": 9,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\api\\auth\\AuthControllerREST.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\api\\cart\\v1\\CartControllerREST.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\api\\category\\CategoryControllerREST.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 21,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\api\\JavaScriptControllerRest.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\api\\order\\v1\\OrdersControllerRest.java"
+                },
+                {
+                    "blank": 19,
+                    "code": 75,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\api\\product\\v1\\ProductControllerREST.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\api\\review\\v1\\ReviewControllerREST.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\AuthController.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\CartController.java"
+                },
+                {
+                    "blank": 10,
+                    "code": 76,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\DashboardController.java"
+                },
+                {
+                    "blank": 10,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\OrdersController.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 65,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\controllers\\ShopController.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 14,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\CartDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\CartProductDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\CategoryDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\CsvFileUploadDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\LoginDto.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\OrderCompanyDto.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\OrderUserDto.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\ProductDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\RegisterDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\request\\SearchRequestDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\response\\Products.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\response\\SearchDashboardSearchResponse.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\ReviewDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\SubCategoryDto.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\dto\\UserDto.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\exceptions\\ErrorObject.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\exceptions\\GlobalExceptionHandler.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\exceptions\\ProductNotFoundException.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 1,
+                    "comment": 8,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\exceptions\\ProductsNotFoundException.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\Cart.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\CartProduct.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\Category.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\OrderCompany.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\OrderUser.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\Product.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\ProductOrderModel.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\Review.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\SubCategory.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\models\\UserEntity.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\CartProductRepository.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\CartRepository.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\CategoryRepository.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\OrderCompanyRepository.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\OrderUserRepository.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\ProductOrderModelRepository.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\ProductRepository.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\ReviewRepository.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\SubCategoryRepository.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\repository\\UserRepository.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 34,
+                    "comment": 3,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\security\\CustomUserDetailsService.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 86,
+                    "comment": 4,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\security\\SecurityConfig.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\security\\SecurityUtil.java"
+                },
+                {
+                    "blank": 10,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\CartService.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\CategorysService.java"
+                },
+                {
+                    "blank": 34,
+                    "code": 182,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\impl\\CartServiceImpl.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\impl\\CategorysServiceImpl.java"
+                },
+                {
+                    "blank": 24,
+                    "code": 201,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\impl\\OrderServiceImpl.java"
+                },
+                {
+                    "blank": 37,
+                    "code": 220,
+                    "comment": 4,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\impl\\ProductServiceImpl.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 48,
+                    "comment": 2,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\impl\\ReviewServiceImpl.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\impl\\UserServiceImpl.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\OrderService.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\ProductService.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\ReviewService.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\service\\UserService.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\ShopApplication.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\java\\com\\webshop\\shop\\util\\TupleInteger.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\js\\main.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 6282,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\js\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\js\\package.json"
+                },
+                {
+                    "blank": 13,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\js\\src\\pages\\dashboard\\orders.js"
+                },
+                {
+                    "blank": 51,
+                    "code": 208,
+                    "comment": 15,
+                    "filename": "shop\\src\\main\\js\\src\\pages\\dashboard\\products.js"
+                },
+                {
+                    "blank": 34,
+                    "code": 159,
+                    "comment": 6,
+                    "filename": "shop\\src\\main\\js\\src\\pages\\shop\\product.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\js\\src\\pages\\shop\\reviewStars.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\js\\src\\util\\toast.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\js\\webpack.config.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\resources\\application.properties"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\static\\js\\bundle.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 319,
+                    "comment": 4,
+                    "filename": "shop\\src\\main\\resources\\templates\\addProduct.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 110,
+                    "comment": 3,
+                    "filename": "shop\\src\\main\\resources\\templates\\allProducts.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 73,
+                    "comment": 2,
+                    "filename": "shop\\src\\main\\resources\\templates\\cart.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 142,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\checkout.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\layouts\\commonFooter.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\layouts\\commonHeader.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\layouts\\dashboardHeader.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\layouts\\defaultDashboardLayout.html"
+                },
+                {
+                    "blank": 29,
+                    "code": 96,
+                    "comment": 65,
+                    "filename": "shop\\src\\main\\resources\\templates\\layouts\\defaultLayout.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\login.html"
+                },
+                {
+                    "blank": 9,
+                    "code": 78,
+                    "comment": 2,
+                    "filename": "shop\\src\\main\\resources\\templates\\orders.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 29,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\resources\\templates\\orderSuccess.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\ordersUserPage.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 64,
+                    "comment": 10,
+                    "filename": "shop\\src\\main\\resources\\templates\\product.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 110,
+                    "comment": 3,
+                    "filename": "shop\\src\\main\\resources\\templates\\products.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 82,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\registerCompany.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\registerUser.html"
+                },
+                {
+                    "blank": 9,
+                    "code": 254,
+                    "comment": 3,
+                    "filename": "shop\\src\\main\\resources\\templates\\shop.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 40,
+                    "comment": 1,
+                    "filename": "shop\\src\\main\\resources\\templates\\shopDashboard.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "shop\\src\\main\\resources\\templates\\singleDashboardOrder.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "shop\\src\\test\\java\\com\\webshop\\shop\\ShopApplicationTests.java"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "shop\\target\\classes\\application.properties"
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\api\\auth\\AuthControllerREST.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\api\\cart\\v1\\CartControllerREST.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\api\\category\\CategoryControllerREST.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\api\\JavaScriptControllerRest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\api\\order\\v1\\OrdersControllerRest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\api\\product\\v1\\ProductControllerREST.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\api\\review\\v1\\ReviewControllerREST.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\AuthController.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\CartController.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\DashboardController.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\OrdersController.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\controllers\\ShopController.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\CartDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\CartProductDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\CategoryDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\CsvFileUploadDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\LoginDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\OrderCompanyDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\OrderUserDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\ProductDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\RegisterDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\request\\SearchRequestDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\response\\Products.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\response\\SearchDashboardSearchResponse.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\ReviewDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\SubCategoryDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\dto\\UserDto.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\exceptions\\ErrorObject.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\exceptions\\GlobalExceptionHandler.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\exceptions\\ProductNotFoundException.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\Cart.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\CartProduct.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\Category.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\OrderCompany.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\OrderUser.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\Product.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\ProductOrderModel.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\Review.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\SubCategory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\models\\UserEntity.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\CartProductRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\CartRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\CategoryRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\OrderCompanyRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\OrderUserRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\ProductOrderModelRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\ProductRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\ReviewRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\SubCategoryRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\repository\\UserRepository.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\security\\CustomUserDetailsService.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\security\\SecurityConfig.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\security\\SecurityUtil.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\CartService.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\CategorysService.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\impl\\CartServiceImpl.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\impl\\CategorysServiceImpl.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\impl\\OrderServiceImpl.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\impl\\ProductServiceImpl.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\impl\\ReviewServiceImpl.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\impl\\UserServiceImpl.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\OrderService.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\ProductService.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\ReviewService.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\service\\UserService.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\ShopApplication.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "shop\\target\\classes\\com\\webshop\\shop\\util\\TupleInteger.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\static\\js\\bundle.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 319,
+                    "comment": 4,
+                    "filename": "shop\\target\\classes\\templates\\addProduct.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 110,
+                    "comment": 3,
+                    "filename": "shop\\target\\classes\\templates\\allProducts.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 73,
+                    "comment": 2,
+                    "filename": "shop\\target\\classes\\templates\\cart.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 142,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\checkout.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\layouts\\commonFooter.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\layouts\\commonHeader.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\layouts\\dashboardHeader.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\layouts\\defaultDashboardLayout.html"
+                },
+                {
+                    "blank": 29,
+                    "code": 96,
+                    "comment": 65,
+                    "filename": "shop\\target\\classes\\templates\\layouts\\defaultLayout.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\login.html"
+                },
+                {
+                    "blank": 9,
+                    "code": 78,
+                    "comment": 2,
+                    "filename": "shop\\target\\classes\\templates\\orders.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 29,
+                    "comment": 1,
+                    "filename": "shop\\target\\classes\\templates\\orderSuccess.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\ordersUserPage.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 64,
+                    "comment": 10,
+                    "filename": "shop\\target\\classes\\templates\\product.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 110,
+                    "comment": 3,
+                    "filename": "shop\\target\\classes\\templates\\products.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 82,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\registerCompany.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\registerUser.html"
+                },
+                {
+                    "blank": 9,
+                    "code": 254,
+                    "comment": 3,
+                    "filename": "shop\\target\\classes\\templates\\shop.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 40,
+                    "comment": 1,
+                    "filename": "shop\\target\\classes\\templates\\shopDashboard.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "shop\\target\\classes\\templates\\singleDashboardOrder.html"
+                },
+                {
+                    "filename": "shop\\target\\test-classes\\com\\webshop\\shop\\ShopApplicationTests.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 22,
+                    "code": 54,
+                    "comment": 4,
+                    "filename": "templates\\auth\\login.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "templates\\auth\\registerCompany.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "templates\\auth\\registerUser.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 81,
+                    "comment": 3,
+                    "filename": "templates\\dashboard\\addProduct.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 81,
+                    "comment": 2,
+                    "filename": "templates\\dashboard\\orders.html"
+                },
+                {
+                    "blank": 7,
+                    "code": 120,
+                    "comment": 3,
+                    "filename": "templates\\dashboard\\products.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 120,
+                    "comment": 0,
+                    "filename": "templates\\dashboard\\shopDashboard.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 102,
+                    "comment": 0,
+                    "filename": "templates\\shop\\aboutUs.html"
+                },
+                {
+                    "blank": 14,
+                    "code": 255,
+                    "comment": 4,
+                    "filename": "templates\\shop\\allProducts.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 165,
+                    "comment": 4,
+                    "filename": "templates\\shop\\cart.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 192,
+                    "comment": 11,
+                    "filename": "templates\\shop\\checkout.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 112,
+                    "comment": 1,
+                    "filename": "templates\\shop\\contactUs.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 111,
+                    "comment": 0,
+                    "filename": "templates\\shop\\faq.html"
+                },
+                {
+                    "blank": 9,
+                    "code": 254,
+                    "comment": 3,
+                    "filename": "templates\\shop\\shop.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 77,
+                    "comment": 0,
+                    "filename": "templates\\shop\\successPage.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 80,
+                    "comment": 0,
+                    "filename": "templates\\shop\\termsAndConditions.html"
+                }
+            ]
+        }
+    ]
+}

@@ -1,28 +1,69 @@
--- Create a table for categories
-CREATE TABLE categories (
-    category_id INT PRIMARY KEY,
-    category_name VARCHAR(100) NOT NULL
-);
 
--- Create a table for subcategories
-CREATE TABLE subcategories (
-    subcategory_id INT PRIMARY KEY,
-    subcategory_name VARCHAR(100) NOT NULL,
-    category_id INT,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id)
-);
 
 -- Insert sample data into categories table
-INSERT INTO categories (category_id, category_name) VALUES
-(1, 'Electronics'),
-(2, 'Clothing'),
-(3, 'Books');
+INSERT INTO category (id, name)
+VALUES
+    (1, 'Electronics'),
+    (2, 'Home & Kitchen'),
+    (3, 'Fashion'),
+    (4, 'Health & Beauty'),
+    (5, 'Books & Audible'),
+    (6, 'Sports & Outdoors'),
+    (7, 'Toys & Games'),
+    (8, 'Automotive'),
+    (9, 'Pet Supplies'),
+    (10, 'Grocery & Gourmet Food')
 
 -- Insert sample data into subcategories table
-INSERT INTO subcategories (subcategory_id, subcategory_name, category_id) VALUES
-(101, 'Mobile Phones', 1),
-(102, 'Laptops', 1),
-(103, 'T-Shirts', 2),
-(104, 'Jeans', 2),
-(105, 'Fiction', 3),
-(106, 'Non-fiction', 3);
+INSERT INTO sub_category (id, name, category_id)
+VALUES
+    (1, 'Laptops', 1),
+    (2, 'Smartphones', 1),
+    (3, 'TVs', 1),
+    (4, 'Cameras', 1),
+    (5, 'Headphones', 1),
+    (6, 'Furniture', 2),
+    (7, 'Appliances', 2),
+    (8, 'Cookware', 2),
+    (9, 'Home Décor', 2),
+    (10, 'Bedding & Linens', 2),
+    (11, 'Men''s Clothing', 3),
+    (12, 'Women''s Clothing', 3),
+    (13, 'Shoes', 3),
+    (14, 'Accessories', 3),
+    (15, 'Jewelry', 3),
+    (16, 'Skincare', 4),
+    (17, 'Haircare', 4),
+    (18, 'Makeup', 4),
+    (19, 'Personal Care', 4),
+    (20, 'Fragrances', 4),
+    (21, 'Fiction', 5),
+    (22, 'Non-Fiction', 5),
+    (23, 'Children''s Books', 5),
+    (24, 'Audiobooks', 5),
+    (25, 'Best Sellers', 5),
+    (26, 'Exercise & Fitness', 6),
+    (27, 'Outdoor Recreation', 6),
+    (28, 'Team Sports', 6),
+    (29, 'Camping & Hiking', 6),
+    (30, 'Cycling', 6),
+    (31, 'Action Figures', 7),
+    (32, 'Board Games', 7),
+    (33, 'Outdoor Play', 7),
+    (34, 'Puzzles', 7),
+    (35, 'Building Toys', 7),
+    (36, 'Car Parts', 8),
+    (37, 'Tools & Equipment', 8),
+    (38, 'Accessories', 8),
+    (39, 'Motorcycle Parts', 8),
+    (40, 'Oils & Fluids', 8),
+    (41, 'Dog Supplies', 9),
+    (42, 'Cat Supplies', 9),
+    (43, 'Small Animals', 9),
+    (44, 'Bird Supplies', 9),
+    (45, 'Fish & Aquatic Pets', 9),
+    (46, 'Beverages', 10),
+    (47, 'Snacks', 10),
+    (48, 'Pantry Staples', 10),
+    (49, 'Breakfast Foods', 10),
+    (50, 'Organic & Natural Foods', 10);

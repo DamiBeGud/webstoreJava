@@ -44,6 +44,16 @@ public class ShopController {
 
     @GetMapping("/")
     public String getShopPage(Model model) {
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            Cart cart = cartService.getCart();
+            model.addAttribute("cart", cart);
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+        model.addAttribute("specialDeals", productService.getSpecialDealProducts());
+        model.addAttribute("electronics", productService.getProductsByCategory(1));
+
         return "shop";
     }
 

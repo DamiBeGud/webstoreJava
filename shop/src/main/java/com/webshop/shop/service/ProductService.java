@@ -28,4 +28,11 @@ public interface ProductService {
     List<ProductDto> createProductCsv(CsvFileUploadDto csvFileUploadDto);
 
     Product getOneProductByIdForOrderService(int id);
+
+    List<ProductDto> getSpecialDealProducts();
+
+    List<ProductDto> getProductsByCategory(int id);
+
+    List<ProductDto> getProductsBySubCategory(int id);
+
 }

@@ -187,7 +187,7 @@ public class ProductServiceImpl implements ProductService {
 
     private static Product parseCSVLine(String line, int userId) {
         // Define the regex pattern for parsing CSV lines
-        String regex = "([^,]+),([^,]+),(\\d*\\.?\\d+),(\\d+),(.*?),(\\d+),(\\d+)";
+        String regex = "^(.+?),(.*?),(\\d*\\.?\\d+),(\\d+),(.*?),(1|2|3),(\\d+),(FALSE|TRUE),(\\d+)$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(line);
@@ -200,6 +200,8 @@ public class ProductServiceImpl implements ProductService {
             String image = matcher.group(5);
             int category = Integer.parseInt(matcher.group(6));
             int subCategory = Integer.parseInt(matcher.group(7));
+            boolean discount = Boolean.parseBoolean(matcher.group(8));
+            double discountPrice = Double.parseDouble(matcher.group(9));
 
             Product product = new Product();
             product.setName(name);
@@ -209,6 +211,8 @@ public class ProductServiceImpl implements ProductService {
             product.setImage(image);
             product.setCategory(category);
             product.setSubCategory(subCategory);
+            product.setDiscount(discount);
+            product.setDiscountPrice(discountPrice);
             product.setUserId(userId);
 
             return product;
@@ -255,6 +259,29 @@ public class ProductServiceImpl implements ProductService {
         product.setStock(product.getStock() - stock);
         productRepository.save(product);
 
+    }
+
+    @Override
+    public List<ProductDto> getSpecialDealProducts() {
+        List<Product> products = productRepository.findAllByDiscountIsTrue();
+        List<ProductDto> productDtos = products.stream().map(prod -> {
+            return mapToDto(prod);
+        }).collect(Collectors.toList());
+        return productDtos;
+    }
+
+    @Override
+    public List<ProductDto> getProductsByCategory(int id) {
+        List<Product> products = productRepository.findAllByCategory(id);
+        List<ProductDto> productDtos = products.stream().map(prod -> mapToDto(prod)).collect(Collectors.toList());
+        return productDtos;
+
+    }
+
+    @Override
+    public List<ProductDto> getProductsBySubCategory(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getProductsBySubCategory'");
     }
 
 }
