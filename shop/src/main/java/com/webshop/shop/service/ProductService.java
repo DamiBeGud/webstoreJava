@@ -35,4 +35,6 @@ public interface ProductService {
 
     List<ProductDto> getProductsBySubCategory(int id);
 
+    List<ProductDto> searchForProducts(String searcString);
+
 }

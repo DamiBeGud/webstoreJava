@@ -284,4 +284,11 @@ public class ProductServiceImpl implements ProductService {
         throw new UnsupportedOperationException("Unimplemented method 'getProductsBySubCategory'");
     }
 
+    @Override
+    public List<ProductDto> searchForProducts(String searcString) {
+        List<Product> products = productRepository.findAllByNameContainingIgnoreCase(searcString);
+        List<ProductDto> productDtos = products.stream().map(prod -> mapToDto(prod)).collect(Collectors.toList());
+        return productDtos;
+    }
+
 }

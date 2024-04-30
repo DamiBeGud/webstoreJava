@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/v1/product/")
@@ -55,16 +56,18 @@ public class ProductControllerREST {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable int id){
+    public ResponseEntity<ProductDto> getProductById(@PathVariable int id) {
         return new ResponseEntity<>(productService.getOneProductById(id), HttpStatus.OK);
     }
 
     @PostMapping("company/search")
-    public ResponseEntity<SearchDashboardSearchResponse> getProductsCompanySearch(@RequestBody SearchRequestDto searchRequestDto) {
+    public ResponseEntity<SearchDashboardSearchResponse> getProductsCompanySearch(
+            @RequestBody SearchRequestDto searchRequestDto) {
         System.out.println(searchRequestDto);
         SearchDashboardSearchResponse searchDashboardSearchResponse = new SearchDashboardSearchResponse();
-        searchDashboardSearchResponse.setProducts(productService.getAllProductsWithNameWithUserId(searchRequestDto.getSearchString(),
-        searchRequestDto.getUserId()));
+        searchDashboardSearchResponse
+                .setProducts(productService.getAllProductsWithNameWithUserId(searchRequestDto.getSearchString(),
+                        searchRequestDto.getUserId()));
         searchDashboardSearchResponse.setCategories(categorysService.getAllCategorys());
         searchDashboardSearchResponse.setSubCategories(categorysService.getAllSubCategorys());
 
@@ -87,9 +90,15 @@ public class ProductControllerREST {
     }
 
     @PostMapping("update")
-    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {       
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {
         return new ResponseEntity<>(productService.updateProduct(productDto),
                 HttpStatus.OK);
+    }
+
+    @GetMapping("search")
+    public ResponseEntity<List<ProductDto>> getSearchProduct(@RequestParam("search") String searchString) {
+        List<ProductDto> searchResults = productService.searchForProducts(searchString);
+        return new ResponseEntity<>(searchResults, HttpStatus.OK);
     }
 
 }
