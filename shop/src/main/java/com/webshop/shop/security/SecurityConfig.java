@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .authorizeRequests(requests -> requests
                         .requestMatchers(
                                 "/shop",
+                                "/",
                                 "/login",
                                 "/register/**",
                                 "/css/**",

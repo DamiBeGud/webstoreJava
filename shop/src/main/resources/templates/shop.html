@@ -8,46 +8,107 @@
 
   <div layout:fragment="content">
     <div class="container mt-5">
-      <h2 class="mb-4">Special deals</h2>
+      <h2 class="mb-4">Special Deals</h2>
       <div class="product-slider-container">
         <div class="product-card-item" th:each="product : ${specialDeals}">
           <div class="product-card-container">
             <img th:src="${product.image}" class="product-card-image" alt="Product Image">
             <div class="card-body">
-              <h5 class="card-title" th:text="${product.name}">Product 1</h5>
-              <p class="card-text" th:text="${product.discountPrice}">$20.00</p>
-              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
-              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  
-    <div class="container mt-5">
-      <h2 class="mb-4">Electronics</h2>
-      <div class="product-slider-container">
-        <div class="product-card-item"  th:each="product : ${electronics}">
-          <div class="product-card-container">
-            <img th:src="${product.image}" class="product-card-image" alt="Product Image">
-            <div class="card-body">
-              <h5 class="card-title" th:text="${product.name}">Product 1</h5>
-              <p class="card-text" th:if="${!product.discount}">$<span th:text="${product.price}"></span></p>
-              <p class="card-text" th:if="${product.discount}">$
-              <span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
-              <span th:text="${product.discountPrice}"></span>
+              <h5 class="card-title" style="max-width: 25ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.name}">Product 1</h5>
+              <p class="card-text" style="max-width: 40ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.description}"></p>
+              <p class="card-text" th:if="${!product.discount}">
+                $<span th:text="${product.price}"></span>
               </p>
-              <p class="card-text" th:text="${product.description}"></p>
+              <p class="card-text" th:if="${product.discount}">
+                $<span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
+                <span th:text="${product.discountPrice}"></span>
+              </p>
               <br>
               <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
               <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
             </div>
           </div>
         </div>
-
       </div>
     </div>
+  
+    <div class="container mt-5">
+      <h2 class="mb-4">Electronics</h2>
+      <div class="product-slider-container">
+        <div class="product-card-item" th:each="product : ${electronics}">
+          <div class="product-card-container">
+            <img th:src="${product.image}" class="product-card-image" alt="Product Image">
+            <div class="card-body">
+              <h5 class="card-title" style="max-width: 25ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.name}">Product 1</h5>
+              <p class="card-text" style="max-width: 40ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.description}"></p>
+              <p class="card-text" th:if="${!product.discount}">
+                $<span th:text="${product.price}"></span>
+              </p>
+              <p class="card-text" th:if="${product.discount}">
+                $<span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
+                <span th:text="${product.discountPrice}"></span>
+              </p>
+              <br>
+              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
+              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <h2 class="mb-4">	Home & Kitchen</h2>
+      <div class="product-slider-container">
+        <div class="product-card-item" th:each="product : ${homeAndKitchen}">
+          <div class="product-card-container">
+            <img th:src="${product.image}" class="product-card-image" alt="Product Image">
+            <div class="card-body">
+              <h5 class="card-title" style="max-width: 25ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.name}">Product 1</h5>
+              <p class="card-text" style="max-width: 40ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.description}"></p>
+              <p class="card-text" th:if="${!product.discount}">
+                $<span th:text="${product.price}"></span>
+              </p>
+              <p class="card-text" th:if="${product.discount}">
+                $<span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
+                <span th:text="${product.discountPrice}"></span>
+              </p>
+              <br>
+              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
+              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <h2 class="mb-4">	Fashion</h2>
+      <div class="product-slider-container">
+        <div class="product-card-item" th:each="product : ${fashion}">
+          <div class="product-card-container">
+            <img th:src="${product.image}" class="product-card-image" alt="Product Image">
+            <div class="card-body">
+              <h5 class="card-title" style="max-width: 25ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.name}">Product 1</h5>
+              <p class="card-text" style="max-width: 40ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.description}"></p>
+              <p class="card-text" th:if="${!product.discount}">
+                $<span th:text="${product.price}"></span>
+              </p>
+              <p class="card-text" th:if="${product.discount}">
+                $<span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
+                <span th:text="${product.discountPrice}"></span>
+              </p>
+              <br>
+              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
+              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
 
 
 

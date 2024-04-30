@@ -82,34 +82,41 @@
 
       <!-- Main content area to display products -->
       <div class="col-md-9 p-4">
-          <div class="row">
-            <div class="col-md-4" th:each="product : ${products}">
-              <div class="product-card">
-                <div class="card">
-                        <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
-                          <img th:src="@{${product.image}}" class="card-img-top" alt="Product Image">
-                        </a>  
-                          <div class="card-body">
-                            <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
-                              <h5 class="card-title" th:text="${product.name}">Product 1</h5>
-                              <p class="card-text rating-class" th:id="${product.rating}">Rating:</p>
-                              <p class="card-text" th:if="${!product.discount}">$<span th:text="${product.price}"></span></p>
-
-                              <p class="card-text" th:if="${product.discount}">$
-                              <span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
-                              <span th:text="${product.discountPrice}"></span>
-                              </p>
-                              <p class="card-text" th:text="${product.description}"></p>
-                              <br>
-                            </a> 
-                              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
-                              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
-                          </div>
-                      </div>
-                  </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-4" th:each="product : ${products}">
+            <div class="product-card" style="min-height: 100%;">
+              <div class="card h-100" style="border: none;">
+                <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
+                  <img th:src="@{${product.image}}" class="card-img-top img-fluid" alt="Product Image">
+                </a>
+                <div class="card-body d-flex flex-column" style="min-height: 100%;">
+                  <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
+                    <h5 class="card-title mb-0" style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0;" th:text="${product.name}">Product 1</h5>
+                    <p class="card-text rating-class" th:id="${product.rating}" style="margin-bottom: 0;">Rating:</p>
+                    <p class="card-text" th:if="${!product.discount}" style="margin-bottom: 0;">$<span th:text="${product.price}"></span></p>
+                    <p class="card-text" th:if="${product.discount}" style="margin-bottom: 0;">
+                      $<span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
+                      <span th:text="${product.discountPrice}"></span>
+                    </p>
+                    <p class="card-text" style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0;" th:text="${product.description}"></p>
+                  </a>
+                  <br>
+                </div>
+              </div>
+              <div style="position: absolute; bottom: 0px; padding: 20px;">
+                <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart" style="width: 100%;">Add to Cart</button>
+                <div th:unless="${#authorization.expression('isAuthenticated()')}">
+                  <a href="/login" class="btn btn-secondary mt-2" style="width: 100%;">Log in to purchase</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      
+      
+      
+      
     </div>
   </div>
 </div>

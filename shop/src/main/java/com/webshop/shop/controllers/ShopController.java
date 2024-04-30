@@ -53,7 +53,8 @@ public class ShopController {
         }
         model.addAttribute("specialDeals", productService.getSpecialDealProducts());
         model.addAttribute("electronics", productService.getProductsByCategory(1));
-
+        model.addAttribute("homeAndKitchen", productService.getProductsByCategory(2));
+        model.addAttribute("fashion", productService.getProductsByCategory(3));
         return "shop";
     }
 

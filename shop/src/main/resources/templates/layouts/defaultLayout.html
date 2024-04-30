@@ -92,6 +92,8 @@
   border: none;
   transition: all 0.3s;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  white-space: normal;
 }
 
 .product-card-container:hover {
@@ -111,7 +113,7 @@
 .product-card-item {
   display: inline-block;
   width: 300px;
-  margin-right: 20px; /* Adjust as needed */
+  margin-right: 20px;
 }
 
 
@@ -121,7 +123,7 @@
 
 <body>
 
-  <div th:replace="layouts/commonHeader :: header" sec:authorize="hasRole('ROLE_USER')"></div>
+  <div th:replace="layouts/commonHeader :: header" sec:authorize="!hasRole('ROLE_ADMIN')"></div>
   <div th:replace="layouts/dashboardHeader :: header" sec:authorize="hasRole('ROLE_ADMIN')"></div>
 
   <section layout:fragment="content">
