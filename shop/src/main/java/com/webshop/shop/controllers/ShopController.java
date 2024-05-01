@@ -106,4 +106,24 @@ public class ShopController {
         return "contactUs";
     }
 
+    @GetMapping("/faq")
+    public String getFAQPage(Model model) {
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+        return "faq";
+    }
+
+    @GetMapping("/termsandconditions")
+    public String getTermsAndConditionsPage(Model model) {
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+        return "termsAndConditions";
+    }
+
 }

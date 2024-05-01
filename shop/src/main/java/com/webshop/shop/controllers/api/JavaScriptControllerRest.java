@@ -23,4 +23,18 @@ public class JavaScriptControllerRest {
                 .contentType(MediaType.parseMediaType("application/javascript"))
                 .body(resource);
     }
+
+    @GetMapping("/static/css/main.css")
+    public ResponseEntity<Resource> getCSS() {
+        Resource resource = new ClassPathResource("static/css/main.css");
+
+        // Check if the resource exists
+        if (!resource.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("text/css"))
+                .body(resource);
+    }
 }
