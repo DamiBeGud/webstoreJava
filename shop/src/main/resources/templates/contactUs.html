@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/defaultLayout">
+
+<body>
+
+
+<div layout:fragment="content">
+  <!-- Contact Form -->
+  <section id="contact-form" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <h2 class="text-center mb-4">Contact Us</h2>
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 class="text-center mb-4">Contact Us</h1>
+        <p>If you have any questions or concerns, feel free to reach out to us via email or phone:</p>
+        <ul class="list-unstyled">
+          <li>Email: <a href="mailto:info@valdivian.com">info@valdivian.com</a></li>
+          <li>Phone: <a href="tel:1-800-123-4567">1-800-123-4567</a></li>
+        </ul>
+        <p>We are available Monday to Friday, 9:00 AM to 5:00 PM</p>
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-center mb-4">Visit Us</h2>
+        <p>Our physical address:</p>
+        <address>
+          Valdivian Company Inc.<br>
+          Birkholzweg 38<br>
+          Frankfurt am Main, Germany<br>
+          Postal Code: 60433
+        </address>
+        <p>For inquiries related to sales, partnerships, or collaborations, please email us at <a href="mailto:sales@valdivian.com">sales@valdivian.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

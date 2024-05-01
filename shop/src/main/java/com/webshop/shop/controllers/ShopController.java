@@ -86,4 +86,24 @@ public class ShopController {
         return "product";
     }
 
+    @GetMapping("/about")
+    public String getAboutUsPage(Model model) {
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+        return "aboutUs";
+    }
+
+    @GetMapping("/contact")
+    public String getContactUsPage(Model model) {
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+        return "contactUs";
+    }
+
 }
