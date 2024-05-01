@@ -127,3 +127,12 @@ ul {
     background-color:  #ff9900;
 
 }
+
+.btn:focus {
+    outline: none;
+    box-shadow: none; 
+}
+.btn-primary:focus {
+    outline: none;
+    box-shadow: none; 
+}

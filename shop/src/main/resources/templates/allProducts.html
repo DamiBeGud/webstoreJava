@@ -8,42 +8,49 @@
       <div class="col-md-3">
         <div class="sidebar">
           <h2>Categories</h2>
-          <div id="accordion">
-            <div class="card">
-              <div class="card-header" id="electronicsHeading">
-                <h5 class="mb-0">
-                  <button class="btn btn-link accordion-link" data-toggle="collapse" data-target="#electronicsCollapse" aria-expanded="true" aria-controls="electronicsCollapse">
-                    Electronics
-                  </button>
-                </h5>
-              </div>
-              <div id="electronicsCollapse" class="collapse" aria-labelledby="electronicsHeading" data-parent="#accordion">
-                <div class="card-body">
-                  <ul>
-                    <li><a href="#">Smartphones</a></li>
-                    <li><a href="#">Laptops</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header" id="clothingHeading">
-                <h5 class="mb-0">
-                  <button class="btn btn-link accordion-link" data-toggle="collapse" data-target="#clothingCollapse" aria-expanded="true" aria-controls="clothingCollapse">
-                    Clothing
-                  </button>
-                </h5>
-              </div>
-              <div id="clothingCollapse" class="collapse" aria-labelledby="clothingHeading" data-parent="#accordion">
-                <div class="card-body">
-                  <ul>
-                    <li><a href="#">Men's Clothing</a></li>
-                    <li><a href="#">Women's Clothing</a></li>
-                  </ul>
+          <div class="container">
+            <div id="accordion">
+              <div class="row">
+                <div class="col">
+                  <div class="card" th:each="category : ${category}" style="border:none;">
+                    <div class="card-header" th:id="'electronicsHeading_' + ${category.id}">
+                      <h5 class="mb-0">
+                        <button th:text="${category.name}" 
+                                class="btn btn-link accordion-link"
+                                style="color:#ff9900;"
+                                data-toggle="collapse"
+                                th:data-target="'#electronicsCollapse_' + ${category.id}" 
+                                aria-expanded="true" 
+                                th:aria-controls="'electronicsCollapse_' + ${category.id}">
+                          Electronics
+                        </button>
+                      </h5>
+                    </div>
+                    <div th:id="'electronicsCollapse_' + ${category.id}"
+                         class="collapse" 
+                         aria-labelledby="'electronicsHeading_' + ${category.id}" 
+                         data-parent="#accordion">
+                      <div class="card-body">
+                        <ul>
+                          <div  th:each="subcategory : ${subCategory}">
+                            <div th:if="${subcategory.categoryId == category.id}">
+                              <li><a href="#"
+                                     th:text="${subcategory.name}"
+                                     style="color:#ff9900;">
+                                 Smartphones
+                                </a>
+                              </li>
+                            </div>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          
           <h2>Filters</h2>
           <div class="form-group">
             <label for="priceRange">Price Range:</label>

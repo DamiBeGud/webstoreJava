@@ -18,6 +18,7 @@ import com.webshop.shop.models.UserEntity;
 import com.webshop.shop.repository.UserRepository;
 import com.webshop.shop.security.SecurityUtil;
 import com.webshop.shop.service.CartService;
+import com.webshop.shop.service.CategorysService;
 import com.webshop.shop.service.ProductService;
 import com.webshop.shop.service.ReviewService;
 import com.webshop.shop.service.UserService;
@@ -29,17 +30,20 @@ public class ShopController {
     private ReviewService reviewService;
     private UserService userService;
     private CartService cartService;
+    private CategorysService categorysService;
 
     @Autowired
     public ShopController(
             ProductService productService,
             ReviewService reviewService,
             UserService userService,
-            CartService cartService) {
+            CartService cartService,
+            CategorysService categorysService) {
         this.productService = productService;
         this.reviewService = reviewService;
         this.userService = userService;
         this.cartService = cartService;
+        this.categorysService = categorysService;
     }
 
     @GetMapping("/")
@@ -60,8 +64,24 @@ public class ShopController {
 
     @GetMapping("/shop")
     public String getProducts(Model model) {
-
         model.addAttribute("products", productService.getAllProductsShop());
+        model.addAttribute("category", categorysService.getAllCategorys());
+        model.addAttribute("subCategory", categorysService.getAllSubCategorys());
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            Cart cart = cartService.getCart();
+            model.addAttribute("cart", cart);
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+
+        return "allProducts";
+    }
+
+    @GetMapping("/shop/search")
+    public String getSearchProducts(Model model, @RequestParam("search") String searchString) {
+
+        model.addAttribute("products", productService.searchForProducts(searchString));
         String email = SecurityUtil.getSessionUser();
         if (email != null) {
             model.addAttribute("user", userService.getUser());

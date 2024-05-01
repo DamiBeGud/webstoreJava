@@ -9,9 +9,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" th:action="@{/shop/search}" method="get">
         <div class="position-relative">
-          <input type="text" class="form-control mr-sm-2" id="searchInput" placeholder="Search...">
+          <input type="text" class="form-control mr-sm-2" id="searchInput" name="search" placeholder="Search...">
           <div class="suggestions" id="searchSuggestions" style="display: none; position: absolute; width: 100%; top: calc(100% + 10px); left: 0; z-index: 2;"></div>
           <button class="btn my-2 my-sm-0" type="submit" style="border-color: #ff9900; color:#ff9900">Search</button>
         </div>

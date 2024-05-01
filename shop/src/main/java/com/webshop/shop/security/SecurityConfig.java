@@ -77,7 +77,7 @@ public class SecurityConfig {
                                 response.sendRedirect("/dashboard/" + id.getId());
                             } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
                                 // If the user has the role USER, redirect to /shop
-                                response.sendRedirect("/shop");
+                                response.sendRedirect("/");
                             }
                         }))
                 .build();
