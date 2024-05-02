@@ -82,6 +82,42 @@ public class ShopController {
     public String getSearchProducts(Model model, @RequestParam("search") String searchString) {
 
         model.addAttribute("products", productService.searchForProducts(searchString));
+        model.addAttribute("category", categorysService.getAllCategorys());
+        model.addAttribute("subCategory", categorysService.getAllSubCategorys());
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            Cart cart = cartService.getCart();
+            model.addAttribute("cart", cart);
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+
+        return "allProducts";
+    }
+
+    @GetMapping("/shop/category")
+    public String getCategoryProducts(Model model, @RequestParam("category") int categoryId) {
+
+        model.addAttribute("products", productService.getProductsByCategory(categoryId));
+        model.addAttribute("category", categorysService.getAllCategorys());
+        model.addAttribute("subCategory", categorysService.getAllSubCategorys());
+        String email = SecurityUtil.getSessionUser();
+        if (email != null) {
+            model.addAttribute("user", userService.getUser());
+            Cart cart = cartService.getCart();
+            model.addAttribute("cart", cart);
+            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
+        }
+
+        return "allProducts";
+    }
+
+    @GetMapping("/shop/subcategory")
+    public String getSubCategoryProducts(Model model, @RequestParam("subcategory") int subCategoryId) {
+
+        model.addAttribute("products", productService.getProductsBySubCategory(subCategoryId));
+        model.addAttribute("category", categorysService.getAllCategorys());
+        model.addAttribute("subCategory", categorysService.getAllSubCategorys());
         String email = SecurityUtil.getSessionUser();
         if (email != null) {
             model.addAttribute("user", userService.getUser());

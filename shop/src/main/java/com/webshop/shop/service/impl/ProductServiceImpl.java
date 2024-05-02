@@ -280,8 +280,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getProductsBySubCategory(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProductsBySubCategory'");
+        List<Product> products = productRepository.findAllBySubCategory(id);
+        List<ProductDto> productDtos = products.stream().map(prod -> mapToDto(prod)).collect(Collectors.toList());
+        return productDtos;
     }
 
     @Override
