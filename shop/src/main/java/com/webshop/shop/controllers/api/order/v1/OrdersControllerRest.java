@@ -31,4 +31,10 @@ public class OrdersControllerRest {
         return new ResponseEntity<>(orderService.getCompanyOrder(id), HttpStatus.OK);
     }
 
+    @PostMapping("ship/{orderId}")
+    public ResponseEntity shipOrder(@PathVariable int orderId) {
+
+        return new ResponseEntity<>(orderService.shipOrder(orderId), HttpStatus.OK);
+    }
+
 }

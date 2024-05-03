@@ -1,10 +1,13 @@
 package com.webshop.shop.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
+import java.util.Comparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -196,7 +199,7 @@ public class OrderServiceImpl implements OrderService {
                     orderDto.setCustomer(userService.getUserById(orderDto.getUserId()));
                     return orderDto;
                 }).collect(Collectors.toList());
-
+        Collections.sort(orders, Comparator.comparing(OrderCompanyDto::getId).reversed());
         return orders;
     }
 
@@ -221,6 +224,17 @@ public class OrderServiceImpl implements OrderService {
         OrderCompany order = orderCompanyRepository.findById(id).orElseThrow();
         System.out.println("ORDER SERVICE DEBUG" + order);
         return mapToDtoCompanyOrder(order);
+    }
+
+    @Override
+    public OrderCompanyDto shipOrder(int orderId) {
+        OrderCompany order = orderCompanyRepository.findById(orderId).orElseThrow();
+        order.setStatus(true);
+        LocalDate date = LocalDate.now();
+        order.setDateShipped(date);
+        OrderCompany shipedOrder = orderCompanyRepository.save(order);
+
+        return mapToDtoCompanyOrder(shipedOrder);
     }
 
 }

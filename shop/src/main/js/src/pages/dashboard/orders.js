@@ -45,7 +45,36 @@ export function ordersDashboard(){
         console.log(responseData)
     }
     
-    
+    document.addEventListener("DOMContentLoaded", ()=>{
+        let shipOrderBtn = document.querySelectorAll('.shipOrder')
+        if(shipOrderBtn != null){
+            shipOrderBtn.forEach(shipOrderBtn =>{
+                shipOrderBtn.addEventListener('click',()=>{
+                    let url = "http://localhost:8080/api/v1/orders/ship/" + shipOrderBtn.id
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        }
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                        console.log(data)
+                        document.getElementById("status-" + shipOrderBtn.id).innerHTML =""
+                        document.getElementById("status-" + shipOrderBtn.id).classList = ""
+                        document.getElementById("status-" + shipOrderBtn.id).innerHTML ="Shiped"
+                        document.getElementById("status-" + shipOrderBtn.id).classList = "badge badge-success"
+                        shipOrderBtn.remove()
+                        document.getElementById("dateShipped-" + data.id).innerHTML = data.dateShipped
+
+                      })
+                      .catch(error => {
+                        console.error('Error:', error);
+                      });
+                })
+            })
+        }
+    })
     
     
 }

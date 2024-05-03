@@ -27,19 +27,19 @@
                   <td th:text="${order.customer.name}">John Doe</td>
                   <td th:text="${order.customer.number} + ' ' + ${order.customer.street} + ', ' + ${order.customer.city} + ', ' + ${order.customer.country}">123 Main St, City, Country</td>
                   <td th:text="${order.date}">2022-04-25</td>
-                  <td></td>
+                  <td th:text="${order.dateShipped}" th:id="'dateShipped-' + ${order.id}"></td>
                   <td>
                     <button th:id="${order.id}" type="button" class="btn btn-primary getSingleOrderDashBoard" data-toggle="modal" data-target="#orderModal">
                       View Order
                     </button>
                   </td>
                   <td>
-                    <span th:class="${order.status} ? 'badge badge-success' : 'badge badge-primary'">
+                    <span th:class="${order.status} ? 'badge badge-success' : 'badge badge-primary'" th:id="'status-' + ${order.id}">
                       <span th:text="${order.status} ? 'Shipped' : 'Pending'">Pending</span>
                     </span>
                   </td>
                   <td>
-                    <button class="btn btn-success btn-sm">Ship</button>
+                    <button class="btn btn-success btn-sm shipOrder" th:id="${order.id}" th:if="${order.status == false}">Ship</button>
                   </td>
                 </tr>
               </tbody>

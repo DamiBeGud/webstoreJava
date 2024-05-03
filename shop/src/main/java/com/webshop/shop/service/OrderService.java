@@ -18,4 +18,6 @@ public interface OrderService {
     List<OrderCompanyDto> getCompanyOrders();
 
     OrderCompanyDto getCompanyOrder(int id);
+
+    OrderCompanyDto shipOrder(int orderId);
 }
