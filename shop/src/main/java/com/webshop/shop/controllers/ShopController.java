@@ -63,8 +63,38 @@ public class ShopController {
     }
 
     @GetMapping("/shop")
-    public String getProducts(Model model) {
-        model.addAttribute("products", productService.getAllProductsShop());
+    public String getProducts(Model model,
+            @RequestParam(required = false, name = "category") Integer categoryId,
+            @RequestParam(required = false, name = "sort") String sortString,
+            @RequestParam(required = false, name = "subcategory") Integer subCategoryId,
+            @RequestParam(required = false, name = "from") Double from,
+            @RequestParam(required = false, name = "to") Double to) {
+        List<ProductDto> products;
+
+        if (categoryId == null && subCategoryId == null) {
+            products = productService.getAllProductsShop();
+        } else {
+            if (categoryId != null) {
+                products = productService.getProductsByCategory(categoryId);
+            } else {
+                products = productService.getProductsBySubCategory(subCategoryId);
+            }
+        }
+        if (sortString != null) {
+            products = productService.sortProducts(sortString, products);
+        }
+        if (from != null || to != null) {
+            if (from == null) {
+                from = 0.0;
+            }
+            if (to == null) {
+                to = 10000.0;
+            }
+            products = productService.filterProducts(from, to, products);
+        }
+
+        model.addAttribute("products", products);
+
         model.addAttribute("category", categorysService.getAllCategorys());
         model.addAttribute("subCategory", categorysService.getAllSubCategorys());
         String email = SecurityUtil.getSessionUser();
@@ -82,23 +112,6 @@ public class ShopController {
     public String getSearchProducts(Model model, @RequestParam("search") String searchString) {
 
         model.addAttribute("products", productService.searchForProducts(searchString));
-        model.addAttribute("category", categorysService.getAllCategorys());
-        model.addAttribute("subCategory", categorysService.getAllSubCategorys());
-        String email = SecurityUtil.getSessionUser();
-        if (email != null) {
-            model.addAttribute("user", userService.getUser());
-            Cart cart = cartService.getCart();
-            model.addAttribute("cart", cart);
-            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
-        }
-
-        return "allProducts";
-    }
-
-    @GetMapping("/shop/category")
-    public String getCategoryProducts(Model model, @RequestParam("category") int categoryId) {
-
-        model.addAttribute("products", productService.getProductsByCategory(categoryId));
         model.addAttribute("category", categorysService.getAllCategorys());
         model.addAttribute("subCategory", categorysService.getAllSubCategorys());
         String email = SecurityUtil.getSessionUser();

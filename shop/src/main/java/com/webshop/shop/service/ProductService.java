@@ -37,4 +37,8 @@ public interface ProductService {
 
     List<ProductDto> searchForProducts(String searcString);
 
+    List<ProductDto> sortProducts(String sortBy, List<ProductDto> products);
+
+    List<ProductDto> filterProducts(double from, double to, List<ProductDto> products);
+
 }

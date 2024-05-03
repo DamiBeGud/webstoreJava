@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -292,4 +294,51 @@ public class ProductServiceImpl implements ProductService {
         return productDtos;
     }
 
+    @Override
+    public List<ProductDto> sortProducts(String sortBy, List<ProductDto> products) {
+        switch (sortBy) {
+            case "priceAscending":
+                sortByPriceAscending(products);
+                break;
+            case "priceDescending":
+                sortByPriceDescending(products);
+                break;
+            case "nameAZ":
+                sortByNameAZ(products);
+                break;
+            case "nameZA":
+                sortByNameZA(products);
+                break;
+
+        }
+        return products;
+    }
+
+    private static List<ProductDto> sortByPriceAscending(List<ProductDto> products) {
+        Collections.sort(products, Comparator.comparing(ProductDto::getPrice));
+        return products;
+    }
+
+    private static List<ProductDto> sortByPriceDescending(List<ProductDto> products) {
+        Collections.sort(products, Comparator.comparing(ProductDto::getPrice).reversed());
+        return products;
+    }
+
+    private static List<ProductDto> sortByNameAZ(List<ProductDto> products) {
+        Collections.sort(products, Comparator.comparing(ProductDto::getName));
+        return products;
+    }
+
+    private static List<ProductDto> sortByNameZA(List<ProductDto> products) {
+        Collections.sort(products, Comparator.comparing(ProductDto::getName).reversed());
+        return products;
+    }
+
+    @Override
+    public List<ProductDto> filterProducts(double from, double to, List<ProductDto> products) {
+
+        List<ProductDto> filteredProducts = products.stream()
+                .filter(product -> product.getPrice() >= from && product.getPrice() <= to).collect(Collectors.toList());
+        return filteredProducts;
+    }
 }

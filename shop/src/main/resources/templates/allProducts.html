@@ -32,14 +32,14 @@
                          data-parent="#accordion">
                       <div class="card-body">
                         <ul>
-                          <li><a th:href="'http://localhost:8080/shop/category?category=' + ${category.id}"     
+                          <li><a th:href="'http://localhost:8080/shop?category=' + ${category.id}"     
                                  style="color:#ff9900;">
                                 <span>All <span th:text="${category.name}"></span></span>
                                 </a>
                           </li>
                           <div  th:each="subcategory : ${subCategory}">
                             <div th:if="${subcategory.categoryId == category.id}">
-                              <li><a th:href="'http://localhost:8080/shop/subcategory?subcategory=' + ${subcategory.id}"
+                              <li><a th:href="'http://localhost:8080/shop?subcategory=' + ${subcategory.id}"
                                      th:text="${subcategory.name}"
                                      style="color:#ff9900;">
                                  Smartphones
@@ -55,7 +55,31 @@
               </div>
             </div>
           </div>
-          
+          <h2>Sort</h2>
+          <div class="form-group">
+            <ul>
+              <li><a href="?sort=priceUp" class="sort" id="priceAscending" style="color:#ff9900;">Price ascending</a></li>
+              <li><a href="?sort=priceUp" class="sort" id="priceDescending" style="color:#ff9900;">Price descending</a></li>
+              <li><a href="?sort=priceUp" class="sort" id="nameAZ" style="color:#ff9900;">Name A-Z</a></li>
+              <li><a href="?sort=priceUp" class="sort" id="nameZA" style="color:#ff9900;">Name Z-A</a></li>
+              <script>
+                let sort = document.querySelectorAll(".sort")
+                let currentUrl = window.location.href;
+                let prevSort;
+                sort.forEach(sort => {
+                  if(currentUrl.includes("?")){
+                    if(currentUrl.includes("sort")){
+                      sort.setAttribute('href', currentUrl.replace(/sort=[^&]*/g, "sort=" + sort.id))
+                    }else{
+                      sort.setAttribute('href',currentUrl + "&sort=" + sort.id)
+                    }
+                  }else{
+                    sort.setAttribute('href',currentUrl + "?sort=" + sort.id)
+                  }
+                })
+              </script>
+            </ul>
+          </div>
           <h2>Filters</h2>
           <div class="form-group">
             <label for="priceRange">Price Range:</label>
@@ -66,27 +90,36 @@
               </div>
               <input type="text" class="form-control" id="endPrice" placeholder="Ending Price">
             </div>
-          </div>
-          <div class="form-group">
-            <label for="brandSelect">Brand:</label>
-            <select class="form-control" id="brandSelect">
-              <option>Select Brand</option>
-              <option>Brand 1</option>
-              <option>Brand 2</option>
-              <option>Brand 3</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Rating:</label>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="rating1">
-              <label class="form-check-label" for="rating1">1 Star</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="rating2">
-              <label class="form-check-label" for="rating2">2 Stars</label>
-            </div>
-            <!-- Additional rating options can be added here -->
+            <a href="" class="btn btn-primary" id="applyFilters" style="margin-top: 10px;">Apply filters</a>
+            <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                  let startPrice = document.getElementById("startPrice");
+                  let endPrice = document.getElementById("endPrice");
+                  let applyFilters = document.getElementById('applyFilters')
+                  let currentUrl = window.location.href;
+                  startPrice.addEventListener("input", () => {
+                      endPrice.value = parseInt(startPrice.value) + 1
+                      if(currentUrl.includes("from") || currentUrl.includes("to")){
+                        applyFilters.setAttribute('href', 
+                          currentUrl.replace(/from=[^&]*/g, "from=" + startPrice.value)
+                                    .replace(/to=[^&]*/g, "to=" + endPrice.value))
+                      }else{
+                        applyFilters.setAttribute("href", `
+                          ${currentUrl}?from=${startPrice.value}&to=${endPrice.value}
+                        `);
+                      }
+                  });
+              
+                  endPrice.addEventListener("input", ()=>{
+                    if(currentUrl.includes("to")){
+                      applyFilters.setAttribute("href", applyFilters.getAttribute("href").replace(/to=[^&]*/g, "to=" + endPrice.value))
+                    }else{
+                      applyFilters.setAttribute("href", "?to=" + endPrice.value)
+                    }
+                  })
+                  
+                });             
+            </script>
           </div>
         </div>
       </div>
