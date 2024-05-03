@@ -12,6 +12,7 @@ import com.webshop.shop.dto.CartDto;
 import com.webshop.shop.dto.CartProductDto;
 import com.webshop.shop.dto.ProductDto;
 import com.webshop.shop.exceptions.ProductNotFoundException;
+import com.webshop.shop.exceptions.UpdateQtyException;
 import com.webshop.shop.models.Cart;
 import com.webshop.shop.models.CartProduct;
 import com.webshop.shop.models.Product;
@@ -25,20 +26,21 @@ import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.ProductService;
 
 @Service
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
 
     private CartRepository cartRepository;
     private CartProductRepository cartProductRepository;
     private UserRepository userRepository;
     private ProductRepository productRepository;
     private ProductService productService;
+
     @Autowired
     public CartServiceImpl(
-        ProductRepository productRepository,
-        CartRepository cartRepository,
-        CartProductRepository cartProductRepository,
-        UserRepository userRepository,
-        ProductService productService) {
+            ProductRepository productRepository,
+            CartRepository cartRepository,
+            CartProductRepository cartProductRepository,
+            UserRepository userRepository,
+            ProductService productService) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
         this.cartProductRepository = cartProductRepository;
@@ -57,7 +59,7 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public Cart getCart() {
-        
+
         String email = SecurityUtil.getSessionUser();
         UserEntity user = userRepository.findByEmail(email);
         int id = user.getId();
@@ -66,21 +68,21 @@ public class CartServiceImpl implements CartService{
 
         Cart cart = new Cart();
 
-        if(carts.size() > 0){
-           Optional<Cart> foundCart = carts.stream().filter(c -> c.getActive() == true).findFirst();
-           if(foundCart.isPresent()){
-            cart.setId(foundCart.get().getId());
-            cart.setUserId(foundCart.get().getUserId());
-            cart.setCart(foundCart.get().getCart());
-            cart.setActive(foundCart.get().getActive());
-           }else{
-            Cart newCart = createCart(id);
-            cart.setId(newCart.getId());
-            cart.setUserId(newCart.getUserId());
-            cart.setActive(newCart.getActive());
-            cart.setCart(newCart.getCart());
-           }
-        }else{
+        if (carts.size() > 0) {
+            Optional<Cart> foundCart = carts.stream().filter(c -> c.getActive() == true).findFirst();
+            if (foundCart.isPresent()) {
+                cart.setId(foundCart.get().getId());
+                cart.setUserId(foundCart.get().getUserId());
+                cart.setCart(foundCart.get().getCart());
+                cart.setActive(foundCart.get().getActive());
+            } else {
+                Cart newCart = createCart(id);
+                cart.setId(newCart.getId());
+                cart.setUserId(newCart.getUserId());
+                cart.setActive(newCart.getActive());
+                cart.setCart(newCart.getCart());
+            }
+        } else {
             Cart newCart = createCart(id);
             cart.setId(newCart.getId());
             cart.setUserId(newCart.getUserId());
@@ -88,14 +90,14 @@ public class CartServiceImpl implements CartService{
             cart.setCart(newCart.getCart());
         }
         System.out.println(cart);
-     return cart;   
+        return cart;
     }
-
 
     @Override
     public void addProductToCart(int userId, int cartId, int productId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow();
-        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product was not found"));
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("Product was not found"));
 
         CartProduct cartProduct = new CartProduct();
         cartProduct.setCompanyId(product.getUserId());
@@ -123,7 +125,7 @@ public class CartServiceImpl implements CartService{
             return cartProductDto;
         }).collect(Collectors.toList());
         double total = 0;
-        for(CartProductDto cartProductDto :cartProductDtos){
+        for (CartProductDto cartProductDto : cartProductDtos) {
             double price = cartProductDto.getPrice();
             total = total + price;
         }
@@ -134,8 +136,7 @@ public class CartServiceImpl implements CartService{
         return cartDto;
     }
 
-
-    private CartDto mapToDtoCart(Cart cart){
+    private CartDto mapToDtoCart(Cart cart) {
         CartDto cartDto = new CartDto();
         cartDto.setId(cart.getId());
         cartDto.setActive(cart.getActive());
@@ -143,26 +144,27 @@ public class CartServiceImpl implements CartService{
         cartDto.setUserId(cart.getUserId());
         return cartDto;
     }
-    private CartProductDto productDtoToCartProductDto(ProductDto productDto){
+
+    private CartProductDto productDtoToCartProductDto(ProductDto productDto) {
         CartProductDto cartProductDto = new CartProductDto();
         cartProductDto.setProductId(productDto.getId());
         cartProductDto.setName(productDto.getName());
         cartProductDto.setCompanyId(productDto.getUserId());
         cartProductDto.setImage(productDto.getImage());
-        if(productDto.getDiscount()){
+        if (productDto.getDiscount()) {
             cartProductDto.setPrice(productDto.getDiscountPrice());
-        }else{
+        } else {
             cartProductDto.setPrice(productDto.getPrice());
         }
         return cartProductDto;
     }
 
     @Override
-    public int removeProductFromCart(int cartId,int cartProductId) {
+    public int removeProductFromCart(int cartId, int cartProductId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow();
         System.out.println("Cart remove:" + cart);
         List<CartProduct> cartProducts = cart.getCart();
-    
+
         cartProducts.removeIf(cp -> cp.getId() == cartProductId);
         cart.setCart(cartProducts);
         cartRepository.save(cart);
@@ -181,16 +183,21 @@ public class CartServiceImpl implements CartService{
     @Override
     public CartProductDto updateQty(int cartProductId, int qty) {
         CartProduct cartProduct = cartProductRepository.findById(cartProductId).orElseThrow();
+        Product checkProduct = productRepository.findById(cartProduct.getProductId())
+                .orElseThrow(() -> new ProductNotFoundException("Product Not Found"));
+        if (checkProduct.getStock() < qty) {
+            throw new UpdateQtyException("Maximal Qty is" + checkProduct.getStock());
+        }
         CartProductDto cartProductDto = new CartProductDto();
         cartProduct.setQty(qty);
         cartProductRepository.save(cartProduct);
 
         double updatedPrice = 0;
-        
+
         ProductDto product = productService.getOneProductById(cartProduct.getProductId());
-        if(product.getDiscount() == true){
+        if (product.getDiscount() == true) {
             updatedPrice = product.getDiscountPrice() * qty;
-        }else{
+        } else {
             updatedPrice = product.getPrice() * qty;
         }
 

@@ -112,8 +112,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 let productsInCartNumber = parseInt(productsInCart.innerHTML);
                 productsInCartNumber -= 1;
                 productsInCart.innerHTML = productsInCartNumber;
+                let removedPrice = parseFloat(document.getElementById('summaryPrice-' + data).innerHTML);
                 document.getElementById('productCard-' + data).remove();
                 document.getElementById('cartSummery-' + data).remove();
+                let totalSUmmeryPrice = document.getElementById('totalSummary');
+                totalSUmmeryPrice.innerHTML = parseFloat(totalSUmmeryPrice.innerHTML) - removedPrice;
                 toast("success","Product removed from cart")
             })
             .catch(error => {
@@ -141,7 +144,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
 
             })
-            .then(response => response.json())
+            .then(response => {
+                if(!response.ok){
+                    throw new Error("Response was not ok");
+                }
+                return response.json()})
             .then(data=>{
                 console.log('qty data' + data.id + data.qty + data.price)
                 const cardPrice = document.getElementById('productCardPrice-' + data.id);
@@ -156,9 +163,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 totlaSummeryNum = totlaSummeryNum + data.price - summeryPriceNum;
                 totalSummery.innerHTML = "";
                 totalSummery.innerHTML = totlaSummeryNum
+                let alert = document.getElementById("qtyErrorMessage");
+                alert.innerHTML = "";
+                alert.classList=""
             })
             .catch(error => {
                 console.error('Request failed', error);
+                let alert = document.getElementById("qtyErrorMessage");
+                alert.innerHTML = "Selected quantity is not in stock!";
+                alert.classList="alert alert-danger"
             });
         });
     });

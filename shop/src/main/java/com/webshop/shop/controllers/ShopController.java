@@ -125,23 +125,6 @@ public class ShopController {
         return "allProducts";
     }
 
-    @GetMapping("/shop/subcategory")
-    public String getSubCategoryProducts(Model model, @RequestParam("subcategory") int subCategoryId) {
-
-        model.addAttribute("products", productService.getProductsBySubCategory(subCategoryId));
-        model.addAttribute("category", categorysService.getAllCategorys());
-        model.addAttribute("subCategory", categorysService.getAllSubCategorys());
-        String email = SecurityUtil.getSessionUser();
-        if (email != null) {
-            model.addAttribute("user", userService.getUser());
-            Cart cart = cartService.getCart();
-            model.addAttribute("cart", cart);
-            model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
-        }
-
-        return "allProducts";
-    }
-
     @GetMapping("/product/{id}")
     public String getProduct(@PathVariable int id, Model model) {
         model.addAttribute("product", productService.getOneProductById(id));

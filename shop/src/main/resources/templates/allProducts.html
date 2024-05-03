@@ -1,169 +1,176 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="layouts/defaultLayout">
+
 <body>
   <div layout:fragment="content">
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar with categories and filters -->
-      <div class="col-md-3">
-        <div class="sidebar">
-          <h2>Categories</h2>
-          <div class="container">
-            <div id="accordion">
-              <div class="row">
-                <div class="col">
-                  <div class="card" th:each="category : ${category}" style="border:none;">
-                    <div class="card-header" th:id="'electronicsHeading_' + ${category.id}">
-                      <h5 class="mb-0">
-                        <button th:text="${category.name}" 
-                                class="btn btn-link accordion-link"
-                                style="color:#ff9900;"
-                                data-toggle="collapse"
-                                th:data-target="'#electronicsCollapse_' + ${category.id}" 
-                                aria-expanded="true" 
-                                th:aria-controls="'electronicsCollapse_' + ${category.id}">
-                          Electronics
-                        </button>
-                      </h5>
-                    </div>
-                    <div th:id="'electronicsCollapse_' + ${category.id}"
-                         class="collapse" 
-                         aria-labelledby="'electronicsHeading_' + ${category.id}" 
-                         data-parent="#accordion">
-                      <div class="card-body">
-                        <ul>
-                          <li><a th:href="'http://localhost:8080/shop?category=' + ${category.id}"     
-                                 style="color:#ff9900;">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar with categories and filters -->
+        <div class="col-md-3">
+          <div class="sidebar">
+            <h2>Categories</h2>
+            <div class="container">
+              <div id="accordion">
+                <div class="row">
+                  <div class="col">
+                    <div class="card" th:each="category : ${category}" style="border:none;">
+                      <div class="card-header" th:id="'electronicsHeading_' + ${category.id}">
+                        <h5 class="mb-0">
+                          <button th:text="${category.name}" class="btn btn-link accordion-link" style="color:#ff9900;"
+                            data-toggle="collapse" th:data-target="'#electronicsCollapse_' + ${category.id}"
+                            aria-expanded="true" th:aria-controls="'electronicsCollapse_' + ${category.id}">
+                            Electronics
+                          </button>
+                        </h5>
+                      </div>
+                      <div th:id="'electronicsCollapse_' + ${category.id}" class="collapse"
+                        aria-labelledby="'electronicsHeading_' + ${category.id}" data-parent="#accordion">
+                        <div class="card-body">
+                          <ul>
+                            <li><a th:href="'http://localhost:8080/shop?category=' + ${category.id}"
+                                style="color:#ff9900;">
                                 <span>All <span th:text="${category.name}"></span></span>
-                                </a>
-                          </li>
-                          <div  th:each="subcategory : ${subCategory}">
-                            <div th:if="${subcategory.categoryId == category.id}">
-                              <li><a th:href="'http://localhost:8080/shop?subcategory=' + ${subcategory.id}"
-                                     th:text="${subcategory.name}"
-                                     style="color:#ff9900;">
-                                 Smartphones
-                                </a>
-                              </li>
+                              </a>
+                            </li>
+                            <div th:each="subcategory : ${subCategory}">
+                              <div th:if="${subcategory.categoryId == category.id}">
+                                <li><a th:href="'http://localhost:8080/shop?subcategory=' + ${subcategory.id}"
+                                    th:text="${subcategory.name}" style="color:#ff9900;">
+                                    Smartphones
+                                  </a>
+                                </li>
+                              </div>
                             </div>
-                          </div>
-                        </ul>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <h2>Sort</h2>
-          <div class="form-group">
-            <ul>
-              <li><a href="?sort=priceUp" class="sort" id="priceAscending" style="color:#ff9900;">Price ascending</a></li>
-              <li><a href="?sort=priceUp" class="sort" id="priceDescending" style="color:#ff9900;">Price descending</a></li>
-              <li><a href="?sort=priceUp" class="sort" id="nameAZ" style="color:#ff9900;">Name A-Z</a></li>
-              <li><a href="?sort=priceUp" class="sort" id="nameZA" style="color:#ff9900;">Name Z-A</a></li>
-              <script>
-                let sort = document.querySelectorAll(".sort")
-                let currentUrl = window.location.href;
-                let prevSort;
-                sort.forEach(sort => {
-                  if(currentUrl.includes("?")){
-                    if(currentUrl.includes("sort")){
-                      sort.setAttribute('href', currentUrl.replace(/sort=[^&]*/g, "sort=" + sort.id))
-                    }else{
-                      sort.setAttribute('href',currentUrl + "&sort=" + sort.id)
+            <h2>Sort</h2>
+            <div class="form-group">
+              <ul>
+                <li><a href="?sort=priceUp" class="sort" id="priceAscending" style="color:#ff9900;">Price ascending</a>
+                </li>
+                <li><a href="?sort=priceUp" class="sort" id="priceDescending" style="color:#ff9900;">Price
+                    descending</a></li>
+                <li><a href="?sort=priceUp" class="sort" id="nameAZ" style="color:#ff9900;">Name A-Z</a></li>
+                <li><a href="?sort=priceUp" class="sort" id="nameZA" style="color:#ff9900;">Name Z-A</a></li>
+                <script>
+                  let sort = document.querySelectorAll(".sort")
+                  let currentUrl = window.location.href;
+                  let prevSort;
+                  sort.forEach(sort => {
+                    if (currentUrl.includes("?")) {
+                      if (currentUrl.includes("sort")) {
+                        sort.setAttribute('href', currentUrl.replace(/sort=[^&]*/g, "sort=" + sort.id))
+                      } else {
+                        sort.setAttribute('href', currentUrl + "&sort=" + sort.id)
+                      }
+                    } else {
+                      sort.setAttribute('href', currentUrl + "?sort=" + sort.id)
                     }
-                  }else{
-                    sort.setAttribute('href',currentUrl + "?sort=" + sort.id)
-                  }
-                })
-              </script>
-            </ul>
-          </div>
-          <h2>Filters</h2>
-          <div class="form-group">
-            <label for="priceRange">Price Range:</label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="startPrice" placeholder="Starting Price">
-              <div class="input-group-prepend">
-                <span class="input-group-text">to</span>
-              </div>
-              <input type="text" class="form-control" id="endPrice" placeholder="Ending Price">
+                  })
+                </script>
+              </ul>
             </div>
-            <a href="" class="btn btn-primary" id="applyFilters" style="margin-top: 10px;">Apply filters</a>
-            <script>
-              document.addEventListener("DOMContentLoaded", function() {
+            <h2>Filters</h2>
+            <div class="form-group">
+              <label for="priceRange">Price Range:</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="startPrice" placeholder="Starting Price">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">to</span>
+                </div>
+                <input type="text" class="form-control" id="endPrice" placeholder="Ending Price">
+              </div>
+              <a href="" class="btn btn-primary" id="applyFilters" style="margin-top: 10px;">Apply filters</a>
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
                   let startPrice = document.getElementById("startPrice");
                   let endPrice = document.getElementById("endPrice");
                   let applyFilters = document.getElementById('applyFilters')
                   let currentUrl = window.location.href;
                   startPrice.addEventListener("input", () => {
-                      endPrice.value = parseInt(startPrice.value) + 1
-                      if(currentUrl.includes("from") || currentUrl.includes("to")){
-                        applyFilters.setAttribute('href', 
-                          currentUrl.replace(/from=[^&]*/g, "from=" + startPrice.value)
-                                    .replace(/to=[^&]*/g, "to=" + endPrice.value))
-                      }else{
-                        applyFilters.setAttribute("href", `
+                    endPrice.value = parseInt(startPrice.value) + 1
+                    if (currentUrl.includes("from") || currentUrl.includes("to")) {
+                      applyFilters.setAttribute('href',
+                        currentUrl.replace(/from=[^&]*/g, "from=" + startPrice.value)
+                          .replace(/to=[^&]*/g, "to=" + endPrice.value))
+                    } else {
+                      applyFilters.setAttribute("href", `
                           ${currentUrl}?from=${startPrice.value}&to=${endPrice.value}
                         `);
-                      }
+                    }
                   });
-              
-                  endPrice.addEventListener("input", ()=>{
-                    if(currentUrl.includes("to")){
+
+                  endPrice.addEventListener("input", () => {
+                    if (currentUrl.includes("to")) {
                       applyFilters.setAttribute("href", applyFilters.getAttribute("href").replace(/to=[^&]*/g, "to=" + endPrice.value))
-                    }else{
+                    } else {
                       applyFilters.setAttribute("href", "?to=" + endPrice.value)
                     }
                   })
-                  
+
                 });             
-            </script>
+              </script>
+            </div>
           </div>
         </div>
-      </div>
 
 
-      <!-- Main content area to display products -->
-      <div class="col-md-9 p-4">
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4" th:each="product : ${products}">
-            <div class="product-card" style="min-height: 100%;">
-              <div class="card h-100" style="border: none;">
-                <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
-                  <img th:src="@{${product.image}}" class="card-img-top img-fluid" alt="Product Image">
-                </a>
-                <div class="card-body d-flex flex-column" style="min-height: 100%;">
+        <!-- Main content area to display products -->
+        <div class="col-md-9 p-4">
+          <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4" th:each="product : ${products}">
+              <div class="product-card" style="min-height: 100%;">
+                <div class="card h-100" style="border: none;">
                   <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
-                    <h5 class="card-title mb-0" style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0;" th:text="${product.name}">Product 1</h5>
-                    <p class="card-text rating-class" th:id="${product.rating}" style="margin-bottom: 0;">Rating:</p>
-                    <p class="card-text" th:if="${!product.discount}" style="margin-bottom: 0;">$<span th:text="${product.price}"></span></p>
-                    <p class="card-text" th:if="${product.discount}" style="margin-bottom: 0;">
-                      $<span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
-                      <span th:text="${product.discountPrice}"></span>
-                    </p>
-                    <p class="card-text" style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0;" th:text="${product.description}"></p>
+                    <img th:src="@{${product.image}}" class="card-img-top img-fluid" alt="Product Image">
                   </a>
-                  <br>
+                  <div class="card-body d-flex flex-column" style="min-height: 100%;">
+                    <a th:href="@{'/product/' + ${product.id}}" class="product-card-link">
+                      <h5 class="card-title mb-0"
+                        style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0;"
+                        th:text="${product.name}">Product 1</h5>
+                      <p class="card-text rating-class" th:id="${product.rating}" style="margin-bottom: 0;">Rating:</p>
+                      <p class="card-text" th:if="${!product.discount}" style="margin-bottom: 0;">$<span
+                          th:text="${product.price}"></span></p>
+                      <p class="card-text" th:if="${product.discount}" style="margin-bottom: 0;">
+                        $<span class="crossed-out-text" style="color: red; text-decoration: line-through;"
+                          th:text="${product.price}">$50.00</span>
+                        <span th:text="${product.discountPrice}"></span>
+                      </p>
+                      <p class="card-text"
+                        style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0;"
+                        th:text="${product.description}"></p>
+                    </a>
+                    <br>
+                  </div>
                 </div>
+                <div style="position: absolute; bottom: 0px; padding: 20px;">
+                  <div th:if="${product.stock > 0}">
+                      <button sec:authorize="isAuthenticated()"
+                              th:id="'http://localhost:8080/api/v1/user/' + ${user.id} + '/cart/' + ${cart.id} + '/add/' + ${product.id}"
+                              class="btn btn-primary addProductToCart" style="width: 100%;">Add to Cart
+                      </button>
+                      <div th:unless="${#authorization.expression('isAuthenticated()')}">
+                          <a href="/login" class="btn btn-secondary mt-2" style="width: 100%;">Log in to purchase</a>
+                      </div>
+                  </div>
+                  <div th:unless="${product.stock > 0}">
+                      <p class="text-danger">Out of stock</p>
+                  </div>
               </div>
-              <div style="position: absolute; bottom: 0px; padding: 20px;">
-                <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart" style="width: 100%;">Add to Cart</button>
-                <div th:unless="${#authorization.expression('isAuthenticated()')}">
-                  <a href="/login" class="btn btn-secondary mt-2" style="width: 100%;">Log in to purchase</a>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      
-      
-      
     </div>
   </div>
-</div>
 </body>
+
 </html>
