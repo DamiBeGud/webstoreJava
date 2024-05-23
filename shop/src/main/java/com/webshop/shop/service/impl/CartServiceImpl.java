@@ -25,6 +25,8 @@ import com.webshop.shop.security.SecurityUtil;
 import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.ProductService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -219,6 +221,15 @@ public class CartServiceImpl implements CartService {
     public Cart getCartForOrderService(int userId, Boolean active) {
         Cart cart = cartRepository.findFirstByUserIdAndActive(userId, active);
         return cart;
+    }
+
+    @Override
+    @Transactional
+    public void removeDiscontinuedProductFromCarts(int productId) {
+        List<CartProduct> cartProducts = cartProductRepository.findAllByProductId(productId);
+        for (CartProduct product : cartProducts) {
+            cartRepository.deleteAllByCartProductId(product.getId());
+        }
     }
 
 }

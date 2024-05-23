@@ -22,4 +22,6 @@ public interface CartService {
     void deactivateCart(int cartId);
 
     Cart getCartForOrderService(int userId, Boolean active);
+
+    void removeDiscontinuedProductFromCarts(int productId);
 }

@@ -3,19 +3,14 @@ package com.webshop.shop.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.webshop.shop.dto.ProductDto;
 import com.webshop.shop.models.Cart;
-import com.webshop.shop.models.UserEntity;
-import com.webshop.shop.repository.UserRepository;
 import com.webshop.shop.security.SecurityUtil;
 import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.CategorysService;
@@ -69,31 +64,13 @@ public class ShopController {
             @RequestParam(required = false, name = "subcategory") Integer subCategoryId,
             @RequestParam(required = false, name = "from") Double from,
             @RequestParam(required = false, name = "to") Double to) {
-        List<ProductDto> products;
 
-        if (categoryId == null && subCategoryId == null) {
-            products = productService.getAllProductsShop();
-        } else {
-            if (categoryId != null) {
-                products = productService.getProductsByCategory(categoryId);
-            } else {
-                products = productService.getProductsBySubCategory(subCategoryId);
-            }
-        }
-        if (sortString != null) {
-            products = productService.sortProducts(sortString, products);
-        }
-        if (from != null || to != null) {
-            if (from == null) {
-                from = 0.0;
-            }
-            if (to == null) {
-                to = 10000.0;
-            }
-            products = productService.filterProducts(from, to, products);
-        }
-
-        model.addAttribute("products", products);
+        model.addAttribute("products", filterChain(
+                categoryId,
+                sortString,
+                subCategoryId,
+                from,
+                to));
 
         model.addAttribute("category", categorysService.getAllCategorys());
         model.addAttribute("subCategory", categorysService.getAllSubCategorys());
@@ -176,6 +153,37 @@ public class ShopController {
             model.addAttribute("productsInCart", cartService.getNumberOfProductsInCart());
         }
         return "termsAndConditions";
+    }
+
+    private List<ProductDto> filterChain(
+            Integer categoryId,
+            String sortString,
+            Integer subCategoryId,
+            Double from,
+            Double to) {
+        List<ProductDto> products;
+        if (categoryId == null && subCategoryId == null) {
+            products = productService.getAllProductsShop();
+        } else {
+            if (categoryId != null) {
+                products = productService.getProductsByCategory(categoryId);
+            } else {
+                products = productService.getProductsBySubCategory(subCategoryId);
+            }
+        }
+        if (sortString != null) {
+            products = productService.sortProducts(sortString, products);
+        }
+        if (from != null || to != null) {
+            if (from == null) {
+                from = 0.0;
+            }
+            if (to == null) {
+                to = 10000.0;
+            }
+            products = productService.filterProducts(from, to, products);
+        }
+        return products;
     }
 
 }

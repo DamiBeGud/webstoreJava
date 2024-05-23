@@ -26,4 +26,5 @@ public class Product {
     private int subCategory;
     private Boolean discount = false;
     private double discountPrice;
+    private Boolean discontinued = false;
 }

@@ -22,7 +22,7 @@
           <th>Sub category</th>
           <th>Edit Product</th>
           <th>Add Stock</th>
-          <th>Delete</th>
+          <th>Discontinued</th>
         </tr>
       </thead>
       <tbody>
@@ -45,9 +45,32 @@
           <th:block th:each="subCategory : ${subCategoryList}" th:if="${subCategory.id == product.subCategory}">
             <td th:text="${subCategory.name}">Laptop</td>
           </th:block>
-          <td><button class="btn btn-primary editProduct" data-toggle="collapse" data-target="#editProductCollapse" th:id="${product.id}">Edit</button></td>
-          <td><button class="btn btn-secondary addStock" data-toggle="collapse" data-target="#editAmountCollapse" th:id="${product.id}">Add</button></td>
-          <td><button class="btn btn-danger">Delete</button></td>
+          <td>
+            <div th:if="${product.discontinued}">
+                <p>Discontinued</p>
+            </div>
+            <div th:if="${!product.discontinued}">
+                <button class="btn btn-primary editProduct" data-toggle="collapse" data-target="#editProductCollapse" th:id="${product.id}">Edit</button>
+            </div>
+        </td>          
+        <td>
+          <div th:if="${product.discontinued}">
+              <p>Discontinued</p>
+          </div>
+          <div th:if="${!product.discontinued}">
+            <button class="btn btn-secondary addStock" data-toggle="collapse" data-target="#editAmountCollapse" th:id="${product.id}">Add</button>
+          </div>
+      </td>
+      <td>
+        <div th:if="${product.discontinued}">
+            <p>Discontinued</p>
+        </div>
+        <div th:if="${!product.discontinued}">
+          <button class="btn btn-danger discontinueProduct" th:id="${product.id}">Discontinue</button>
+        </div>
+    </td>
+          
+          
         </tr>
         <!-- Add more product rows here -->
       </tbody>

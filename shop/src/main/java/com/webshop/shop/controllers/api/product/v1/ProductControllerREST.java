@@ -9,6 +9,7 @@ import com.webshop.shop.dto.ProductDto;
 import com.webshop.shop.dto.request.SearchRequestDto;
 import com.webshop.shop.dto.response.SearchDashboardSearchResponse;
 import com.webshop.shop.models.Product;
+import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.CategorysService;
 import com.webshop.shop.service.ProductService;
 
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,11 +37,14 @@ public class ProductControllerREST {
 
     private ProductService productService;
     private CategorysService categorysService;
+    private CartService cartService;
 
     @Autowired
-    public ProductControllerREST(ProductService productService, CategorysService categorysService) {
+    public ProductControllerREST(ProductService productService, CategorysService categorysService,
+            CartService cartService) {
         this.productService = productService;
         this.categorysService = categorysService;
+        this.cartService = cartService;
     }
 
     @PostMapping("create")
@@ -101,4 +106,11 @@ public class ProductControllerREST {
         return new ResponseEntity<>(searchResults, HttpStatus.OK);
     }
 
+    @DeleteMapping("discontinue/{id}")
+    public ResponseEntity<ProductDto> discontinueProduct(@PathVariable int id) {
+        ProductDto disProductDto = productService.discontinueProduct(id);
+        cartService.removeDiscontinuedProductFromCarts(id);
+
+        return new ResponseEntity<>(disProductDto, HttpStatus.OK);
+    }
 }

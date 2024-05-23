@@ -22,13 +22,14 @@
                 <span th:text="${product.discountPrice}"></span>
               </p>
               <br>
-              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
-              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
+              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart" th:if="${product.stock != 0 and !product.discontinued}">Add to Cart</button>
+              <a href="/login" sec:authorize="!isAuthenticated()" th:if="${product.stock != 0 and !product.discontinued}">Log in to add Product to Cart</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
   
     <div class="container mt-5">
       <h2 class="mb-4">Electronics</h2>
@@ -39,24 +40,25 @@
             <div class="card-body">
               <h5 class="card-title" style="max-width: 25ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.name}">Product 1</h5>
               <p class="card-text" style="max-width: 40ch; overflow-wrap: break-word; word-wrap: break-word;" th:text="${product.description}"></p>
-              <p class="card-text" th:if="${!product.discount}">
-                $<span th:text="${product.price}"></span>
-              </p>
+              <p class="card-text" th:if="${product.stock != 0}" th:text="'$' + ${product.price}"></p>
+              <p class="card-text" th:if="${product.stock == 0}" style="color: red;">Out of Stock</p>
+              <p class="card-text" th:if="${product.discontinued}" style="color: orange;">Discontinued</p>
               <p class="card-text" th:if="${product.discount}">
                 $<span class="crossed-out-text" style="color: red; text-decoration: line-through;" th:text="${product.price}">$50.00</span>
                 <span th:text="${product.discountPrice}"></span>
               </p>
               <br>
-              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
-              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
+              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart" th:if="${product.stock != 0 and !product.discontinued}">Add to Cart</button>
+              <a href="/login" sec:authorize="!isAuthenticated()" th:if="${product.stock != 0 and !product.discontinued}">Log in to add Product to Cart</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
 
     <div class="container mt-5">
-      <h2 class="mb-4">	Home & Kitchen</h2>
+      <h2 class="mb-4">Home & Kitchen</h2>
       <div class="product-slider-container">
         <div class="product-card-item" th:each="product : ${homeAndKitchen}">
           <div class="product-card-container">
@@ -72,16 +74,16 @@
                 <span th:text="${product.discountPrice}"></span>
               </p>
               <br>
-              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
-              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
+              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart" th:if="${product.stock != 0 and !product.discontinued}">Add to Cart</button>
+              <a href="/login" sec:authorize="!isAuthenticated()" th:if="${product.stock != 0 and !product.discontinued}">Log in to add Product to Cart</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+    
     <div class="container mt-5">
-      <h2 class="mb-4">	Fashion</h2>
+      <h2 class="mb-4">Fashion</h2>
       <div class="product-slider-container">
         <div class="product-card-item" th:each="product : ${fashion}">
           <div class="product-card-container">
@@ -97,8 +99,8 @@
                 <span th:text="${product.discountPrice}"></span>
               </p>
               <br>
-              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart">Add to Cart</button>
-              <a href="/login" sec:authorize="!isAuthenticated()">Log in to add Product to Cart</a>
+              <button sec:authorize="isAuthenticated()" th:id="'http://localhost:8080/api/v1/user/'+ ${user.id} +'/cart/' + ${cart.id} + '/add/' + ${product.id}" class="btn btn-primary addProductToCart" th:if="${product.stock != 0 and !product.discontinued}">Add to Cart</button>
+              <a href="/login" sec:authorize="!isAuthenticated()" th:if="${product.stock != 0 and !product.discontinued}">Log in to add Product to Cart</a>
             </div>
           </div>
         </div>

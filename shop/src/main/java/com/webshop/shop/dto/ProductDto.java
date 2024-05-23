@@ -17,7 +17,7 @@ public class ProductDto {
     private double discountPrice;
     private int rating;
     private int qty;
-
+    private boolean discontinued;
     // Remove later
     private int cartProductId;
 }

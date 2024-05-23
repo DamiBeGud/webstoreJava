@@ -15,10 +15,23 @@
         <h2 class="mb-3" th:text="${product.name}">Product Name</h2>
         <p th:text="${product.description}">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor dapibus tellus, vel varius nisi vestibulum sed.</p>
         <p>Price: $ <span th:text="${product.price}">99.99</span></p>
-        <p>Amount in Stock: 10</p>
+        <p>Amount in Stock: <span th:text="${product.stock}"></span></p>
         <p class="card-text rating-class" th:id="${product.rating}"> Rating:</p>
         <!-- Add to Cart Button -->
-        <button type="button" class="btn btn-primary mb-4">Add to Cart</button>
+        <div style="position: absolute; bottom: 0px; padding: 20px;">
+          <div th:if="${product.stock == 0}">
+              <p class="text-danger">Out of Stock</p>
+          </div>
+          <div th:if="${product.stock > 0}">
+              <div th:if="${product.discontinued}">
+                  <p class="text-warning" style="color: orange;">Discontinued</p>
+              </div>
+              <div th:unless="${product.discontinued}">
+                  <button type="button" class="btn btn-primary mb-4" sec:authorize="isAuthenticated()">Add to Cart</button>
+              </div>
+          </div>
+      </div>
+      
       </div>
     </div>
   </div>

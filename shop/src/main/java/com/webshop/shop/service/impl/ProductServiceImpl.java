@@ -21,6 +21,7 @@ import com.webshop.shop.dto.ReviewDto;
 import com.webshop.shop.exceptions.ProductNotFoundException;
 import com.webshop.shop.models.Product;
 import com.webshop.shop.repository.ProductRepository;
+import com.webshop.shop.service.CartService;
 import com.webshop.shop.service.ProductService;
 import com.webshop.shop.service.ReviewService;
 
@@ -33,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductServiceImpl(ProductRepository productRepository, ReviewService reviewService) {
         this.productRepository = productRepository;
         this.reviewService = reviewService;
+
     }
 
     @Override
@@ -176,6 +178,7 @@ public class ProductServiceImpl implements ProductService {
         productDto.setDiscount(product.getDiscount());
         productDto.setDiscountPrice(product.getDiscountPrice());
         productDto.setImage(product.getImage());
+        productDto.setDiscontinued(product.getDiscontinued());
         return productDto;
     }
 
@@ -340,5 +343,16 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> filteredProducts = products.stream()
                 .filter(product -> product.getPrice() >= from && product.getPrice() <= to).collect(Collectors.toList());
         return filteredProducts;
+    }
+
+    @Override
+    public ProductDto discontinueProduct(int productId) {
+
+        Product discontinueProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("Product not Found"));
+        discontinueProduct.setDiscontinued(true);
+        productRepository.save(discontinueProduct);
+
+        return mapToDto(discontinueProduct);
     }
 }

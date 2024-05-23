@@ -41,4 +41,6 @@ public interface ProductService {
 
     List<ProductDto> filterProducts(double from, double to, List<ProductDto> products);
 
+    ProductDto discontinueProduct(int productId);
+
 }

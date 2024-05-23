@@ -248,8 +248,38 @@ export function products () {
     }
   }
 
+  document.addEventListener('DOMContentLoaded', () => {
+    let discontinueProductButtons = document.getElementsByClassName('discontinueProduct');
+    for (let button of discontinueProductButtons) {
+      button.addEventListener('click', () => {
+        let productId = button.id;
+        fetch('http://localhost:8080/api/v1/product/discontinue/' + productId, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok')
+            }
+            return response.json()
+          })
+          .then(data => {
+            // Handle successful response
+            console.log('Response:', data)
+          })
+          .catch(error => {
+            // Handle error
+            console.error('Error:', error)
+          })
 
 
+
+      });
+    }
+  });
+  
 
 
 
