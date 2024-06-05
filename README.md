@@ -49,17 +49,38 @@ spring.jpa.hibernate.ddl-auto=update
 
   ```
 Ensure to replace yourpassword with your actual PostgreSQL password
+### 3. Install JavaScript Dependencies and Run Webpack Server
+To manage client-side scripts effectively and take advantage of modern JavaScript frameworks and libraries, our project uses npm to handle dependencies and webpack to bundle JavaScript files.
 
-### 3. Start the Application
+Installing Node.js and npm
+Ensure you have Node.js and npm installed on your system to handle JavaScript dependencies. If not installed:
 
-### 4. Run the Category Setup Script
+- Download and install Node.js from nodejs.org.
+- npm is included with Node.js installation.
+Install Dependencies
+After setting up Node.js and npm, you need to install the project's JavaScript dependencies. These dependencies are defined in a package.json file located in the root of your project. To install these dependencies, run the following command in your js project directory:
+
+```bash
+npm install
+```
+This command reads the package.json file and installs all the necessary packages listed under dependencies and devDependencies.
+
+After installing dependencies run the following command: 
+```bash
+npx webpack
+```
+
+
+### 4. Start the Application
+
+### 5. Run the Category Setup Script
 To populate the database with necessary categories, run the cath.sql script provided in the repository. Execute the script using:
 ```bash
 psql -U postgres -d webshop -a -f path/to/cath.sql
 ```
 Replace path/to/cath.sql with the actual path to the cath.sql script.
 
-### 5. Register a New Company
+### 6. Register a New Company
 After the application starts, open a web browser and navigate to register page
 
 ###6. Add Products
