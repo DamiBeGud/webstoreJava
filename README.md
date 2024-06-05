@@ -21,7 +21,8 @@ Follow these steps to get your application up and running:
 Clone the repository from Discord. You will find the link to the Git repository in the designated Discord channel. Use the following command to clone it:
 
 ```bash
-git clone <repository-url>  ```
+git clone <repository-url>
+```
 
 ### Set Up PostgreSQL
 Install PostgreSQL if it's not already installed. After installation, you need to create a database for the application:
