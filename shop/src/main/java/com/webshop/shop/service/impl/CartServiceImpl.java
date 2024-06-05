@@ -27,6 +27,10 @@ import com.webshop.shop.service.ProductService;
 
 import jakarta.transaction.Transactional;
 
+/**
+ * Provides the implementation of cart service managing user carts and
+ * interactions with products within these carts.
+ */
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -36,6 +40,9 @@ public class CartServiceImpl implements CartService {
     private ProductRepository productRepository;
     private ProductService productService;
 
+    /**
+     * Constructs the cart service with necessary repository and service injections.
+     */
     @Autowired
     public CartServiceImpl(
             ProductRepository productRepository,
@@ -50,6 +57,12 @@ public class CartServiceImpl implements CartService {
         this.productService = productService;
     }
 
+    /**
+     * Creates a new cart for a user based on the user's ID.
+     * 
+     * @param id the user's ID.
+     * @return the newly created cart.
+     */
     @Override
     public Cart createCart(int id) {
         Cart cart = new Cart();
@@ -59,6 +72,12 @@ public class CartServiceImpl implements CartService {
         return newCart;
     }
 
+    /**
+     * Retrieves the current active cart for a session user, creating a new one if
+     * necessary.
+     * 
+     * @return the active cart.
+     */
     @Override
     public Cart getCart() {
 
@@ -95,6 +114,13 @@ public class CartServiceImpl implements CartService {
         return cart;
     }
 
+    /**
+     * Adds a product to the user's cart.
+     * 
+     * @param userId    the user's ID.
+     * @param cartId    the cart's ID.
+     * @param productId the product's ID to add.
+     */
     @Override
     public void addProductToCart(int userId, int cartId, int productId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow();
@@ -111,6 +137,12 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cart);
     }
 
+    /**
+     * Retrieves the shopping cart details as a DTO, including all products within
+     * the cart.
+     * 
+     * @return the detailed cart DTO.
+     */
     @Override
     public CartDto getShopingCart() {
         Cart cart = getCart();
@@ -161,6 +193,13 @@ public class CartServiceImpl implements CartService {
         return cartProductDto;
     }
 
+    /**
+     * Removes a product from the user's cart.
+     * 
+     * @param cartId        the ID of the cart.
+     * @param cartProductId the ID of the cart product to remove.
+     * @return the ID of the removed cart product.
+     */
     @Override
     public int removeProductFromCart(int cartId, int cartProductId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow();
@@ -175,6 +214,11 @@ public class CartServiceImpl implements CartService {
         return cartProductId;
     }
 
+    /**
+     * Returns the number of products in the current session user's cart.
+     * 
+     * @return the count of products in the cart.
+     */
     @Override
     public int getNumberOfProductsInCart() {
         Cart cart = getCart();
@@ -182,6 +226,13 @@ public class CartServiceImpl implements CartService {
         return numberOfProductsInCart;
     }
 
+    /**
+     * Updates the quantity of a product in the cart and recalculates the price.
+     * 
+     * @param cartProductId the ID of the cart product to update.
+     * @param qty           the new quantity.
+     * @return the updated cart product DTO.
+     */
     @Override
     public CartProductDto updateQty(int cartProductId, int qty) {
         CartProduct cartProduct = cartProductRepository.findById(cartProductId).orElseThrow();
@@ -210,6 +261,11 @@ public class CartServiceImpl implements CartService {
         return cartProductDto;
     }
 
+    /**
+     * Deactivates a user's cart, marking it as inactive.
+     * 
+     * @param cartId the ID of the cart to deactivate.
+     */
     @Override
     public void deactivateCart(int cartId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow();
@@ -217,12 +273,26 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cart);
     }
 
+    /**
+     * Retrieves the cart for order processing based on the user ID and activity
+     * status.
+     * 
+     * @param userId the user's ID.
+     * @param active the activity status to filter by.
+     * @return the cart matching the criteria.
+     */
     @Override
     public Cart getCartForOrderService(int userId, Boolean active) {
         Cart cart = cartRepository.findFirstByUserIdAndActive(userId, active);
         return cart;
     }
 
+    /**
+     * Removes all cart products associated with a discontinued product from all
+     * carts.
+     * 
+     * @param productId the ID of the discontinued product.
+     */
     @Override
     @Transactional
     public void removeDiscontinuedProductFromCarts(int productId) {

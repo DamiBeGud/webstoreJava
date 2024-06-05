@@ -34,6 +34,10 @@ import com.webshop.shop.util.TupleInteger;
 
 import jakarta.transaction.Transactional;
 
+/**
+ * Implements the order service, handling business logic associated with user
+ * and company orders.
+ */
 @Service
 public class OrderServiceImpl implements OrderService {
     private OrderUserRepository orderUserRepository;
@@ -62,6 +66,12 @@ public class OrderServiceImpl implements OrderService {
         this.productOrderModelRepository = productOrderModelRepository;
     }
 
+    /**
+     * Creates a new user order based on the current state of the user's cart and
+     * stores it in the database.
+     * 
+     * @return the ID of the newly created user order.
+     */
     @Override
     public int createUserOrder() {
         UserDto user = userService.getUser();
@@ -76,7 +86,11 @@ public class OrderServiceImpl implements OrderService {
         return newOrder.getId();
     }
 
-    // Has to be updated to dto same as users order
+    /**
+     * Creates orders for companies based on the cart's contents.
+     * 
+     * @param cart the cart containing the products to order.
+     */
     @Override
     public void createCompanyOrder(Cart cart) {
         List<Integer> companyIds = cart.getCart().stream().map(product -> {
@@ -115,6 +129,12 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    /**
+     * Converts a product model into a product order model, applying any discounts.
+     * 
+     * @param product the product to convert.
+     * @return the converted product order model.
+     */
     private ProductOrderModel productToOrderProduct(Product product) {
         ProductOrderModel productOrderModel = new ProductOrderModel();
         productOrderModel.setProductid(product.getId());
@@ -142,12 +162,23 @@ public class OrderServiceImpl implements OrderService {
         return orderUserDto;
     }
 
+    /**
+     * Retrieves a user order by ID and converts it into a DTO format.
+     * 
+     * @param orderId the ID of the order to retrieve.
+     * @return the order in DTO format.
+     */
     @Override
     public OrderUserDto getUserOrder(int orderId) {
         OrderUser order = orderUserRepository.findById(orderId).orElseThrow();
         return mapToDtoOrderUser(order);
     }
 
+    /**
+     * Retrieves all orders made by a user and converts them into a list of DTOs.
+     * 
+     * @return a list of all user orders in DTO format.
+     */
     @Override
     public List<OrderUserDto> getUserOrders() {
         UserDto user = userService.getUser();
@@ -190,6 +221,12 @@ public class OrderServiceImpl implements OrderService {
         return productDto;
     }
 
+    /**
+     * Retrieves all company orders made by a user and sorts them by ID in
+     * descending order.
+     * 
+     * @return a sorted list of all company orders in DTO format.
+     */
     @Override
     public List<OrderCompanyDto> getCompanyOrders() {
         UserDto user = userService.getUser();
@@ -218,6 +255,12 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    /**
+     * Converts an OrderCompany entity to its DTO form.
+     * 
+     * @param orderCompany the entity to convert.
+     * @return the converted DTO.
+     */
     @Override
     public OrderCompanyDto getCompanyOrder(int id) {
         System.out.println("ORDER SERVICE ID" + id);
@@ -226,6 +269,13 @@ public class OrderServiceImpl implements OrderService {
         return mapToDtoCompanyOrder(order);
     }
 
+    /**
+     * Ships a company order, setting its status to shipped and recording the
+     * shipment date.
+     * 
+     * @param orderId the ID of the order to ship.
+     * @return the shipped order in DTO format.
+     */
     @Override
     public OrderCompanyDto shipOrder(int orderId) {
         OrderCompany order = orderCompanyRepository.findById(orderId).orElseThrow();
