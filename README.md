@@ -24,7 +24,7 @@ Clone the repository from Discord. You will find the link to the Git repository 
 git clone <repository-url>
 ```
 
-### Set Up PostgreSQL
+### 2. Set Up PostgreSQL
 Install PostgreSQL if it's not already installed. After installation, you need to create a database for the application:
   1. Open your terminal or PostgreSQL command line tool.
   2. Log in to PostgreSQL
@@ -48,3 +48,30 @@ spring.datasource.password=yourpassword
 spring.jpa.hibernate.ddl-auto=update
 
   ```
+Ensure to replace yourpassword with your actual PostgreSQL password
+
+### 3. Start the Application
+
+### 4. Run the Category Setup Script
+To populate the database with necessary categories, run the cath.sql script provided in the repository. Execute the script using:
+```bash
+psql -U postgres -d webshop -a -f path/to/cath.sql
+```
+Replace path/to/cath.sql with the actual path to the cath.sql script.
+
+### 5. Register a New Company
+After the application starts, open a web browser and navigate to register page
+
+###6. Add Products
+You can add products to your webshop in two ways:
+
+Upload a CSV File: Navigate to the product upload section. Use the provided CSV file or a similar one formatted according to the guidelines provided in the application documentation.
+
+Manual Entry: Go to add products manually through the form provided.
+
+## Support
+If you encounter any issues or require assistance, please contact me via Teams or  email at damjan.mlinaric@iu-study.org 
+
+
+
+This README is designed to be comprehensive and should guide users through setting up your project smoothly. Adjust paths and URLs as per your actual project setup and repository details.
