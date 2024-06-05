@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webshop.shop.security.SecurityUtil;
 import com.webshop.shop.service.CartService;
+import com.webshop.shop.service.LoggerService;
 import com.webshop.shop.service.OrderService;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class OrdersController {
     private OrderService orderService;
     private CartService cartService;
+    private LoggerService loggerService;
 
     @Autowired
-    public OrdersController(OrderService orderService, CartService cartService) {
+    public OrdersController(OrderService orderService, CartService cartService, LoggerService loggerService) {
         this.orderService = orderService;
         this.cartService = cartService;
+        this.loggerService = loggerService;
     }
 
     @GetMapping("/order/success/{orderId}")
@@ -37,7 +40,8 @@ public class OrdersController {
 
     @PostMapping("/cart/checkout/order")
     public String placeOrder() {
-
+        loggerService.info("Order Placed Endpoint Called");
+        loggerService.debug("Debugging Order Placed Endpoint");
         int orderId = orderService.createUserOrder();
         return "redirect:/order/success/" + orderId;
     }

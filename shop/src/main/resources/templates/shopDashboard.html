@@ -1,41 +1,18 @@
 <html lang="en" layout:decorate="layouts/defaultLayout">
   <body>
-    <style>
-      canvas {
-        max-width: 100%;
-      }
-    </style>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
   <div class="container mt-5" layout:fragment="content">
-    <h2 class="mb-4">Dashboard</h2>
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <h5 class="mb-3">Sales by Category</h5>
-        <canvas id="salesByCategoryChart"></canvas>
+    <!-- Welcome Section -->
+    <div style="height: 100vh; background: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center / cover; display: flex; justify-content: center; align-items: center;">
+      <div style="background: rgba(0, 0, 0, 0.5); color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.5); text-align: center; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+          <h1>Hi, <span th:text="${user.name}"></span></h1>
+          <h2>Welcome to the Dashboard</h2>
+          <p>This is a simple dashboard interface. Use this as a starting point to build your webshop.</p>
+          <a th:href="'/dashboard/' + ${user.id} + '/product/add'" class="btn btn-light btn-lg">Add new Products</a>
       </div>
-      <div class="col-md-6 mb-4">
-        <h5 class="mb-3">Sales Trend</h5>
-        <canvas id="salesTrendChart"></canvas>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Total Revenue</h5>
-            <p class="card-text">$50,000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Total Orders</h5>
-            <p class="card-text">250</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
+
   </div>  
   </body>
 </html>

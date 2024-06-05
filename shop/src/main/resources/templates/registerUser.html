@@ -46,6 +46,11 @@
         <div class="invalid-feedback">Please enter the ZIP code.</div>
       </div>
       <div class="form-group">
+        <label for="company_city">City</label>
+        <input type="text" class="form-control" id="company_city" placeholder="Enter City" th:field="*{city}" required>
+        <div class="invalid-feedback">Please enter the City.</div>
+      </div>
+      <div class="form-group">
         <label for="billing_country">Country</label>
         <input type="text" class="form-control" id="billing_country" name="billing_country" placeholder="Enter country" required th:field="*{country}">
         <div class="invalid-feedback">Please enter the country.</div>

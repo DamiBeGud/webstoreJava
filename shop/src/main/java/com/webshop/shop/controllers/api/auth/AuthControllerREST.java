@@ -18,6 +18,7 @@ import com.webshop.shop.dto.LoginDto;
 import com.webshop.shop.dto.RegisterDto;
 import com.webshop.shop.models.UserEntity;
 import com.webshop.shop.repository.UserRepository;
+import com.webshop.shop.service.LoggerService;
 
 @RestController
 @RequestMapping("/api/auth/")
@@ -25,13 +26,15 @@ public class AuthControllerREST {
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+    private LoggerService loggerService;
 
     @Autowired
     public AuthControllerREST(AuthenticationManager authenticationManager, UserRepository userRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder, LoggerService loggerService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.loggerService = loggerService;
     }
 
     @PostMapping("register/{role}")
@@ -55,9 +58,16 @@ public class AuthControllerREST {
 
     @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        loggerService.info("Login Endpoint Called");
+        loggerService.debug("Debugging Login");
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (Exception e) {
+            loggerService.error("An error occurred in login endpoint", e);
+
+        }
         return new ResponseEntity<>("User loged in successfuly", HttpStatus.OK);
     }
 

@@ -112,18 +112,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAllProductsWithUserId(int id) {
         List<Product> products = productRepository.findAllByUserId(id);
-        if (products.isEmpty()) {
-            throw new ProductNotFoundException("No products found with the provided name");
-        }
         return products.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
     }
 
     @Override
     public List<ProductDto> getAllProductsWithNameWithUserId(String name, int id) {
         List<Product> products = productRepository.findAllByNameContainingIgnoreCaseAndUserId(name, id);
-        if (products.isEmpty()) {
-            throw new ProductNotFoundException("No products found with the provided name");
-        }
         return products.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
     }
 

@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         user.setStreet(registerDto.getStreet());
         user.setZip(registerDto.getZip());
         user.setCountry(registerDto.getCountry());
+        user.setCity(registerDto.getCity());
         userRepository.save(user);
 
         return user.getId();
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
         return mapToDtoUser(user);
     }
 
-    private UserDto mapToDtoUser(UserEntity userEntity){
+    private UserDto mapToDtoUser(UserEntity userEntity) {
         UserDto userDto = new UserDto();
         userDto.setId(userEntity.getId());
         userDto.setEmail(userEntity.getEmail());
