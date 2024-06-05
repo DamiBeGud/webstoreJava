@@ -5,7 +5,7 @@ This project is an Amazon-like webshop application developed using Java with Spr
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
-- Java JDK 11 or later
+- Java JDK 17 or later
 - Maven (for dependency management and running the application)
 - PostgreSQL
 - Git (for cloning the repository)
